@@ -2,27 +2,24 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { originalMedia } from "../lib/original-media";
 
 const slides = [
   {
-    image: "/images/hero-living-clean.png",
-    title: "LIVING ROOM SERIES",
-    subtitle: "Space aesthetics · textured lifestyle"
+    image: originalMedia.heroes[0],
+    title: "BATH ROOM SERIES"
   },
   {
-    image: "/images/dining.jpg",
-    title: "CERAMIC TILE SERIES",
-    subtitle: "Surfaces for residential and commercial spaces"
+    image: originalMedia.heroes[1],
+    title: "LIVING ROOM SERIES"
   },
   {
-    image: "/images/bathroom-green.jpg",
-    title: "BATHROOM SERIES",
-    subtitle: "Sanitaryware, fittings and coordinated finishes"
+    image: originalMedia.heroes[2],
+    title: "DINING ROOM"
   },
   {
-    image: "/images/mosaic-room.jpg",
-    title: "MOSAIC SERIES",
-    subtitle: "Stone, ceramic and glass mosaic collections"
+    image: originalMedia.heroes[3],
+    title: "KITCHEN ROOM SERIES"
   }
 ];
 
@@ -45,11 +42,6 @@ export function HomeCarousel() {
   return (
     <section className="original-home-carousel" aria-label="Huangjia product collections">
       <img key={slide.image} src={slide.image} alt={slide.title} />
-      <span className="original-carousel-shade" />
-      <div className="original-carousel-copy">
-        <h1>{slide.title}</h1>
-        <p>{slide.subtitle}</p>
-      </div>
       <button className="carousel-arrow is-left" onClick={() => move(-1)} aria-label="Previous slide">
         <ChevronLeft size={31} />
       </button>

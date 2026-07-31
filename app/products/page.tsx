@@ -11,6 +11,7 @@ import {
   filterProducts,
   normalizeCategory
 } from "../lib/catalog";
+import { originalMedia } from "../lib/original-media";
 
 export default function ProductsPage() {
   const [category, setCategory] = useState("");
@@ -39,10 +40,13 @@ export default function ProductsPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="original-page-title">
-          <span>Home / Products</span>
-          <h1>Products</h1>
-          <p>{catalog.products.length} Items</p>
+        <section className="original-product-banner">
+          <img src={originalMedia.productBanner} alt="Products" />
+          <div className="original-page-title is-on-media">
+            <span>Home / Products</span>
+            <h1>Products</h1>
+            <p>{catalog.products.length} Items</p>
+          </div>
         </section>
 
         <section className="product-browser">

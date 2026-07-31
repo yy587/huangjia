@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { SiteShell } from "../components/SiteShell";
 import { catalog } from "../lib/catalog";
+import { originalMedia } from "../lib/original-media";
 
 export default function NewsPage() {
   return (
@@ -16,7 +17,7 @@ export default function NewsPage() {
             <article key={article.slug} className="news-card">
               <a href={`/news/${article.slug}`} className="news-image">
                 <img
-                  src={index === 0 ? "/images/detail-floor.jpg" : "/images/team-client.jpg"}
+                  src={originalMedia.news[index]}
                   alt={article.title}
                 />
                 <span>{String(index + 1).padStart(2, "0")}</span>

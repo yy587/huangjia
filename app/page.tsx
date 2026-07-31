@@ -1,15 +1,16 @@
-import { ArrowRight, CreditCard, RefreshCw, Sparkles, Truck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { HomeCarousel } from "./components/HomeCarousel";
 import { LegacyProductCard } from "./components/LegacyProductCard";
 import { SiteShell } from "./components/SiteShell";
 import { catalog } from "./lib/catalog";
+import { originalMedia } from "./lib/original-media";
 
 const homeCategories = [
-  { name: "CERAMIC TILE", image: "/images/tile-living.jpg" },
-  { name: "SLAB", image: "/images/slab-white.jpg" },
-  { name: "MOSAIC", image: "/images/mosaic-room.jpg" },
-  { name: "SANITARY", image: "/images/bathroom.jpg" },
-  { name: "WALL PANEL", image: "/images/wall-panel.jpg" }
+  { name: "CERAMIC TILE", image: originalMedia.categories[0] },
+  { name: "SLAB", image: originalMedia.categories[1] },
+  { name: "MOSAIC", image: originalMedia.categories[2] },
+  { name: "SANITARY", image: originalMedia.categories[3] },
+  { name: "WALL PANEL", image: originalMedia.categories[4] }
 ];
 
 const originalProducts = [...catalog.products].reverse().slice(0, 8);
@@ -22,8 +23,12 @@ function ProductSection({ title, subtitle }: { title: string; subtitle: string }
         <p>{subtitle}</p>
       </div>
       <div className="legacy-product-grid">
-        {originalProducts.map((product) => (
-          <LegacyProductCard key={`${title}-${product.slug}`} product={product} />
+        {originalProducts.map((product, index) => (
+          <LegacyProductCard
+            key={`${title}-${product.slug}`}
+            product={product}
+            image={originalMedia.homeProducts[index]}
+          />
         ))}
       </div>
     </section>
@@ -67,23 +72,14 @@ export default function HomePage() {
         />
 
         <section className="original-logo-strip" aria-label="Huangjia collections">
-          {[
-            "/images/tile-living.jpg",
-            "/images/slab-white.jpg",
-            "/images/mosaic-room.jpg",
-            "/images/bathroom.jpg",
-            "/images/wall-panel.jpg",
-            "/images/detail-floor.jpg",
-            "/images/dining.jpg",
-            "/images/bathroom-green.jpg"
-          ].map((image, index) => (
+          {originalMedia.collectionStrip.map((image, index) => (
             <div key={image}><img src={image} alt={`Huangjia collection ${index + 1}`} /></div>
           ))}
         </section>
 
         <section className="original-story-section">
           <div className="original-story-image">
-            <img src="/images/team-client.jpg" alt="OUR STORY" />
+            <img src={originalMedia.story} alt="OUR STORY" />
           </div>
           <div className="original-story-copy">
             <div className="original-section-heading align-left">
@@ -117,7 +113,7 @@ export default function HomePage() {
             {catalog.news.map((article, index) => (
               <a href={`/news/${article.slug}`} key={article.slug}>
                 <img
-                  src={index === 0 ? "/images/detail-floor.jpg" : "/images/team-client.jpg"}
+                  src={originalMedia.news[index]}
                   alt={article.title}
                 />
                 <small>{article.date}</small>
@@ -132,28 +128,28 @@ export default function HomePage() {
         <section className="original-service-strip">
           {[
             {
-              icon: Truck,
+              icon: originalMedia.services[0],
               title: "Fast Ground Shipping",
               text: "Inside the United States"
             },
             {
-              icon: RefreshCw,
+              icon: originalMedia.services[1],
               title: "Free Exchanges",
               text: "15 day guarantee on all items"
             },
             {
-              icon: CreditCard,
+              icon: originalMedia.services[2],
               title: "Safe Payments",
               text: "Trusted SSL Protection"
             },
             {
-              icon: Sparkles,
+              icon: originalMedia.services[3],
               title: "Top Selection",
               text: "100% vegan and cruelty free"
             }
-          ].map(({ icon: Icon, title, text }) => (
+          ].map(({ icon, title, text }) => (
             <article key={title}>
-              <Icon size={25} />
+              <img src={icon} alt="" />
               <div><h3>{title}</h3><p>{text}</p></div>
             </article>
           ))}
@@ -165,12 +161,7 @@ export default function HomePage() {
             <p>Join us &amp; Shop Instagram</p>
           </div>
           <div className="original-social-grid">
-            {[
-              "/images/tile-living.jpg",
-              "/images/mosaic-room.jpg",
-              "/images/dining.jpg",
-              "/images/bathroom-green.jpg"
-            ].map((image, index) => (
+            {originalMedia.social.map((image, index) => (
               <a href="/products" key={image} aria-label={`Huangjia gallery ${index + 1}`}>
                 <img src={image} alt="" />
               </a>

@@ -5,14 +5,14 @@ import type { Product } from "../lib/catalog";
 import { primaryModel } from "../lib/catalog";
 import { useInquiry } from "./InquiryProvider";
 
-export function LegacyProductCard({ product }: { product: Product }) {
+export function LegacyProductCard({ product, image }: { product: Product; image?: string }) {
   const { addItem, items } = useInquiry();
   const added = items.some((item) => item.slug === product.slug);
 
   return (
     <article className="legacy-product-card">
       <a href={`/product/${product.slug}`} className="legacy-product-image">
-        <img src={product.images[0]} alt={primaryModel(product.name)} loading="lazy" />
+        <img src={image || product.images[0]} alt={primaryModel(product.name)} />
         <span>Quick View</span>
       </a>
       <small>{product.category.replace("BASIR", "BASIN")}</small>

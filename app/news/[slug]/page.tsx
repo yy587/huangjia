@@ -22,7 +22,7 @@ export default async function ArticlePage({
           <h1>{article.title}</h1>
           <div className="article-image">
             <img
-              src={slug === "show-11-8" ? "/images/detail-floor.jpg" : "/images/team-client.jpg"}
+              src={article.image}
               alt={article.title}
             />
           </div>

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { categoryGroups, catalog } from "../lib/catalog";
+import { originalMedia } from "../lib/original-media";
 import { useInquiry } from "./InquiryProvider";
 import { LanguageToggle } from "./LanguageProvider";
 
@@ -41,8 +42,7 @@ export function SiteShell({
           <Search size={19} /> <span>Search</span>
         </a>
         <a href="/" className="catalog-brand" aria-label="SHIE home">
-          <span>SHIE</span>
-          <small>Huangjia<br />surfaces</small>
+          <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
         </a>
         <div className="catalog-actions">
           <a href="/cart" className="selection-link" aria-label={`Cart, ${count} items`}>
@@ -130,8 +130,7 @@ export function SiteShell({
       <footer className="catalog-footer original-footer">
         <div className="original-footer-main">
           <a href="/" className="catalog-brand footer-brand">
-            <span>SHIE</span>
-            <small>Huangjia<br />surfaces</small>
+            <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
           </a>
           <nav>
             <a href="/">Home</a>
@@ -151,6 +150,11 @@ export function SiteShell({
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved.</span>
+          <div className="original-footer-icons" aria-label="Huangjia contact and social channels">
+            {originalMedia.footerIcons.map((icon, index) => (
+              <img key={icon} src={icon} alt={`Huangjia channel ${index + 1}`} />
+            ))}
+          </div>
         </div>
       </footer>
     </div>
