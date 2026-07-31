@@ -37,13 +37,10 @@ export default function CartPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="selection-hero">
-          <span className="micro-label">B2B product selection</span>
-          <h1>Your enquiry<br /><em>selection.</em></h1>
-          <p>
-            Add products as you browse, adjust quantities, then send the complete list
-            to our Foshan sales team for specifications, samples and pricing.
-          </p>
+        <section className="original-page-title">
+          <span>Home / Cart</span>
+          <h1>Shopping Cart</h1>
+          <p>{count} Items</p>
         </section>
         {items.length ? (
           <section className="selection-layout">

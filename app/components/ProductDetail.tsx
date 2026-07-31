@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Check, Minus, Plus, Share2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Minus, Plus, Share2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { catalog, primaryModel, productTitle } from "../lib/catalog";
@@ -74,11 +74,6 @@ export function ProductDetail({ product }: { product: Product }) {
             <p className="product-summary">
               {product.summary || "Huangjia coordinated building material collection."}
             </p>
-            <ul className="product-benefits">
-              <li><Check size={16} /> Export-ready project supply</li>
-              <li><Check size={16} /> Samples and specifications available</li>
-              <li><Check size={16} /> OEM / ODM enquiry supported</li>
-            </ul>
             <div className="selection-controls">
               <div>
                 <button onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
@@ -86,7 +81,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 <button onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
               </div>
               <button className={added ? "add-selection is-added" : "add-selection"} onClick={add}>
-                {added ? "Added to selection" : "Add to selection"}
+                {added ? "Added to Cart" : "Add to Cart"}
                 <ArrowRight size={17} />
               </button>
             </div>

@@ -30,15 +30,9 @@ export default function ContactPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="page-hero contact-hero">
-          <div>
-            <span className="micro-label">Contact our Foshan team</span>
-            <h1>Tell us what<br />you’re <em>building.</em></h1>
-          </div>
-          <p>
-            Share a product, quantity or project brief. We’ll help coordinate the
-            right specifications, samples and next steps.
-          </p>
+        <section className="original-page-title">
+          <span>Home / Contact Us</span>
+          <h1>Contact Us</h1>
         </section>
         <section className="contact-page-grid">
           <div className="contact-details">

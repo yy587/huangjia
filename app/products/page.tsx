@@ -39,15 +39,10 @@ export default function ProductsPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="page-hero products-hero">
-          <div>
-            <span className="micro-label">Complete collection · {catalog.products.length} product groups</span>
-            <h1>Materials for every<br /><em>part of the space.</em></h1>
-          </div>
-          <p>
-            Browse Huangjia’s complete online catalogue—from exterior ceramic tile to
-            coordinated sanitaryware and fittings.
-          </p>
+        <section className="original-page-title">
+          <span>Home / Products</span>
+          <h1>Products</h1>
+          <p>{catalog.products.length} Items</p>
         </section>
 
         <section className="product-browser">

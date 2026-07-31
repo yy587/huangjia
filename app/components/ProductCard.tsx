@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         <button onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)}`}>
           <Plus size={16} />
-          {selected ? "Add another" : "Add to selection"}
+          {selected ? "Added to Cart" : "Add to Cart"}
         </button>
       </div>
     </article>

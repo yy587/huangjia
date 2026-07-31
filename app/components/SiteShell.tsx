@@ -37,13 +37,31 @@ export function SiteShell({
         <LanguageToggle compact />
       </div>
       <header className="catalog-header">
+        <a href="/search" className="catalog-leading-search">
+          <Search size={19} /> <span>Search</span>
+        </a>
         <a href="/" className="catalog-brand" aria-label="SHIE home">
           <span>SHIE</span>
           <small>Huangjia<br />surfaces</small>
         </a>
-        <nav className="catalog-nav" aria-label="Primary navigation">
+        <div className="catalog-actions">
+          <a href="/cart" className="selection-link" aria-label={`Cart, ${count} items`}>
+            <ShoppingBag size={20} />
+            <span>Cart</span>
+            <b>{count}</b>
+          </a>
+          <button
+            className="catalog-mobile-toggle"
+            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}
+          >
+            <Menu size={24} />
+          </button>
+        </div>
+      </header>
+      <nav className="catalog-nav catalog-nav-row" aria-label="Primary navigation">
           <a href="/">Home</a>
-          <a href="/about">About</a>
+          <a href="/about">About Us</a>
           <div
             className="mega-trigger"
             onMouseEnter={() => setProductsOpen(true)}
@@ -83,30 +101,9 @@ export function SiteShell({
               </div>
             </div>
           </div>
-          <a href="/news">News</a>
-          <a href="/contact">Contact</a>
-        </nav>
-        <div className="catalog-actions">
-          <a href="/search" aria-label="Search">
-            <Search size={19} />
-          </a>
-          <a href="/cart" className="selection-link" aria-label={`Selection, ${count} items`}>
-            <ShoppingBag size={19} />
-            <span>Selection</span>
-            <b>{count}</b>
-          </a>
-          <a href="/contact" className="catalog-header-cta">
-            Request quote <ArrowRight size={15} />
-          </a>
-          <button
-            className="catalog-mobile-toggle"
-            aria-label="Open menu"
-            onClick={() => setMobileOpen(true)}
-          >
-            <Menu size={24} />
-          </button>
-        </div>
-      </header>
+          <a href="/news">News <ChevronDown size={14} /></a>
+          <a href="/contact">Contact Us</a>
+      </nav>
 
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
@@ -119,7 +116,7 @@ export function SiteShell({
           ["Products", "/products"],
           ["News", "/news"],
           ["Contact", "/contact"],
-          [`Selection (${count})`, "/cart"]
+          [`Cart (${count})`, "/cart"]
         ].map(([label, href], index) => (
           <a key={label} href={href}>
             <small>0{index + 1}</small>
@@ -130,54 +127,30 @@ export function SiteShell({
 
       {children}
 
-      <footer className="catalog-footer">
-        <div className="footer-lead">
-          <span className="micro-label">Begin a conversation</span>
-          <h2>Let’s build the right material package.</h2>
-          <a href="/contact">
-            Start a project <ArrowRight size={21} />
+      <footer className="catalog-footer original-footer">
+        <div className="original-footer-main">
+          <a href="/" className="catalog-brand footer-brand">
+            <span>SHIE</span>
+            <small>Huangjia<br />surfaces</small>
           </a>
-        </div>
-        <div className="footer-grid">
-          <div>
-            <a href="/" className="catalog-brand footer-brand">
-              <span>SHIE</span>
-              <small>Huangjia<br />surfaces</small>
-            </a>
-            <p>Surface and building material solutions, made in Foshan for projects worldwide.</p>
-          </div>
-          <div>
-            <strong>Explore</strong>
+          <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
             <a href="/products">Products</a>
-            <a href="/about">About us</a>
             <a href="/news">News</a>
-            <a href="/contact">Contact</a>
-          </div>
+            <a href="/contact">Contact Us</a>
+          </nav>
           <div>
-            <strong>Product families</strong>
-            {categoryGroups.slice(0, 5).map((group) => (
-              <a
-                key={group.name}
-                href={`/products?category=${encodeURIComponent(group.name)}`}
-              >
-                {group.name}
-              </a>
-            ))}
-          </div>
-          <div>
-            <strong>Contact</strong>
             <a href={`mailto:${catalog.contact.email}`}>
               <Mail size={14} /> {catalog.contact.email}
             </a>
             <a href={`tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`}>
               {catalog.contact.phone}
             </a>
-            <p>Foshan, Guangdong, China</p>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd.</span>
-          <span>International trade · OEM / ODM · Project supply</span>
+          <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved.</span>
         </div>
       </footer>
     </div>

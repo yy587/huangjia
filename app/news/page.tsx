@@ -6,12 +6,10 @@ export default function NewsPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="page-hero news-hero">
-          <div>
-            <span className="micro-label">News & journal</span>
-            <h1>Updates from<br /><em>Huangjia.</em></h1>
-          </div>
-          <p>Company notes, product information and practical updates for our customers.</p>
+        <section className="original-page-title">
+          <span>Home / News</span>
+          <h1>News</h1>
+          <p>Blog · Notice</p>
         </section>
         <section className="news-list">
           {catalog.news.map((article, index) => (
