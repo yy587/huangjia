@@ -3,7 +3,6 @@
 import {
   ArrowRight,
   ChevronDown,
-  Globe2,
   Mail,
   Menu,
   Search,
@@ -13,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { categoryGroups, catalog } from "../lib/catalog";
 import { useInquiry } from "./InquiryProvider";
+import { LanguageToggle } from "./LanguageProvider";
 
 export function SiteShell({
   children,
@@ -34,9 +34,7 @@ export function SiteShell({
       <div className="catalog-utility">
         <span>Foshan · China</span>
         <span>Tile & building material solutions for global projects</span>
-        <span>
-          <Globe2 size={13} /> EN
-        </span>
+        <LanguageToggle compact />
       </div>
       <header className="catalog-header">
         <a href="/" className="catalog-brand" aria-label="SHIE home">

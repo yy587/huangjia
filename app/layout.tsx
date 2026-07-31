@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { InquiryProvider } from "./components/InquiryProvider";
+import { LanguageProvider } from "./components/LanguageProvider";
 import "./globals.css";
 import "./catalog.css";
 
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <InquiryProvider>{children}</InquiryProvider>
+        <LanguageProvider>
+          <InquiryProvider>{children}</InquiryProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

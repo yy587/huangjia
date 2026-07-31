@@ -17,6 +17,7 @@ import {
   X
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { LanguageToggle } from "./components/LanguageProvider";
 
 const collections = [
   {
@@ -127,9 +128,7 @@ export default function Home() {
         <span className="utility-center">
           Tile & building material solutions for global projects
         </span>
-        <span>
-          <Globe2 size={13} /> EN
-        </span>
+        <LanguageToggle compact />
       </div>
 
       <header className={scrolled ? "site-header is-scrolled" : "site-header"}>

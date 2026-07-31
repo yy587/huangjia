@@ -1526,3 +1526,39 @@ footer {
     transition-duration: 0.01ms !important;
   }
 }
+
+.language-toggle {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.language-toggle:hover {
+  color: var(--accent);
+}
+
+html[lang="zh-CN"] body {
+  font-family: "DM Sans", "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+html[lang="zh-CN"] .brand-sub,
+html[lang="zh-CN"] .catalog-brand small {
+  max-width: 82px;
+  letter-spacing: 0.06em;
+}
+
+html[lang="zh-CN"] .desktop-nav,
+html[lang="zh-CN"] .catalog-nav,
+html[lang="zh-CN"] .header-cta,
+html[lang="zh-CN"] .catalog-header-cta {
+  letter-spacing: 0.05em;
+}
