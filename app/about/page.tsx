@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { SiteShell } from "../components/SiteShell";
 
 const originalAboutText = [
@@ -12,38 +11,14 @@ const originalAboutText = [
 export default function AboutPage() {
   return (
     <SiteShell>
-      <main className="catalog-main">
-        <section className="page-hero about-hero original-about-hero">
-          <div>
-            <span className="micro-label">Foshan Huangjia Building Material Co., Ltd.</span>
+      <main className="catalog-main text-only-about">
+        <section className="text-only-about-inner">
+          <header>
+            <span>Foshan Huangjia Building Material Co., Ltd.</span>
             <h1>About Us</h1>
-          </div>
-        </section>
-
-        <section className="about-image-band original-about-image">
-          <img
-            src="/images/team-client.jpg"
-            alt="Foshan Huangjia Building Material Co., Ltd."
-          />
-        </section>
-
-        <section className="original-about-content">
-          <div className="original-about-title">
-            <span className="micro-label">About Us</span>
-            <h2>Foshan Huangjia<br />Building Material Co., Ltd.</h2>
-          </div>
-          <div className="original-about-copy">
-            {originalAboutText.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-            <div className="original-about-actions">
-              <a href="/products">
-                Products <ArrowRight size={16} />
-              </a>
-              <a href="/contact">
-                Contact Us <ArrowRight size={16} />
-              </a>
-            </div>
+          </header>
+          <div className="text-only-about-copy">
+            {originalAboutText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
       </main>
