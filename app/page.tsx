@@ -1,524 +1,289 @@
-"use client";
-
 import {
-  ArrowDown,
   ArrowRight,
   Check,
-  ChevronDown,
-  Globe2,
-  Mail,
-  Menu,
-  MessageCircle,
-  MoveUpRight,
+  ClipboardList,
   PackageCheck,
   Search,
-  ShieldCheck,
-  Sparkles,
-  X
+  Send,
+  Truck
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { LanguageToggle } from "./components/LanguageProvider";
+import { ProductCard } from "./components/ProductCard";
+import { SiteShell } from "./components/SiteShell";
+import { catalog } from "./lib/catalog";
 
-const collections = [
+const mainCategories = [
   {
     name: "Ceramic Tile",
-    detail: "Polished · Rustic · Glazed",
-    image: "/images/tile-living.jpg",
-    className: "collection-large"
+    description: "Polished, rustic, glazed and exterior wall tile",
+    image: "/images/tile-living.jpg"
   },
   {
-    name: "Large Format Slab",
-    detail: "Statement-scale surfaces",
-    image: "/images/slab-white.jpg",
-    className: ""
+    name: "Slab",
+    description: "Large-format architectural surfaces",
+    image: "/images/slab-white.jpg"
   },
   {
     name: "Mosaic",
-    detail: "Texture in every detail",
-    image: "/images/mosaic-room.jpg",
-    className: ""
+    description: "Stone, ceramic and glass mosaic",
+    image: "/images/mosaic-room.jpg"
+  },
+  {
+    name: "Sanitary",
+    description: "Sanitaryware, faucets, showers and fittings",
+    image: "/images/bathroom.jpg"
   },
   {
     name: "Wall Panel",
-    detail: "Wood · PET · Ripple",
-    image: "/images/wall-panel.jpg",
-    className: ""
-  },
-  {
-    name: "Bathroom",
-    detail: "Sanitary & hardware systems",
-    image: "/images/bathroom.jpg",
-    className: "collection-wide"
+    description: "Wood, PET marble and water-ripple panels",
+    image: "/images/wall-panel.jpg"
   }
 ];
 
-const projects = [
-  {
-    key: "living",
-    label: "Living",
-    number: "01",
-    title: "Quiet luxury, built from the ground up.",
-    description:
-      "Warm-veined porcelain creates a continuous visual plane while balancing daily durability with a refined residential feel.",
-    meta: "Residential · Porcelain slab · 1200 × 2400 mm",
-    image: "/images/hero-living-clean.png"
-  },
-  {
-    key: "dining",
-    label: "Dining",
-    number: "02",
-    title: "Material warmth for social spaces.",
-    description:
-      "A composed palette of tactile wall panels and neutral flooring gives hospitality-inspired depth to an everyday dining room.",
-    meta: "Residential · Wall panel + tile system",
-    image: "/images/dining.jpg"
-  },
-  {
-    key: "bathroom",
-    label: "Bathroom",
-    number: "03",
-    title: "A complete room, one coordinated source.",
-    description:
-      "Surfaces, sanitaryware and fittings are developed as one practical specification—easier to select, sample and deliver.",
-    meta: "Hospitality · Tile + sanitary system",
-    image: "/images/bathroom-green.jpg"
-  }
-];
+const latestProducts = [...catalog.products].reverse().slice(0, 8);
+const featuredProducts = catalog.products
+  .filter((product) =>
+    ["RUSTIC TILE", "TOILET BOWL", "FAUCET", "SHOWER HEAD"].includes(product.category)
+  )
+  .slice(0, 4);
 
-function ArrowLink({ children }: { children: React.ReactNode }) {
+export default function HomePage() {
   return (
-    <span className="arrow-link">
-      {children}
-      <ArrowRight size={17} strokeWidth={1.7} />
-    </span>
-  );
-}
-
-export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeProject, setActiveProject] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
-  const project = projects[activeProject];
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <main>
-      <div className="utility">
-        <span>Foshan · China</span>
-        <span className="utility-center">
-          Tile & building material solutions for global projects
-        </span>
-        <LanguageToggle compact />
-      </div>
-
-      <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
-        <a href="/" className="brand" aria-label="SHIE home">
-          <span className="brand-mark">SHIE</span>
-          <span className="brand-sub">Huangjia surfaces</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="/products">Products</a>
-          <a href="#projects">Projects</a>
-          <a href="#capabilities">Capabilities</a>
-          <a href="/about">About</a>
-        </nav>
-        <div className="header-actions">
-          <a href="/search" aria-label="Search" className="icon-button">
-            <Search size={19} />
-          </a>
-          <a href="/contact" className="header-cta">
-            Request samples <ArrowRight size={15} />
-          </a>
-          <button
-            aria-label="Open menu"
-            className="menu-button"
-            onClick={() => setMenuOpen(true)}
-          >
-            <Menu size={24} />
-          </button>
-        </div>
-      </header>
-
-      <div className={menuOpen ? "mobile-menu is-open" : "mobile-menu"}>
-        <button
-          className="mobile-close"
-          aria-label="Close menu"
-          onClick={() => setMenuOpen(false)}
-        >
-          <X size={26} />
-        </button>
-        <span className="mobile-kicker">Explore SHIE</span>
-        {[
-          ["Products", "/products"],
-          ["Projects", "#projects"],
-          ["Capabilities", "#capabilities"],
-          ["About", "/about"],
-          ["Contact", "/contact"]
-        ].map(
-          ([item, href], index) => (
-            <a
-              key={item}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-            >
-              <span>0{index + 1}</span>
-              {item}
-            </a>
-          )
-        )}
-      </div>
-
-      <section className="hero" aria-label="SHIE ceramic surface collection">
-        <img
-          className="hero-image"
-          src="/images/hero-living-clean.png"
-          alt="Contemporary living room finished with large format stone-look tile"
-        />
-        <div className="hero-shade" />
-        <div className="hero-content">
-          <p className="eyebrow">Surfaces for considered spaces</p>
-          <h1>
-            Material
-            <br />
-            shapes <em>space.</em>
-          </h1>
-          <p className="hero-copy">
-            Ceramic tile and complete building material systems, curated in
-            Foshan for ambitious spaces around the world.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-light" href="#collections">
-              Explore collections <ArrowRight size={17} />
-            </a>
-            <a className="text-link-light" href="/contact">
-              Start a project <MoveUpRight size={16} />
-            </a>
-          </div>
-        </div>
-        <div className="hero-index">
-          <span>01</span>
-          <div className="hero-line">
-            <i />
-          </div>
-          <span>04</span>
-        </div>
-        <a href="#intro" className="scroll-cue">
-          Scroll to discover <ArrowDown size={16} />
-        </a>
-      </section>
-
-      <section id="intro" className="intro section-pad">
-        <div className="intro-label reveal">
-          <span>01</span>
-          <p>Designed around how<br />people really live.</p>
-        </div>
-        <div className="intro-statement reveal">
-          <h2>
-            From a single surface to a complete space, we make material
-            selection <em>simpler, sharper,</em> and more dependable.
-          </h2>
-          <div className="intro-support">
+    <SiteShell>
+      <main className="catalog-main clear-home">
+        <section className="clear-hero">
+          <div className="clear-hero-copy">
+            <span className="micro-label">Foshan building material supplier</span>
+            <h1>
+              Tile, sanitaryware
+              <br />
+              <em>&amp; complete materials.</em>
+            </h1>
             <p>
-              One sourcing partner for distributors, designers and project
-              teams—supported by flexible specifications, coordinated sampling
-              and export experience.
+              Browse Huangjia’s product catalogue, add the models you need to your
+              selection, and send one clear enquiry to our Foshan team.
             </p>
-            <a href="#capabilities">
-              <ArrowLink>How we work</ArrowLink>
-            </a>
+            <div className="clear-hero-actions">
+              <a href="/products">
+                Browse all products <ArrowRight size={17} />
+              </a>
+              <a href="/contact">
+                Contact our sales team
+              </a>
+            </div>
+            <form className="home-product-search" action="/search">
+              <Search size={19} />
+              <input
+                name="q"
+                aria-label="Search products"
+                placeholder="Search by product, category or model number"
+              />
+              <button type="submit">
+                Search catalogue <ArrowRight size={16} />
+              </button>
+            </form>
           </div>
-        </div>
-      </section>
+          <div className="clear-hero-image">
+            <img
+              src="/images/hero-living-clean.png"
+              alt="Huangjia ceramic tile in a contemporary interior"
+            />
+            <div className="hero-product-note">
+              <span>One coordinated source</span>
+              <strong>7 product families</strong>
+              <p>60 published product groups</p>
+            </div>
+          </div>
+        </section>
 
-      <section id="collections" className="collections section-pad">
-        <div className="section-heading reveal">
-          <div>
-            <span className="section-number">02 / Collections</span>
-            <h2>Explore by material</h2>
+        <section className="home-path">
+          <div className="home-path-title">
+            <span className="micro-label">How this website works</span>
+            <h2>From product search to quotation.</h2>
           </div>
-          <p>
-            A focused collection across the surfaces and fixtures that shape a
-            space.
-          </p>
-        </div>
-        <div className="collection-grid">
-          {collections.map((item, index) => (
-            <a
-              href={`/products?category=${encodeURIComponent(item.name === "Bathroom" ? "Sanitary" : item.name)}`}
-              className={`collection-card ${item.className} reveal`}
-              key={item.name}
-              style={{ transitionDelay: `${index * 70}ms` }}
-            >
-              <img src={item.image} alt={item.name} />
-              <div className="collection-overlay" />
-              <span className="collection-count">0{index + 1}</span>
-              <div className="collection-copy">
-                <h3>{item.name}</h3>
-                <p>{item.detail}</p>
-              </div>
-              <span className="round-arrow">
-                <ArrowRight size={19} />
-              </span>
-            </a>
+          {[
+            {
+              icon: Search,
+              number: "01",
+              title: "Find a product",
+              text: "Browse categories or search a model number."
+            },
+            {
+              icon: ClipboardList,
+              number: "02",
+              title: "Build your selection",
+              text: "Open product details and add the models you need."
+            },
+            {
+              icon: Send,
+              number: "03",
+              title: "Send one enquiry",
+              text: "Add quantities and send the complete selection to sales."
+            },
+            {
+              icon: Truck,
+              number: "04",
+              title: "Confirm & deliver",
+              text: "We confirm specifications, samples, price and shipping."
+            }
+          ].map(({ icon: Icon, number, title, text }) => (
+            <article key={number}>
+              <div><span>{number}</span><Icon size={19} /></div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
           ))}
-        </div>
-        <a href="/products" className="all-collections reveal">
-          <span>View all product categories</span>
-          <ArrowRight size={18} />
-        </a>
-      </section>
+        </section>
 
-      <section id="capabilities" className="capabilities">
-        <div className="capability-visual reveal">
-          <img
-            src="/images/detail-floor.jpg"
-            alt="Close detail of large format floor tile"
-          />
-          <div className="material-tag">
-            <span>Featured finish</span>
-            <strong>Mineral Grey / Soft Matt</strong>
+        <section className="home-categories">
+          <div className="home-section-heading">
+            <div>
+              <span className="micro-label">Product categories</span>
+              <h2>Start with what you need.</h2>
+            </div>
+            <div>
+              <p>
+                The same product structure as the original Huangjia website,
+                presented as a faster, clearer catalogue.
+              </p>
+              <a href="/products">
+                View all categories <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="capability-content">
-          <span className="section-number light">03 / One-stop sourcing</span>
-          <h2 className="reveal">
-            One partner.
-            <br />
-            <em>More possibility.</em>
-          </h2>
-          <p className="capability-lead reveal">
-            Build a more coherent collection and move faster from selection to
-            shipment with one experienced sourcing team.
-          </p>
-          <div className="capability-list">
-            {[
-              {
-                icon: Sparkles,
-                title: "Curated product direction",
-                body: "Market-aware ranges selected for colour, finish and commercial fit."
-              },
-              {
-                icon: PackageCheck,
-                title: "Coordinated samples & loading",
-                body: "Consolidated decisions and practical mixed-product shipment planning."
-              },
-              {
-                icon: ShieldCheck,
-                title: "Quality follow-through",
-                body: "Specification checks and clear progress updates from order to dispatch."
-              }
-            ].map(({ icon: Icon, title, body }) => (
-              <div className="capability-item reveal" key={title}>
-                <Icon size={23} strokeWidth={1.4} />
+          <div className="clear-category-grid">
+            {mainCategories.map((category, index) => (
+              <a
+                href={`/products?category=${encodeURIComponent(category.name)}`}
+                className={index === 0 ? "clear-category-card is-featured" : "clear-category-card"}
+                key={category.name}
+              >
+                <img src={category.image} alt={category.name} />
+                <span className="category-shade" />
+                <small>0{index + 1}</small>
                 <div>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
+                  <h3>{category.name}</h3>
+                  <p>{category.description}</p>
                 </div>
-              </div>
+                <i><ArrowRight size={18} /></i>
+              </a>
             ))}
           </div>
-          <a href="/contact" className="button button-accent reveal">
-            Discuss your specification <ArrowRight size={17} />
-          </a>
-        </div>
-      </section>
-
-      <section id="projects" className="projects section-pad">
-        <div className="section-heading reveal">
-          <div>
-            <span className="section-number">04 / Spaces</span>
-            <h2>See materials in context</h2>
-          </div>
-          <p>
-            Move beyond the product sheet. Explore how finish, proportion and
-            scale work together.
-          </p>
-        </div>
-
-        <div className="project-stage reveal">
-          <div className="project-image-wrap">
-            <img key={project.image} src={project.image} alt={project.title} />
-            <span className="project-badge">{project.label} / 2026</span>
-          </div>
-          <div className="project-info">
-            <span className="project-number">{project.number}</span>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <small>{project.meta}</small>
-            <a href="/about">
-              <ArrowLink>View project details</ArrowLink>
+          <div className="secondary-category-links">
+            <a href="/products?category=Roofing%20Tile">
+              <span>06</span> Roofing Tile <ArrowRight size={15} />
+            </a>
+            <a href="/products?category=Tile%20Accessories">
+              <span>07</span> Tile Accessories <ArrowRight size={15} />
             </a>
           </div>
-        </div>
+        </section>
 
-        <div className="project-tabs" role="tablist" aria-label="Project spaces">
-          {projects.map((item, index) => (
-            <button
-              key={item.key}
-              onClick={() => setActiveProject(index)}
-              className={activeProject === index ? "is-active" : ""}
-              role="tab"
-              aria-selected={activeProject === index}
-            >
-              <span>{item.number}</span>
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section id="about" className="proof section-pad">
-        <div className="proof-title reveal">
-          <span className="section-number light">05 / Why Huangjia</span>
-          <h2>Made to travel.<br /><em>Built to perform.</em></h2>
-        </div>
-        <div className="proof-stats">
-          {[
-            ["15+", "Years in building materials"],
-            ["30+", "Export markets served"],
-            ["7", "Coordinated product categories"],
-            ["1:1", "Project support from enquiry to load"]
-          ].map(([value, label]) => (
-            <div className="stat reveal" key={value}>
-              <strong>{value}</strong>
-              <span>{label}</span>
+        <section className="home-product-section">
+          <div className="home-section-heading compact">
+            <div>
+              <span className="micro-label">Trending products</span>
+              <h2>Recently added products.</h2>
             </div>
-          ))}
-        </div>
-        <div className="proof-note reveal">
-          <Check size={18} />
-          <span>
-            Foshan-based sourcing expertise · Custom specifications ·
-            Consolidated export support
-          </span>
-        </div>
-      </section>
-
-      <section id="contact" className="contact">
-        <div className="contact-image">
-          <img
-            src="/images/team-client.jpg"
-            alt="Huangjia team meeting with international clients"
-          />
-          <div className="contact-image-copy">
-            <span>Let&apos;s build something considered.</span>
-            <p>Tell us the material, quantity and market. We&apos;ll help shape the next step.</p>
+            <div>
+              <p>Open a product to view every published image, model and specification.</p>
+              <a href="/products">
+                Complete catalogue <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="contact-form-wrap">
-          <span className="section-number">Start a project</span>
-          <h2>Request samples<br />or a quotation.</h2>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              const data = new FormData(event.currentTarget);
-              const subject = encodeURIComponent(
-                `Website enquiry from ${data.get("name") || "a new customer"}`
-              );
-              const body = encodeURIComponent(
-                `Name / Company: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nInterest: ${data.get("interest") || ""}\n\n${data.get("details") || ""}`
-              );
-              window.location.href = `mailto:ad2008fs@vip.126.com?subject=${subject}&body=${body}`;
-            }}
-          >
-            <label>
-              <span>Name / Company</span>
-              <input name="name" required type="text" placeholder="Your name and company" />
-            </label>
-            <label>
-              <span>Email</span>
-              <input name="email" required type="email" placeholder="name@company.com" />
-            </label>
-            <label>
-              <span>I&apos;m interested in</span>
-              <div className="select-wrap">
-                <select name="interest" defaultValue="">
-                  <option value="" disabled>Select a product category</option>
-                  <option>Ceramic tile</option>
-                  <option>Slab</option>
-                  <option>Mosaic</option>
-                  <option>Wall panel</option>
-                  <option>Bathroom & sanitary</option>
-                  <option>Mixed collection</option>
-                </select>
-                <ChevronDown size={17} />
-              </div>
-            </label>
-            <label>
-              <span>Project details</span>
-              <textarea name="details" placeholder="Market, quantity, preferred size or finish..." />
-            </label>
-            <button className="button button-dark" type="submit">
-              Send enquiry <ArrowRight size={17} />
-            </button>
-          </form>
-          <div className="direct-contact">
-            <a href="mailto:ad2008fs@vip.126.com">
-              <Mail size={17} /> ad2008fs@vip.126.com
-            </a>
-            <a href="https://www.huangjia-tiles.com/" target="_blank">
-              <Globe2 size={17} /> huangjia-tiles.com
+          <div className="product-grid home-products-grid">
+            {latestProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </section>
+
+        <section className="home-why">
+          <div className="home-why-image">
+            <img src="/images/team-client.jpg" alt="Huangjia team meeting customers" />
+          </div>
+          <div className="home-why-copy">
+            <span className="micro-label">Why Huangjia</span>
+            <h2>One Foshan team.<br />A complete material package.</h2>
+            <p>
+              Huangjia supports distributors, designers and project teams with a
+              coordinated range of tile, slabs, mosaics, wall panels, sanitaryware
+              and accessories.
+            </p>
+            <ul>
+              <li><Check size={16} /> Direct product and specification support</li>
+              <li><Check size={16} /> Mixed-category sourcing and sample coordination</li>
+              <li><Check size={16} /> Export packing and shipment communication</li>
+              <li><Check size={16} /> OEM / ODM and project enquiries</li>
+            </ul>
+            <a href="/about">
+              Learn about Huangjia <ArrowRight size={17} />
             </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <footer>
-        <div className="footer-brand">
-          <span className="brand-mark">SHIE</span>
+        <section className="home-product-section home-featured">
+          <div className="home-section-heading compact">
+            <div>
+              <span className="micro-label">Featured products</span>
+              <h2>Explore more of the range.</h2>
+            </div>
+            <div>
+              <p>Add any model to your selection—there is no online payment or fake $0 price.</p>
+              <a href="/cart">
+                View my selection <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+          <div className="product-grid home-featured-grid">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </section>
+
+        <section className="home-updates">
+          <div className="home-section-heading compact">
+            <div>
+              <span className="micro-label">Recent updates</span>
+              <h2>News from Huangjia.</h2>
+            </div>
+            <a href="/news">View all news <ArrowRight size={16} /></a>
+          </div>
+          <div className="home-news-grid">
+            {catalog.news.map((article, index) => (
+              <a href={`/news/${article.slug}`} key={article.slug}>
+                <div>
+                  <img
+                    src={index === 0 ? "/images/detail-floor.jpg" : "/images/team-client.jpg"}
+                    alt={article.title}
+                  />
+                  <span>{index === 0 ? "Notice" : "Blog"}</span>
+                </div>
+                <small>{article.date}</small>
+                <h3>{article.title}</h3>
+                <p>{article.content.slice(0, 145)}…</p>
+                <b>Read more <ArrowRight size={15} /></b>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="home-final-cta">
+          <div>
+            <PackageCheck size={27} />
+            <span className="micro-label">Ready to source?</span>
+            <h2>Tell us what products you need.</h2>
+          </div>
           <p>
-            Thoughtful surfaces and building material systems for global
-            spaces.
+            Send a product model, quantity and destination. Our team will reply with
+            specifications, availability and quotation details.
           </p>
-        </div>
-        <div className="footer-links">
-          <div>
-            <span>Explore</span>
-            <a href="/products">Products</a>
-            <a href="#projects">Projects</a>
-            <a href="#capabilities">Capabilities</a>
-          </div>
-          <div>
-            <span>Company</span>
-            <a href="/about">About us</a>
-            <a href="/contact">Contact</a>
-            <a href="/cart">Selection</a>
-          </div>
-          <div>
-            <span>Visit</span>
-            <p>Foshan, Guangdong<br />China</p>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 Foshan Huangjia Building Material Co., Ltd.</span>
-          <span>International trade · OEM / ODM · Project supply</span>
-        </div>
-      </footer>
-
-      <a className="floating-inquiry" href="/contact" aria-label="Start an enquiry">
-        <MessageCircle size={19} />
-        <span>Enquire</span>
-      </a>
-    </main>
+          <a href="/contact">
+            Start an enquiry <ArrowRight size={17} />
+          </a>
+        </section>
+      </main>
+    </SiteShell>
   );
 }
