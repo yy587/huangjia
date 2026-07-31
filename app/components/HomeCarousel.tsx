@@ -25,6 +25,7 @@ const slides = [
 
 export function HomeCarousel() {
   const [active, setActive] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = window.setInterval(
@@ -40,7 +41,17 @@ export function HomeCarousel() {
 
   const slide = slides[active];
   return (
-    <section className="original-home-carousel" aria-label="Huangjia product collections">
+    <section
+      className="original-home-carousel"
+      aria-label="Huangjia product collections"
+      onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
+      onTouchEnd={(event) => {
+        if (touchStart === null) return;
+        const distance = event.changedTouches[0].clientX - touchStart;
+        if (Math.abs(distance) > 45) move(distance > 0 ? -1 : 1);
+        setTouchStart(null);
+      }}
+    >
       <img key={slide.image} src={slide.image} alt={slide.title} />
       <button className="carousel-arrow is-left" onClick={() => move(-1)} aria-label="Previous slide">
         <ChevronLeft size={31} />
@@ -57,6 +68,11 @@ export function HomeCarousel() {
             aria-label={`Show slide ${index + 1}`}
           />
         ))}
+      </div>
+      <div className="carousel-status" aria-hidden="true">
+        <b>{String(active + 1).padStart(2, "0")}</b>
+        <span />
+        <small>{String(slides.length).padStart(2, "0")}</small>
       </div>
     </section>
   );

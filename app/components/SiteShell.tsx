@@ -24,10 +24,35 @@ export function SiteShell({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { count } = useInquiry();
 
   useEffect(() => {
     setMobileOpen(false);
+    const updateScroll = () => {
+      const distance = document.documentElement.scrollHeight - window.innerHeight;
+      setScrolled(window.scrollY > 20);
+      setScrollProgress(distance > 0 ? Math.min(window.scrollY / distance, 1) : 0);
+    };
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      }),
+      { threshold: 0.08, rootMargin: "0px 0px -35px" }
+    );
+    document.querySelectorAll(
+      ".original-section-heading,.original-category-grid>a,.legacy-product-card,.original-story-copy,.original-update-grid>a,.news-card,.product-card"
+    ).forEach((element) => {
+      element.classList.add("ui-reveal");
+      observer.observe(element);
+    });
+    updateScroll();
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -37,7 +62,7 @@ export function SiteShell({
         <span>Tile & building material solutions for global projects</span>
         <LanguageToggle compact />
       </div>
-      <header className="catalog-header">
+      <header className={`catalog-header ${scrolled ? "is-scrolled" : ""}`}>
         <a href="/search" className="catalog-leading-search">
           <Search size={19} /> <span>Search</span>
         </a>
@@ -59,7 +84,7 @@ export function SiteShell({
           </button>
         </div>
       </header>
-      <nav className="catalog-nav catalog-nav-row" aria-label="Primary navigation">
+      <nav className={`catalog-nav catalog-nav-row ${scrolled ? "is-scrolled" : ""}`} aria-label="Primary navigation">
           <a href="/">Home</a>
           <a href="/about">About Us</a>
           <div
@@ -104,6 +129,7 @@ export function SiteShell({
           <a href="/news">News <ChevronDown size={14} /></a>
           <a href="/contact">Contact Us</a>
       </nav>
+      <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
@@ -126,6 +152,10 @@ export function SiteShell({
       </aside>
 
       {children}
+
+      <a className="floating-enquiry" href="/contact">
+        <Mail size={17} /> <span>Get a quote</span><ArrowRight size={16} />
+      </a>
 
       <footer className="catalog-footer original-footer">
         <div className="original-footer-main">
