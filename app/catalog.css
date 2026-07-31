@@ -68,3 +68,9 @@
 @media(max-width:480px){
  .clear-hero-image{height:330px}.clear-hero-copy h1{font-size:43px}.home-path{grid-template-columns:1fr}.home-path-title{grid-column:auto}.home-path article{min-height:180px}.clear-category-grid{display:flex;flex-direction:column}.clear-category-card{height:250px}.clear-category-card.is-featured{height:350px}.home-products-grid,.home-featured-grid{grid-template-columns:1fr}.home-products-grid .product-card:nth-child(n+4){display:none}
 }
+
+.original-about-hero{min-height:430px}.original-about-hero h1{font-size:clamp(70px,9vw,130px)}.original-about-image{height:620px}.original-about-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,#17181642)}.original-about-content{padding:120px 8vw 135px;display:grid;grid-template-columns:.8fr 1.2fr;gap:9vw}.original-about-title{position:sticky;top:110px;height:fit-content}.original-about-title h2{margin:18px 0 0;font:300 clamp(40px,4.6vw,66px)/1 "Manrope",sans-serif;letter-spacing:-.055em}.original-about-copy p{margin:0;padding:0 0 28px;color:#171816b0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.85}.original-about-copy p+p{padding-top:28px}.original-about-actions{margin-top:40px;display:flex;gap:12px}.original-about-actions a{height:48px;padding:0 19px;display:flex;align-items:center;gap:15px;background:var(--accent);font-size:9px;font-weight:600;letter-spacing:.09em;text-transform:uppercase}.original-about-actions a:last-child{color:white;background:var(--ink)}
+
+@media(max-width:780px){
+ .original-about-hero{min-height:330px}.original-about-image{height:430px}.original-about-content{padding:75px 22px 90px;grid-template-columns:1fr;gap:55px}.original-about-title{position:static}.original-about-title h2{font-size:42px}.original-about-copy p{font-size:13px}.original-about-actions{align-items:flex-start;flex-direction:column}
+}

@@ -1,86 +1,50 @@
-import { ArrowRight, Check, Globe2, Layers3, PackageCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SiteShell } from "../components/SiteShell";
+
+const originalAboutText = [
+  "HUANGJIA is a leading building material product company that has been dedicated to providing high-quality building material products to our customers for many years. Our company specializes in developing and manufacturing advanced building materia products that meet customers’ specific needs.",
+  "We are committed to delivering the latest technology and best quality to our customers. We believe that by developing products that are innovative, reliable, and of the highest quality, we can achieve a win-win situation for both our customers and ourselves.",
+  "Our products are made with the highest quality standards, and we believe that our products offer exceptional value to our customers. Our products are widely recognized for their innovative design, advanced technology, and high quality materials. We strive to maintain this level of service and quality for our customers by providing prompt and comprehensive after-sales support.",
+  "Our company’s mission is to Create a win-win situation between customer and company by providing high-quality Audio products, exceptional service, and a strong connection with our customers. We believe that by working together, we can Create a positive impact on both our customers and ourselves.",
+  "We are proud of our reputation for exceptional building materia products, after-sales service, and committed team work, we are dedicated to continue to providing our customers with high-quality building materia Introduction."
+];
 
 export default function AboutPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="page-hero about-hero">
+        <section className="page-hero about-hero original-about-hero">
           <div>
-            <span className="micro-label">About Huangjia</span>
-            <h1>A practical partner<br />for <em>complete spaces.</em></h1>
-          </div>
-          <p>
-            Foshan product knowledge, coordinated sourcing and responsive project
-            support—under one roof.
-          </p>
-        </section>
-
-        <section className="about-image-band">
-          <img src="/images/team-client.jpg" alt="Huangjia team working with international clients" />
-          <div>
-            <span>Since Foshan, China</span>
-            <strong>One source.<br />More possibilities.</strong>
+            <span className="micro-label">Foshan Huangjia Building Material Co., Ltd.</span>
+            <h1>About Us</h1>
           </div>
         </section>
 
-        <section className="about-story">
-          <div>
-            <span className="micro-label">Who we are</span>
-            <h2>Materials backed by<br />real manufacturing insight.</h2>
-          </div>
-          <div className="about-copy">
-            <p>
-              HUANGJIA is a building material company dedicated to providing
-              high-quality products for distributors, designers and project teams.
-              We specialize in developing and sourcing advanced building materials
-              around specific customer needs.
-            </p>
-            <p>
-              We combine current technology, consistent quality standards and
-              responsive after-sales support. Our aim is simple: reliable products,
-              clear communication and a long-term win-win relationship with every
-              customer.
-            </p>
-            <a className="solid-link" href="/contact">
-              Talk to our team <ArrowRight size={17} />
-            </a>
-          </div>
+        <section className="about-image-band original-about-image">
+          <img
+            src="/images/team-client.jpg"
+            alt="Foshan Huangjia Building Material Co., Ltd."
+          />
         </section>
 
-        <section className="about-values">
-          {[
-            {
-              icon: Layers3,
-              number: "01",
-              title: "Complete range",
-              copy: "Tile, slabs, mosaics, wall panels, sanitaryware and coordinated accessories."
-            },
-            {
-              icon: Check,
-              number: "02",
-              title: "Quality focus",
-              copy: "Product selection and supply guided by consistent specifications and project requirements."
-            },
-            {
-              icon: Globe2,
-              number: "03",
-              title: "Export experience",
-              copy: "Clear communication, sampling and shipment support for customers around the world."
-            },
-            {
-              icon: PackageCheck,
-              number: "04",
-              title: "Project service",
-              copy: "One coordinated selection and enquiry process from early specification to delivery."
-            }
-          ].map((value) => (
-            <article key={value.number}>
-              <div><span>{value.number}</span><value.icon size={22} /></div>
-              <h3>{value.title}</h3>
-              <p>{value.copy}</p>
-            </article>
-          ))}
+        <section className="original-about-content">
+          <div className="original-about-title">
+            <span className="micro-label">About Us</span>
+            <h2>Foshan Huangjia<br />Building Material Co., Ltd.</h2>
+          </div>
+          <div className="original-about-copy">
+            {originalAboutText.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <div className="original-about-actions">
+              <a href="/products">
+                Products <ArrowRight size={16} />
+              </a>
+              <a href="/contact">
+                Contact Us <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
         </section>
       </main>
     </SiteShell>
