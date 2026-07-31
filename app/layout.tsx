@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { InquiryProvider } from "./components/InquiryProvider";
 import "./globals.css";
+import "./catalog.css";
 
 export const metadata: Metadata = {
   title: "SHIE Surfaces | Ceramic Tile & Building Materials",
@@ -14,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <InquiryProvider>{children}</InquiryProvider>
+      </body>
     </html>
   );
 }

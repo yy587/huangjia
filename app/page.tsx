@@ -133,21 +133,21 @@ export default function Home() {
       </div>
 
       <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
-        <a href="#" className="brand" aria-label="SHIE home">
+        <a href="/" className="brand" aria-label="SHIE home">
           <span className="brand-mark">SHIE</span>
           <span className="brand-sub">Huangjia surfaces</span>
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#collections">Collections</a>
+          <a href="/products">Products</a>
           <a href="#projects">Projects</a>
           <a href="#capabilities">Capabilities</a>
-          <a href="#about">About</a>
+          <a href="/about">About</a>
         </nav>
         <div className="header-actions">
-          <button aria-label="Search" className="icon-button">
+          <a href="/search" aria-label="Search" className="icon-button">
             <Search size={19} />
-          </button>
-          <a href="#contact" className="header-cta">
+          </a>
+          <a href="/contact" className="header-cta">
             Request samples <ArrowRight size={15} />
           </a>
           <button
@@ -169,11 +169,17 @@ export default function Home() {
           <X size={26} />
         </button>
         <span className="mobile-kicker">Explore SHIE</span>
-        {["Collections", "Projects", "Capabilities", "About", "Contact"].map(
-          (item, index) => (
+        {[
+          ["Products", "/products"],
+          ["Projects", "#projects"],
+          ["Capabilities", "#capabilities"],
+          ["About", "/about"],
+          ["Contact", "/contact"]
+        ].map(
+          ([item, href], index) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={href}
               onClick={() => setMenuOpen(false)}
             >
               <span>0{index + 1}</span>
@@ -205,7 +211,7 @@ export default function Home() {
             <a className="button button-light" href="#collections">
               Explore collections <ArrowRight size={17} />
             </a>
-            <a className="text-link-light" href="#contact">
+            <a className="text-link-light" href="/contact">
               Start a project <MoveUpRight size={16} />
             </a>
           </div>
@@ -259,7 +265,7 @@ export default function Home() {
         <div className="collection-grid">
           {collections.map((item, index) => (
             <a
-              href="#contact"
+              href={`/products?category=${encodeURIComponent(item.name === "Bathroom" ? "Sanitary" : item.name)}`}
               className={`collection-card ${item.className} reveal`}
               key={item.name}
               style={{ transitionDelay: `${index * 70}ms` }}
@@ -277,7 +283,7 @@ export default function Home() {
             </a>
           ))}
         </div>
-        <a href="#contact" className="all-collections reveal">
+        <a href="/products" className="all-collections reveal">
           <span>View all product categories</span>
           <ArrowRight size={18} />
         </a>
@@ -332,7 +338,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <a href="#contact" className="button button-accent reveal">
+          <a href="/contact" className="button button-accent reveal">
             Discuss your specification <ArrowRight size={17} />
           </a>
         </div>
@@ -360,7 +366,7 @@ export default function Home() {
             <h3>{project.title}</h3>
             <p>{project.description}</p>
             <small>{project.meta}</small>
-            <a href="#contact">
+            <a href="/about">
               <ArrowLink>View project details</ArrowLink>
             </a>
           </div>
@@ -426,21 +432,28 @@ export default function Home() {
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              alert("Thank you — this concept form is ready to connect to your enquiry system.");
+              const data = new FormData(event.currentTarget);
+              const subject = encodeURIComponent(
+                `Website enquiry from ${data.get("name") || "a new customer"}`
+              );
+              const body = encodeURIComponent(
+                `Name / Company: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nInterest: ${data.get("interest") || ""}\n\n${data.get("details") || ""}`
+              );
+              window.location.href = `mailto:ad2008fs@vip.126.com?subject=${subject}&body=${body}`;
             }}
           >
             <label>
               <span>Name / Company</span>
-              <input required type="text" placeholder="Your name and company" />
+              <input name="name" required type="text" placeholder="Your name and company" />
             </label>
             <label>
               <span>Email</span>
-              <input required type="email" placeholder="name@company.com" />
+              <input name="email" required type="email" placeholder="name@company.com" />
             </label>
             <label>
               <span>I&apos;m interested in</span>
               <div className="select-wrap">
-                <select defaultValue="">
+                <select name="interest" defaultValue="">
                   <option value="" disabled>Select a product category</option>
                   <option>Ceramic tile</option>
                   <option>Slab</option>
@@ -454,15 +467,15 @@ export default function Home() {
             </label>
             <label>
               <span>Project details</span>
-              <textarea placeholder="Market, quantity, preferred size or finish..." />
+              <textarea name="details" placeholder="Market, quantity, preferred size or finish..." />
             </label>
             <button className="button button-dark" type="submit">
               Send enquiry <ArrowRight size={17} />
             </button>
           </form>
           <div className="direct-contact">
-            <a href="mailto:info@huangjia-tiles.com">
-              <Mail size={17} /> info@huangjia-tiles.com
+            <a href="mailto:ad2008fs@vip.126.com">
+              <Mail size={17} /> ad2008fs@vip.126.com
             </a>
             <a href="https://www.huangjia-tiles.com/" target="_blank">
               <Globe2 size={17} /> huangjia-tiles.com
@@ -482,15 +495,15 @@ export default function Home() {
         <div className="footer-links">
           <div>
             <span>Explore</span>
-            <a href="#collections">Collections</a>
+            <a href="/products">Products</a>
             <a href="#projects">Projects</a>
             <a href="#capabilities">Capabilities</a>
           </div>
           <div>
             <span>Company</span>
-            <a href="#about">About us</a>
-            <a href="#contact">Contact</a>
-            <a href="#contact">Downloads</a>
+            <a href="/about">About us</a>
+            <a href="/contact">Contact</a>
+            <a href="/cart">Selection</a>
           </div>
           <div>
             <span>Visit</span>
@@ -499,11 +512,11 @@ export default function Home() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Foshan Huangjia Building Material Co., Ltd.</span>
-          <span>Concept homepage · All product imagery belongs to Huangjia</span>
+          <span>International trade · OEM / ODM · Project supply</span>
         </div>
       </footer>
 
-      <a className="floating-inquiry" href="#contact" aria-label="Start an enquiry">
+      <a className="floating-inquiry" href="/contact" aria-label="Start an enquiry">
         <MessageCircle size={19} />
         <span>Enquire</span>
       </a>
