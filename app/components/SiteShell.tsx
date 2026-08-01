@@ -27,6 +27,20 @@ export function SiteShell({
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const { count } = useInquiry();
+  const phoneDigits = catalog.contact.phone.replace(/[^\d]/g, "");
+  const contactLinks = [
+    { label: "WhatsApp", icon: originalMedia.footerIcons[0], href: `https://wa.me/${phoneDigits}`, className: "rail-whatsapp" },
+    { label: "Skype", icon: originalMedia.footerIcons[1], href: "skype:myskype?chat", className: "rail-skype" },
+    { label: "WeChat", icon: originalMedia.footerIcons[2], href: "/contact", className: "rail-wechat" },
+    { label: "Telephone", icon: originalMedia.footerIcons[3], href: `tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`, className: "rail-phone" },
+    { label: "YouTube", icon: originalMedia.footerIcons[4], href: "https://www.youtube.com/", className: "rail-youtube" },
+    { label: "Instagram", icon: originalMedia.footerIcons[5], href: "https://www.instagram.com/", className: "rail-instagram" },
+    { label: "Pinterest", icon: originalMedia.footerIcons[6], href: "https://www.pinterest.com/", className: "rail-pinterest" },
+    { label: "LinkedIn", icon: originalMedia.footerIcons[7], href: "https://www.linkedin.com/", className: "rail-linkedin" },
+    { label: "Facebook", icon: originalMedia.footerIcons[8], href: "https://www.facebook.com/", className: "rail-facebook" },
+    { label: "X", icon: originalMedia.footerIcons[9], href: "https://www.twitter.com/", className: "rail-x" },
+    { label: "Email", icon: originalMedia.footerIcons[10], href: `mailto:${catalog.contact.email}`, className: "rail-email" }
+  ];
 
   useEffect(() => {
     setMobileOpen(false);
@@ -131,6 +145,25 @@ export function SiteShell({
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
+      <aside className="social-contact-rail" aria-label="Contact and social links">
+        {contactLinks.map((item) => {
+          const external = item.href.startsWith("http");
+          return (
+            <a
+              key={item.label}
+              className={item.className}
+              href={item.href}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noreferrer" : undefined}
+              aria-label={item.label}
+            >
+              <img src={item.icon} alt="" />
+              <span>{item.label}</span>
+            </a>
+          );
+        })}
+      </aside>
+
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
           <X size={26} />
@@ -181,9 +214,20 @@ export function SiteShell({
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved.</span>
           <div className="original-footer-icons" aria-label="Huangjia contact and social channels">
-            {originalMedia.footerIcons.map((icon, index) => (
-              <img key={icon} src={icon} alt={`Huangjia channel ${index + 1}`} />
-            ))}
+            {contactLinks.map((item) => {
+              const external = item.href.startsWith("http");
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined}
+                  aria-label={item.label}
+                >
+                  <img src={item.icon} alt="" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </footer>
