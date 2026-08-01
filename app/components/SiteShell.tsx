@@ -9,8 +9,8 @@ import {
   ShoppingBag,
   X
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { categoryGroups, catalog } from "../lib/catalog";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { categoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
 import { useInquiry } from "./InquiryProvider";
 import { LanguageToggle } from "./LanguageProvider";
@@ -26,7 +26,15 @@ export function SiteShell({
   const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [headerQuery, setHeaderQuery] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const headerSearchRef = useRef<HTMLInputElement>(null);
   const { count } = useInquiry();
+  const headerResults = useMemo(
+    () => headerQuery.trim() ? filterProducts(headerQuery).slice(0, 6) : [],
+    [headerQuery]
+  );
   const phoneDigits = catalog.contact.phone.replace(/[^\d]/g, "");
   const contactLinks = [
     { label: "WhatsApp", icon: originalMedia.footerIcons[0], href: `https://wa.me/${phoneDigits}`, className: "rail-whatsapp" },
@@ -77,9 +85,70 @@ export function SiteShell({
         <LanguageToggle compact />
       </div>
       <header className={`catalog-header ${scrolled ? "is-scrolled" : ""}`}>
-        <a href="/search" className="catalog-leading-search">
-          <Search size={19} /> <span>Search</span>
-        </a>
+        <div
+          className={`catalog-inline-search ${searchFocused ? "is-focused" : ""} ${mobileSearchOpen ? "is-mobile-open" : ""}`}
+          onFocus={() => setSearchFocused(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+              setSearchFocused(false);
+              setMobileSearchOpen(false);
+            }
+          }}
+        >
+          <Search className="catalog-search-icon" size={18} />
+          <button
+            type="button"
+            className="catalog-inline-search-toggle"
+            aria-label="Search products"
+            onClick={() => {
+              const next = !mobileSearchOpen;
+              setMobileSearchOpen(next);
+              if (next) window.requestAnimationFrame(() => headerSearchRef.current?.focus());
+            }}
+          >
+            <Search size={19} />
+          </button>
+          <input
+            ref={headerSearchRef}
+            value={headerQuery}
+            onChange={(event) => setHeaderQuery(event.target.value)}
+            placeholder="Search products or model"
+            aria-label="Search products or model"
+          />
+          {headerQuery && (
+            <button
+              type="button"
+              className="catalog-search-clear"
+              aria-label="Clear search"
+              onClick={() => {
+                setHeaderQuery("");
+                headerSearchRef.current?.focus();
+              }}
+            >
+              <X size={15} />
+            </button>
+          )}
+          {searchFocused && headerQuery.trim() && (
+            <div className="catalog-inline-results" aria-live="polite">
+              <div className="catalog-inline-results-head">
+                <span>Search results</span>
+                <small>{headerResults.length} shown</small>
+              </div>
+              {headerResults.length ? headerResults.map((product) => (
+                <a href={`/product/${product.slug}`} key={product.slug}>
+                  <img src={product.images[0]} alt="" />
+                  <span>
+                    <small>{product.category}</small>
+                    <strong>{primaryModel(product.name)}</strong>
+                  </span>
+                  <ArrowRight size={15} />
+                </a>
+              )) : (
+                <p>No matching products</p>
+              )}
+            </div>
+          )}
+        </div>
         <a href="/" className="catalog-brand" aria-label="SHIE home">
           <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
         </a>
