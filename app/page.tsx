@@ -48,6 +48,17 @@ export default function HomePage() {
             <h2>PRODUCT CATEGORIES</h2>
             <p>Shop by material</p>
           </div>
+          <nav className="home-category-tabs" aria-label="Browse product categories">
+            {homeCategories.map((category, index) => (
+              <a
+                key={category.name}
+                href={`/products?category=${encodeURIComponent(category.name)}`}
+              >
+                <small>{String(index + 1).padStart(2, "0")}</small>
+                {category.name}
+              </a>
+            ))}
+          </nav>
           <div className="original-category-grid">
             {homeCategories.map((category) => (
               <a
@@ -106,6 +117,56 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="home-service-section">
+          <div className="original-section-heading">
+            <h2>WHY CHOOSE HUANGJIA</h2>
+            <p>A clear path from selection to confirmed order</p>
+          </div>
+          <div className="original-service-strip">
+            {[
+              {
+                icon: originalMedia.services[0],
+                title: "Choose materials",
+                text: "Browse categories and product details"
+              },
+              {
+                icon: originalMedia.services[1],
+                title: "Add to cart",
+                text: "Save the models and quantities you need"
+              },
+              {
+                icon: originalMedia.services[2],
+                title: "Request quotation",
+                text: "Send one complete material list to sales"
+              },
+              {
+                icon: originalMedia.services[3],
+                title: "Confirm order",
+                text: "Confirm price, specifications and shipping"
+              }
+            ].map(({ icon, title, text }) => (
+              <article key={title}>
+                <img src={icon} alt="" />
+                <div><h3>{title}</h3><p>{text}</p></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="original-social-section">
+          <div className="original-section-heading">
+            <h2>#HUANGJIA</h2>
+            <p>Join us &amp; Shop Instagram</p>
+          </div>
+          <div className="original-social-grid">
+            {originalMedia.social.map((image, index) => (
+              <a href="/products" key={image} aria-label={`Huangjia gallery ${index + 1}`}>
+                <img src={image} alt="" />
+              </a>
+            ))}
+          </div>
+        </section>
+
         <section className="original-updates-section">
           <div className="original-section-heading">
             <h2>RECENT UPDATES</h2>
@@ -127,48 +188,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="original-service-strip">
-          {[
-            {
-              icon: originalMedia.services[0],
-              title: "Choose materials",
-              text: "Browse categories and product details"
-            },
-            {
-              icon: originalMedia.services[1],
-              title: "Add to cart",
-              text: "Save the models and quantities you need"
-            },
-            {
-              icon: originalMedia.services[2],
-              title: "Request quotation",
-              text: "Send one complete material list to sales"
-            },
-            {
-              icon: originalMedia.services[3],
-              title: "Confirm order",
-              text: "Confirm price, specifications and shipping"
-            }
-          ].map(({ icon, title, text }) => (
-            <article key={title}>
-              <img src={icon} alt="" />
-              <div><h3>{title}</h3><p>{text}</p></div>
-            </article>
-          ))}
-        </section>
-
-        <section className="original-social-section">
-          <div className="original-section-heading">
-            <h2>#HUANGJIA</h2>
-            <p>Join us &amp; Shop Instagram</p>
+        <section className="home-contact-cta">
+          <div>
+            <span>Start a project</span>
+            <h2>Browse, select and request a quote.</h2>
+            <p>Browse products, add materials to your cart, then request a confirmed quotation.</p>
           </div>
-          <div className="original-social-grid">
-            {originalMedia.social.map((image, index) => (
-              <a href="/products" key={image} aria-label={`Huangjia gallery ${index + 1}`}>
-                <img src={image} alt="" />
-              </a>
-            ))}
-          </div>
+          <aside>
+            <a href="/contact">Contact Us <ArrowRight size={17} /></a>
+            <a href="/cart">View cart <ArrowRight size={17} /></a>
+            <small>Direct contact</small>
+            <a href={`tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`}>{catalog.contact.phone}</a>
+            <a href={`mailto:${catalog.contact.email}`}>{catalog.contact.email}</a>
+          </aside>
         </section>
       </main>
     </SiteShell>
