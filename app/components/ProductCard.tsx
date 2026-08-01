@@ -28,6 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
           <p title={productTitle(product.name)}>
             {product.summary || "Huangjia building material collection"}
           </p>
+          <span className="product-card-price">Price on request</span>
         </div>
         <button onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)}`}>
           <Plus size={16} />

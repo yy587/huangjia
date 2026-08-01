@@ -41,10 +41,21 @@ export default function HomePage() {
       <main className="catalog-main original-structure-home">
         <HomeCarousel />
 
+        <section className="shop-entry-bar" aria-label="How to buy Huangjia materials">
+          <div>
+            <span>Official material store</span>
+            <strong>Browse products, add materials to your cart, then request a confirmed quotation.</strong>
+          </div>
+          <nav>
+            <a href="/products">Browse materials <ArrowRight size={16} /></a>
+            <a href="/cart">View cart <ArrowRight size={16} /></a>
+          </nav>
+        </section>
+
         <section className="original-category-section">
           <div className="original-section-heading">
-            <h2>CERAMIC TILE</h2>
-            <p>CERAMIC TILE Products</p>
+            <h2>PRODUCT CATEGORIES</h2>
+            <p>Shop by material</p>
           </div>
           <div className="original-category-grid">
             {homeCategories.map((category) => (
@@ -64,11 +75,11 @@ export default function HomePage() {
         <ProductSection title="TRENDING PRODUCTS" subtitle="Our Bestsellers" />
         <ProductSection
           title="FEATURED PRODUCTS"
-          subtitle="Popular Trending Lash Beauty Artist Products"
+          subtitle="Featured ceramic tile and building materials"
         />
         <ProductSection
           title="NEW ARRIVAL PRODUCTS"
-          subtitle="Find More popular beauty eyelash products"
+          subtitle="Explore the latest Huangjia collections"
         />
 
         <section className="original-logo-strip" aria-label="Huangjia collections">
@@ -129,23 +140,23 @@ export default function HomePage() {
           {[
             {
               icon: originalMedia.services[0],
-              title: "Fast Ground Shipping",
-              text: "Inside the United States"
+              title: "Choose materials",
+              text: "Browse categories and product details"
             },
             {
               icon: originalMedia.services[1],
-              title: "Free Exchanges",
-              text: "15 day guarantee on all items"
+              title: "Add to cart",
+              text: "Save the models and quantities you need"
             },
             {
               icon: originalMedia.services[2],
-              title: "Safe Payments",
-              text: "Trusted SSL Protection"
+              title: "Request quotation",
+              text: "Send one complete material list to sales"
             },
             {
               icon: originalMedia.services[3],
-              title: "Top Selection",
-              text: "100% vegan and cruelty free"
+              title: "Confirm order",
+              text: "Confirm price, specifications and shipping"
             }
           ].map(({ icon, title, text }) => (
             <article key={title}>

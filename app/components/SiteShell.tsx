@@ -59,7 +59,7 @@ export function SiteShell({
     <div className={`catalog-site shell-${theme}`}>
       <div className="catalog-utility">
         <span>Foshan · China</span>
-        <span>Tile & building material solutions for global projects</span>
+        <span>Official material store · Browse, select and request a quote</span>
         <LanguageToggle compact />
       </div>
       <header className={`catalog-header ${scrolled ? "is-scrolled" : ""}`}>

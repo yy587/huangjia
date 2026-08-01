@@ -18,9 +18,7 @@ export function LegacyProductCard({ product, image }: { product: Product; image?
       <small>{product.category.replace("BASIR", "BASIN")}</small>
       <h3><a href={`/product/${product.slug}`}>{primaryModel(product.name)}</a></h3>
       <div className="legacy-price">
-        <span>MSRP: <s>$0.00</s></span>
-        <span>Was: <s>$0.00</s></span>
-        <strong>Now: $0.00</strong>
+        <strong>Price on request</strong>
       </div>
       <button onClick={() => addItem(product)}>
         <ShoppingBag size={15} /> {added ? "Added to Cart" : "Add to Cart"}
