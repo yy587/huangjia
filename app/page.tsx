@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { HomeCarousel } from "./components/HomeCarousel";
-import { LegacyProductCard } from "./components/LegacyProductCard";
+import { HomeProductSection } from "./components/HomeProductSection";
 import { SiteShell } from "./components/SiteShell";
 import { catalog } from "./lib/catalog";
 import { originalMedia } from "./lib/original-media";
@@ -17,21 +17,12 @@ const originalProducts = [...catalog.products].reverse().slice(0, 8);
 
 function ProductSection({ title, subtitle }: { title: string; subtitle: string }) {
   return (
-    <section className="original-product-section">
-      <div className="original-section-heading">
-        <h2>{title}</h2>
-        <p>{subtitle}</p>
-      </div>
-      <div className="legacy-product-grid">
-        {originalProducts.map((product, index) => (
-          <LegacyProductCard
-            key={`${title}-${product.slug}`}
-            product={product}
-            image={originalMedia.homeProducts[index]}
-          />
-        ))}
-      </div>
-    </section>
+    <HomeProductSection
+      title={title}
+      subtitle={subtitle}
+      products={originalProducts}
+      images={originalMedia.homeProducts}
+    />
   );
 }
 
