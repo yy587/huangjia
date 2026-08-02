@@ -369,11 +369,11 @@
 }
 
 .original-home-carousel.is-dining-active{
-  height:auto;
-  min-height:0;
+  height:clamp(480px,45vw,650px);
+  min-height:480px;
   max-height:none;
-  aspect-ratio:1493/1053;
-  background:#b8ad96;
+  aspect-ratio:auto;
+  background:linear-gradient(90deg,#2b271f 0 25%,#b8ad96 75% 100%);
 }
 .original-home-carousel>img.is-dining-slide{
   width:100%;
@@ -381,4 +381,16 @@
   object-fit:contain;
   object-position:center;
   image-rendering:auto;
+}
+
+.original-home-carousel{
+  height:clamp(480px,45vw,650px);
+  min-height:480px;
+}
+@media(max-width:780px){
+  .original-home-carousel,
+  .original-home-carousel.is-dining-active{
+    height:300px;
+    min-height:300px;
+  }
 }
