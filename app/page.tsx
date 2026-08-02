@@ -48,17 +48,6 @@ export default function HomePage() {
             <h2>PRODUCT CATEGORIES</h2>
             <p>Shop by material</p>
           </div>
-          <nav className="home-category-tabs" aria-label="Browse product categories">
-            {homeCategories.map((category, index) => (
-              <a
-                key={category.name}
-                href={`/products?category=${encodeURIComponent(category.name)}`}
-              >
-                <small>{String(index + 1).padStart(2, "0")}</small>
-                {category.name}
-              </a>
-            ))}
-          </nav>
           <div className="original-category-grid">
             {homeCategories.map((category) => (
               <a
