@@ -64,7 +64,7 @@ export function SiteShell({
       { threshold: 0.08, rootMargin: "0px 0px -35px" }
     );
     document.querySelectorAll(
-      ".original-section-heading,.original-category-grid>a,.legacy-product-card,.original-story-copy,.original-update-grid>a,.news-card,.product-card"
+      ".original-section-heading,.original-category-grid>a,.legacy-product-card,.original-story-copy,.original-update-grid>a,.news-card,.product-card,.about-reason-card"
     ).forEach((element) => {
       element.classList.add("ui-reveal");
       observer.observe(element);
