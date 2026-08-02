@@ -42,7 +42,7 @@ export function HomeCarousel() {
   const slide = slides[active];
   return (
     <section
-      className="original-home-carousel"
+      className={`original-home-carousel${active === 2 ? " is-dining-active" : ""}`}
       aria-label="Huangjia product collections"
       onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
       onTouchEnd={(event) => {

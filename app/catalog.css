@@ -368,5 +368,17 @@
   .text-only-about-copy p,.about-copy p,.article-content p,.product-summary,.contact-note p{font-size:15px}
 }
 
-.original-home-carousel>img.is-dining-slide{object-position:center top}
-@media(max-width:780px){.original-home-carousel>img.is-dining-slide{object-position:90% top}}
+.original-home-carousel.is-dining-active{
+  height:auto;
+  min-height:0;
+  max-height:none;
+  aspect-ratio:1493/1053;
+  background:#b8ad96;
+}
+.original-home-carousel>img.is-dining-slide{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  image-rendering:auto;
+}
