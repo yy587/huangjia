@@ -935,9 +935,6 @@
   .about-split-layout .about-reason-photo{width:100px;height:100px}
   .about-split-layout .about-reason-card h3{font-size:14px}
 }
-@media(max-width:360px){
-  .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
-}
 
 /* About page balanced panel redesign */
 .about-split-layout{
@@ -1090,4 +1087,58 @@
   }
   .about-split-layout .about-reason-photo{width:78px;height:96px}
   .about-split-layout .about-reason-card h3{font-size:14px}
+}
+
+/* About page final flow: introduction above, advantages below */
+.about-split-layout{
+  max-width:1540px;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.about-split-layout>.text-only-about-inner,
+.about-split-layout>.about-reasons{width:100%}
+.about-split-layout .text-only-about-copy{max-width:980px}
+.about-split-layout .about-reasons-heading{max-width:760px}
+.about-split-layout .about-reasons-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.about-split-layout .about-reason-card{
+  min-height:260px;
+  padding:26px 18px 22px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:0;
+}
+.about-split-layout .about-reason-photo{width:104px;height:126px}
+.about-split-layout .about-reason-card h3{
+  max-width:240px;
+  margin:24px 0 0;
+  font-size:15px;
+  line-height:1.35;
+  text-align:center;
+}
+@media(max-width:900px){
+  .about-split-layout .about-reasons-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:780px){
+  .about-split-layout{gap:10px}
+  .about-split-layout .about-reasons-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .about-split-layout .about-reason-card{
+    min-height:225px;
+    padding:22px 10px 18px;
+  }
+  .about-split-layout .about-reason-photo{width:88px;height:106px}
+  .about-split-layout .about-reason-card h3{
+    margin-top:19px;
+    font-size:13px;
+  }
+}
+@media(max-width:360px){
+  .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
 }
