@@ -812,3 +812,129 @@
   .home-service-section .original-service-strip{grid-template-columns:1fr}
   .home-service-section .original-service-strip article{min-height:145px}
 }
+
+/* About page: company introduction left, advantages right */
+.about-split-layout{
+  max-width:1680px;
+  margin:0 auto;
+  padding:112px max(4.5vw,34px) 130px;
+  display:grid;
+  grid-template-columns:minmax(330px,.72fr) minmax(620px,1.28fr);
+  gap:clamp(58px,7vw,120px);
+  align-items:start;
+  background:#fff;
+}
+.about-split-layout>.text-only-about-inner{
+  max-width:none;
+  margin:0;
+  padding:0;
+  position:sticky;
+  top:135px;
+}
+.about-split-layout>.text-only-about-inner header{
+  margin-bottom:52px;
+  text-align:left;
+}
+.about-split-layout>.text-only-about-inner header span{
+  color:#777863;
+  font-size:8px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.about-split-layout>.text-only-about-inner h1{
+  margin:15px 0 0;
+  font-family:"DM Sans","Noto Sans SC",sans-serif;
+  font-size:clamp(56px,6.2vw,96px);
+  font-weight:300;
+  line-height:.95;
+  letter-spacing:-.055em;
+}
+.about-split-layout .text-only-about-copy{
+  max-width:580px;
+  margin:0;
+  padding:0;
+}
+.about-split-layout .text-only-about-copy p{
+  margin:0 0 25px;
+  color:#292824a8;
+  font-family:"DM Sans","Noto Sans SC",sans-serif;
+  font-size:14px;
+  line-height:1.85;
+}
+.about-split-layout>.about-reasons{
+  padding:0;
+  background:transparent;
+}
+.about-split-layout .about-reasons-heading{
+  max-width:700px;
+  margin:0 0 48px;
+  text-align:left;
+}
+.about-split-layout .about-reasons-heading>span{
+  margin-bottom:12px;
+  color:#777863;
+  font-size:8px;
+  font-weight:500;
+  letter-spacing:.14em;
+}
+.about-split-layout .about-reasons-heading h2{
+  font-family:"DM Sans","Noto Sans SC",sans-serif;
+  font-size:clamp(40px,4vw,62px);
+  font-weight:300;
+  line-height:1;
+  letter-spacing:-.045em;
+}
+.about-split-layout .about-reasons-heading p{
+  max-width:420px;
+  margin-top:15px;
+  color:#29282470;
+  font-size:10px;
+}
+.about-split-layout .about-reasons-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.about-split-layout .about-reason-card{
+  min-height:310px;
+  padding:30px 22px 24px;
+  background:#f4f2ed;
+}
+.about-split-layout .about-reason-photo{
+  width:126px;
+  height:126px;
+}
+.about-split-layout .about-reason-card h3{
+  margin-top:25px;
+  font-family:"DM Sans","Noto Sans SC",sans-serif;
+  font-size:clamp(16px,1.25vw,20px);
+  font-weight:400;
+}
+@media(max-width:1050px){
+  .about-split-layout{
+    grid-template-columns:minmax(280px,.78fr) minmax(470px,1.22fr);
+    gap:48px;
+  }
+  .about-split-layout .about-reason-card{min-height:285px}
+  .about-split-layout .about-reason-photo{width:110px;height:110px}
+}
+@media(max-width:780px){
+  .about-split-layout{
+    padding:76px 18px 92px;
+    grid-template-columns:1fr;
+    gap:72px;
+  }
+  .about-split-layout>.text-only-about-inner{position:static}
+  .about-split-layout>.text-only-about-inner header{margin-bottom:38px}
+  .about-split-layout>.text-only-about-inner h1{font-size:58px}
+  .about-split-layout .text-only-about-copy p{font-size:14px;line-height:1.8}
+  .about-split-layout .about-reasons-heading{margin-bottom:34px}
+  .about-split-layout .about-reasons-heading h2{font-size:42px}
+  .about-split-layout .about-reasons-grid{gap:8px}
+  .about-split-layout .about-reason-card{min-height:245px;padding:23px 12px 20px}
+  .about-split-layout .about-reason-photo{width:100px;height:100px}
+  .about-split-layout .about-reason-card h3{font-size:14px}
+}
+@media(max-width:360px){
+  .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
+}

@@ -23,32 +23,34 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <main className="catalog-main text-only-about">
-        <section className="text-only-about-inner">
-          <header>
-            <span>Foshan Huangjia Building Material Co., Ltd.</span>
-            <h1>About Us</h1>
-          </header>
-          <div className="text-only-about-copy">
-            {originalAboutText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </div>
-        </section>
-        <section className="about-reasons" aria-labelledby="why-choose-us-title">
-          <div className="about-reasons-heading">
-            <span>Huangjia advantages</span>
-            <h2 id="why-choose-us-title">Why Choose Us?</h2>
-            <p>Photo framework — team portraits can be added later.</p>
-          </div>
-          <div className="about-reasons-grid">
-            {whyChooseUs.map((title, index) => (
-              <article className="about-reason-card" key={title} tabIndex={0}>
-                <div className="about-reason-photo" aria-label={`Photo placeholder ${index + 1}`}>
-                  <span>PHOTO {String(index + 1).padStart(2, "0")}</span>
-                </div>
-                <h3>{title}</h3>
-                <small>{String(index + 1).padStart(2, "0")} / 08</small>
-              </article>
-            ))}
-          </div>
+        <section className="about-split-layout">
+          <article className="text-only-about-inner">
+            <header>
+              <span>Foshan Huangjia Building Material Co., Ltd.</span>
+              <h1>About Us</h1>
+            </header>
+            <div className="text-only-about-copy">
+              {originalAboutText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          </article>
+          <aside className="about-reasons" aria-labelledby="why-choose-us-title">
+            <div className="about-reasons-heading">
+              <span>Huangjia advantages</span>
+              <h2 id="why-choose-us-title">Why Choose Us?</h2>
+              <p>Photo framework — team portraits can be added later.</p>
+            </div>
+            <div className="about-reasons-grid">
+              {whyChooseUs.map((title, index) => (
+                <article className="about-reason-card" key={title} tabIndex={0}>
+                  <div className="about-reason-photo" aria-label={`Photo placeholder ${index + 1}`}>
+                    <span>PHOTO {String(index + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3>{title}</h3>
+                  <small>{String(index + 1).padStart(2, "0")} / 08</small>
+                </article>
+              ))}
+            </div>
+          </aside>
         </section>
       </main>
     </SiteShell>
