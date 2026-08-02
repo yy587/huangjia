@@ -1607,3 +1607,10 @@ body,
 @media(max-width:780px){
   .about-split-layout{--about-text-inset:12px}
 }
+
+/* Contact form stays functional without a coloured card container */
+.contact-form{
+  padding:0;
+  background:#fff;
+  box-shadow:none;
+}
