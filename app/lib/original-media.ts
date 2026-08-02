@@ -5,7 +5,7 @@ export const originalMedia = {
   productBanner: `${upload}/172301541689848900100.jpg`,
   heroes: [
     `${upload}/172319519362627200100.jpg`,
-    `${upload}/172319702098454700100.jpg`,
+    "/images/hero-living-editorial-v2.png",
     "/images/hero-dining-editorial.png",
     `${upload}/172318897449327100100.jpg`
   ],

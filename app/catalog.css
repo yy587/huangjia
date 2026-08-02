@@ -375,7 +375,11 @@
   aspect-ratio:auto;
   background:linear-gradient(90deg,#2b271f 0 25%,#b8ad96 75% 100%);
 }
-.original-home-carousel>img.is-dining-slide{
+.original-home-carousel.is-living-active{
+  background:#d8cbb7;
+}
+.original-home-carousel>img.is-dining-slide,
+.original-home-carousel>img.is-living-slide{
   width:100%;
   height:100%;
   object-fit:contain;
