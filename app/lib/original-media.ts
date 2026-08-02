@@ -7,7 +7,7 @@ export const originalMedia = {
     `${upload}/172319519362627200100.jpg`,
     "/images/hero-living-editorial-v2.png",
     "/images/hero-dining-editorial.png",
-    `${upload}/172318897449327100100.jpg`
+    "/images/hero-kitchen-editorial-v2.png"
   ],
   categories: [
     `${upload}/172345141743994900100.jpg`,

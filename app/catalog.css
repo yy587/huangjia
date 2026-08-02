@@ -378,8 +378,12 @@
 .original-home-carousel.is-living-active{
   background:#d8cbb7;
 }
+.original-home-carousel.is-kitchen-active{
+  background:#bca98a;
+}
 .original-home-carousel>img.is-dining-slide,
-.original-home-carousel>img.is-living-slide{
+.original-home-carousel>img.is-living-slide,
+.original-home-carousel>img.is-kitchen-slide{
   width:100%;
   height:100%;
   object-fit:contain;
