@@ -938,3 +938,156 @@
 @media(max-width:360px){
   .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
 }
+
+/* About page balanced panel redesign */
+.about-split-layout{
+  max-width:1540px;
+  padding:92px max(4.5vw,34px) 112px;
+  grid-template-columns:minmax(390px,.82fr) minmax(610px,1.18fr);
+  gap:18px;
+  align-items:stretch;
+}
+.about-split-layout>.text-only-about-inner{
+  padding:clamp(42px,4vw,64px);
+  position:relative;
+  top:auto;
+  background:#ded8ce;
+}
+.about-split-layout>.text-only-about-inner:before{
+  content:"01";
+  position:absolute;
+  top:28px;
+  right:30px;
+  color:#29282455;
+  font-size:8px;
+  letter-spacing:.14em;
+}
+.about-split-layout>.text-only-about-inner header{
+  margin-bottom:42px;
+}
+.about-split-layout>.text-only-about-inner h1{
+  margin-top:13px;
+  font-size:clamp(48px,4.8vw,72px);
+}
+.about-split-layout .text-only-about-copy{max-width:620px}
+.about-split-layout .text-only-about-copy p{
+  margin-bottom:20px;
+  color:#292824a3;
+  font-size:12px;
+  line-height:1.78;
+}
+.about-split-layout .text-only-about-copy p:first-child{
+  margin-bottom:28px;
+  color:#292824;
+  font-size:15px;
+  line-height:1.7;
+}
+.about-split-layout>.about-reasons{
+  padding:clamp(42px,4vw,64px);
+  background:#f1eee8;
+}
+.about-split-layout>.about-reasons:before{
+  content:"02";
+  position:absolute;
+  top:28px;
+  right:30px;
+  color:#29282455;
+  font-size:8px;
+  letter-spacing:.14em;
+}
+.about-split-layout>.about-reasons{position:relative}
+.about-split-layout .about-reasons-heading{
+  margin-bottom:35px;
+}
+.about-split-layout .about-reasons-heading h2{
+  font-size:clamp(40px,3.6vw,54px);
+}
+.about-split-layout .about-reasons-heading p{
+  margin-top:12px;
+}
+.about-split-layout .about-reasons-grid{
+  gap:10px;
+}
+.about-split-layout .about-reason-card{
+  min-height:156px;
+  padding:18px 18px 18px;
+  display:grid;
+  grid-template-columns:86px minmax(0,1fr);
+  grid-template-rows:1fr;
+  align-items:center;
+  gap:18px;
+  background:#fbfaf7;
+  box-shadow:none;
+}
+.about-split-layout .about-reason-card:hover,
+.about-split-layout .about-reason-card:focus-visible{
+  background:#fff;
+  box-shadow:0 15px 35px #2928240d;
+  transform:translateY(-3px);
+}
+.about-split-layout .about-reason-photo{
+  width:86px;
+  height:108px;
+  border:0;
+  border-radius:0;
+  background:#e5e0d7;
+}
+.about-split-layout .about-reason-photo:before{height:30px}
+.about-split-layout .about-reason-photo:after{width:30px}
+.about-split-layout .about-reason-photo span{
+  bottom:12px;
+  font-size:6px;
+}
+.about-split-layout .about-reason-card:hover .about-reason-photo,
+.about-split-layout .about-reason-card:focus-visible .about-reason-photo{
+  border:0;
+  background:#dcd7cc;
+  transform:scale(1.025);
+}
+.about-split-layout .about-reason-card h3{
+  max-width:220px;
+  margin:0;
+  font-size:15px;
+  line-height:1.35;
+  text-align:left;
+}
+.about-split-layout .about-reason-card:hover h3,
+.about-split-layout .about-reason-card:focus-visible h3{
+  color:#62664f;
+  transform:none;
+}
+.about-split-layout .about-reason-card>small{
+  right:13px;
+  bottom:10px;
+  font-size:6px;
+}
+@media(max-width:1120px){
+  .about-split-layout{
+    grid-template-columns:minmax(340px,.8fr) minmax(500px,1.2fr);
+  }
+  .about-split-layout>.text-only-about-inner,
+  .about-split-layout>.about-reasons{padding:40px 34px}
+  .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
+  .about-split-layout .about-reason-card{min-height:130px}
+}
+@media(max-width:780px){
+  .about-split-layout{
+    padding:54px 14px 72px;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .about-split-layout>.text-only-about-inner,
+  .about-split-layout>.about-reasons{padding:34px 24px 40px}
+  .about-split-layout>.text-only-about-inner h1{font-size:50px}
+  .about-split-layout .text-only-about-copy p{font-size:12px}
+  .about-split-layout .text-only-about-copy p:first-child{font-size:14px}
+  .about-split-layout .about-reasons-heading h2{font-size:38px}
+  .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
+  .about-split-layout .about-reason-card{
+    min-height:126px;
+    grid-template-columns:78px minmax(0,1fr);
+    gap:15px;
+  }
+  .about-split-layout .about-reason-photo{width:78px;height:96px}
+  .about-split-layout .about-reason-card h3{font-size:14px}
+}
