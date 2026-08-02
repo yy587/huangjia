@@ -7,7 +7,7 @@ import { originalMedia } from "../lib/original-media";
 const slides = [
   {
     image: originalMedia.heroes[0],
-    title: "BATH ROOM SERIES"
+    title: "BATHROOM"
   },
   {
     image: originalMedia.heroes[1],
@@ -42,7 +42,7 @@ export function HomeCarousel() {
   const slide = slides[active];
   return (
     <section
-      className={`original-home-carousel${active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : active === 3 ? " is-kitchen-active" : ""}`}
+      className={`original-home-carousel${active === 0 ? " is-bathroom-active" : active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : " is-kitchen-active"}`}
       aria-label="Huangjia product collections"
       onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
       onTouchEnd={(event) => {
@@ -54,7 +54,7 @@ export function HomeCarousel() {
     >
       <img
         key={slide.image}
-        className={active === 1 ? "is-living-slide" : active === 2 ? "is-dining-slide" : active === 3 ? "is-kitchen-slide" : undefined}
+        className={active === 0 ? "is-bathroom-slide" : active === 1 ? "is-living-slide" : active === 2 ? "is-dining-slide" : "is-kitchen-slide"}
         src={slide.image}
         alt={slide.title}
       />

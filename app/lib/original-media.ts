@@ -4,7 +4,7 @@ export const originalMedia = {
   logo: `${upload}/172137324403473800110.png`,
   productBanner: `${upload}/172301541689848900100.jpg`,
   heroes: [
-    `${upload}/172319519362627200100.jpg`,
+    "/images/hero-bathroom-editorial.png",
     "/images/hero-living-editorial-v2.png",
     "/images/hero-dining-editorial.png",
     "/images/hero-kitchen-editorial-v2.png"
