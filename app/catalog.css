@@ -1142,3 +1142,188 @@
 @media(max-width:360px){
   .about-split-layout .about-reasons-grid{grid-template-columns:1fr}
 }
+
+/* Original Huangjia palette: white, charcoal, soft grey and brand orange */
+:root{
+  --ink:#333333;
+  --paper:#ffffff;
+  --cream:#f2f2f2;
+  --soft:#bababa;
+  --accent:#f3a435;
+  --rust:#f27474;
+  --line:rgba(51,51,51,.13);
+}
+body,
+.catalog-site,
+.original-structure-home{
+  color:#333;
+  background:#fff;
+}
+.catalog-utility{background:#333}
+.catalog-header,
+.catalog-header.is-scrolled,
+.catalog-nav-row,
+.catalog-nav-row.is-scrolled{
+  color:#333;
+  background:#fffffff4;
+}
+.catalog-scroll-progress{background:#f3a435}
+.catalog-nav-row>a:hover,
+.catalog-nav-row>.mega-trigger>a:hover,
+.catalog-leading-search:hover,
+.selection-link:hover,
+.mega-categories a:hover{
+  color:#f3a435;
+}
+.catalog-nav-row>a:after,
+.catalog-nav-row>.mega-trigger>a:after{background:#f3a435}
+.mega-menu{color:#333;background:#fff}
+.selection-link b{background:#f3a435}
+.selection-link:hover{border-color:#f3a435}
+.shop-entry-bar{
+  color:#fff;
+  background:#202738;
+}
+.shop-entry-bar span{color:#f3a435}
+.shop-entry-bar a{color:#fff;border-color:#ffffff5c}
+.shop-entry-bar a:first-child{
+  color:#202738;
+  background:#f3a435;
+  border-color:#f3a435;
+}
+.shop-entry-bar a:hover,
+.shop-entry-bar a:first-child:hover{
+  color:#333;
+  background:#fff;
+  border-color:#fff;
+}
+.original-structure-home .original-section-heading p,
+.home-service-section>.original-section-heading p,
+.original-story-copy .original-section-heading p,
+.original-update-grid small,
+.original-update-grid b,
+.legacy-product-card>small,
+.legacy-price strong,
+.product-card-price{
+  color:#f3a435;
+}
+.original-category-section,
+.original-social-section,
+.original-updates-section,
+.original-product-section{
+  background:#fff!important;
+}
+.original-product-section:nth-of-type(even){background:#f2f2f5!important}
+.original-category-grid h3,
+.legacy-product-card h3,
+.original-update-grid h3{color:#333}
+.original-category-grid h3:after,
+.legacy-price,
+.home-product-hint{color:#33333373}
+.home-product-progress{background:#3333331c}
+.home-product-progress span{background:#f3a435}
+.home-product-actions button:hover:not(:disabled),
+.legacy-product-card>button:hover,
+.product-card-body>button:hover,
+.load-more:hover{
+  color:#202738;
+  border-color:#f3a435;
+  background:#f3a435;
+}
+.original-logo-strip{
+  background:#f2f2f5;
+  border:0;
+}
+.original-story-section{background:#fff}
+.original-story-copy{background:#fff}
+.original-story-copy>a{
+  color:#333;
+  border-color:#f3a435;
+  background:transparent;
+}
+.original-story-copy>a:hover{
+  color:#202738;
+  background:#f3a435;
+}
+.home-service-section{background:#f2f2f5}
+.home-service-section .original-service-strip article{
+  color:#333;
+  background:#fff;
+}
+.home-service-section .original-service-strip article:hover{background:#fffaf2}
+.home-service-section .original-service-strip article:before,
+.home-service-section .original-service-strip p{color:#33333375}
+.home-service-section .original-service-strip article>img{filter:none}
+.home-contact-cta{
+  color:#fff;
+  background:#202738;
+}
+.home-contact-cta>div>span{color:#f3a435}
+.home-contact-cta aside>a:first-child{
+  color:#202738;
+  background:#f3a435;
+  border-color:#f3a435;
+}
+.home-contact-cta aside>a:hover{color:#f3a435}
+.floating-enquiry{
+  color:#202738;
+  background:#f3a435;
+}
+.floating-enquiry:hover{color:#fff;background:#202738}
+.social-contact-rail a{filter:none}
+.social-contact-rail .rail-whatsapp{background:#25d366!important}
+.social-contact-rail .rail-skype{background:#00aff0!important}
+.social-contact-rail .rail-wechat{background:#4ec034!important}
+.social-contact-rail .rail-phone{background:#645ea4!important}
+.social-contact-rail .rail-youtube{background:#d54029!important}
+.social-contact-rail .rail-instagram{background:#e1306c!important}
+.social-contact-rail .rail-pinterest{background:#df151b!important}
+.social-contact-rail .rail-linkedin{background:#087daf!important}
+.social-contact-rail .rail-facebook{background:#466cb1!important}
+.social-contact-rail .rail-x{background:#050505!important}
+.social-contact-rail .rail-email{background:#999!important}
+.social-contact-rail a:hover{filter:brightness(1.08)}
+.original-footer{
+  color:#333;
+  background:#fff;
+}
+.original-footer .footer-brand img{filter:none}
+.original-footer-main nav a,
+.original-footer-main>div a{color:#333}
+.original-footer-main nav a:hover,
+.original-footer-main>div a:hover{color:#f3a435}
+.original-footer .footer-bottom{
+  color:#33333375;
+  border-color:#3333331f;
+}
+.original-footer-icons img{filter:none}
+.about-split-layout{background:#fff}
+.about-split-layout>.text-only-about-inner{background:#f2f2f5}
+.about-split-layout>.about-reasons{background:#fff}
+.about-split-layout>.text-only-about-inner header span,
+.about-split-layout .about-reasons-heading>span,
+.about-split-layout .about-reason-card>small,
+.about-split-layout .about-reason-photo span{
+  color:#f3a435;
+}
+.about-split-layout .text-only-about-copy p{color:#333333b0}
+.about-split-layout .text-only-about-copy p:first-child{color:#333}
+.about-split-layout .about-reason-card{background:#f2f2f5}
+.about-split-layout .about-reason-card:hover,
+.about-split-layout .about-reason-card:focus-visible{background:#fff7eb}
+.about-split-layout .about-reason-photo{background:#fff}
+.about-split-layout .about-reason-photo:before,
+.about-split-layout .about-reason-photo:after{background:#f3a43580}
+.about-split-layout .about-reason-card:hover .about-reason-photo,
+.about-split-layout .about-reason-card:focus-visible .about-reason-photo{background:#fff}
+.about-split-layout .about-reason-card:hover h3,
+.about-split-layout .about-reason-card:focus-visible h3{color:#f3a435}
+.page-hero,
+.specification-section{background-color:#202738}
+.solid-link,
+.add-selection,
+.empty-results button,
+.empty-results a{background:#f3a435}
+.product-filters button:hover,
+.product-filters button.is-active{color:#f3a435}
+::selection{color:#202738;background:#f3a435}
