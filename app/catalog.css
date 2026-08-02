@@ -182,3 +182,6 @@
 
 /* Keep the About page within the official white, black and olive palette */
 .about-reasons{background:#fff}.about-reason-card{background:#f7f7f3}.about-reason-card:hover,.about-reason-card:focus-visible{background:#f2f4e8}.about-reason-photo{border-color:#94ad2e99;background:#fff}.about-reason-photo:before,.about-reason-photo:after{background:#94ad2e66}.about-reason-photo span,.about-reason-card>small{color:#748820}.about-reason-card:hover .about-reason-photo,.about-reason-card:focus-visible .about-reason-photo{border-color:#748820;background:#fff}
+
+/* Align About copy with the visual left edge of the page title */
+.text-only-about-copy{margin-left:0;padding-left:clamp(7px,1vw,14px)}
