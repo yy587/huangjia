@@ -1480,3 +1480,97 @@ body,
   .about-split-layout .about-reasons-grid{gap:36px 14px}
   .about-split-layout .about-reason-card{min-height:205px}
 }
+
+/* Unified left alignment for all editorial and commerce content */
+.catalog-main,
+.catalog-main section,
+.original-section-heading,
+.home-product-heading,
+.original-story-copy,
+.home-service-section>.original-section-heading,
+.home-contact-cta,
+.original-page-title,
+.results-toolbar,
+.product-card-body,
+.product-detail-info,
+.section-heading-row,
+.text-only-about-inner,
+.text-only-about-copy,
+.about-reasons-heading,
+.news-card,
+.article-page,
+.article-content,
+.contact-details,
+.contact-form-wrap{
+  text-align:left;
+}
+.original-category-section>.original-section-heading,
+.original-updates-section>.original-section-heading,
+.original-social-section>.original-section-heading,
+.home-service-section>.original-section-heading{
+  margin-left:0;
+  margin-right:0;
+  align-items:flex-start;
+  text-align:left;
+}
+.original-section-heading h2,
+.original-section-heading p,
+.home-product-heading .original-section-heading,
+.home-contact-cta h2,
+.home-contact-cta p,
+.about-reasons-heading h2,
+.about-reasons-heading p,
+.text-only-about-inner header,
+.text-only-about-copy p,
+.original-update-grid h3,
+.original-update-grid p,
+.original-update-grid b,
+.product-card-body h3,
+.product-card-body p,
+.legacy-product-card h3,
+.legacy-price,
+.original-story-copy p{
+  text-align:left;
+}
+.about-split-layout .about-reason-card{
+  align-items:flex-start;
+  text-align:left;
+}
+.about-split-layout .about-reason-card h3{
+  max-width:100%;
+  text-align:left;
+}
+.about-split-layout .about-reason-card>small{
+  left:0;
+  right:auto;
+}
+.about-split-layout .about-reason-photo{margin-left:0}
+.original-page-title{
+  padding-left:max(5vw,30px);
+  padding-right:max(5vw,30px);
+  text-align:left;
+}
+.original-product-banner .original-page-title.is-on-media{
+  padding-left:max(5vw,30px);
+  align-items:flex-start;
+  text-align:left;
+}
+.original-category-grid h3,
+.home-service-section .original-service-strip h3,
+.home-service-section .original-service-strip p{
+  text-align:left;
+}
+.original-footer-main nav,
+.original-footer-main>div,
+.original-footer .footer-bottom{
+  text-align:left;
+}
+@media(max-width:780px){
+  .original-page-title,
+  .original-product-banner .original-page-title.is-on-media{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .about-split-layout .about-reason-card{align-items:flex-start}
+  .about-split-layout .about-reason-card h3{text-align:left}
+}
