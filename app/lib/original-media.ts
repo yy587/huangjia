@@ -6,7 +6,7 @@ export const originalMedia = {
   heroes: [
     `${upload}/172319519362627200100.jpg`,
     `${upload}/172319702098454700100.jpg`,
-    `${upload}/172319103304549800100.jpg`,
+    "/images/hero-dining-editorial.png",
     `${upload}/172318897449327100100.jpg`
   ],
   categories: [

@@ -52,7 +52,12 @@ export function HomeCarousel() {
         setTouchStart(null);
       }}
     >
-      <img key={slide.image} src={slide.image} alt={slide.title} />
+      <img
+        key={slide.image}
+        className={active === 2 ? "is-dining-slide" : undefined}
+        src={slide.image}
+        alt={slide.title}
+      />
       <button className="carousel-arrow is-left" onClick={() => move(-1)} aria-label="Previous slide">
         <ChevronLeft size={31} />
       </button>

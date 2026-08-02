@@ -367,3 +367,6 @@
   .about-reasons-heading h2{font-size:36px;line-height:1.25}
   .text-only-about-copy p,.about-copy p,.article-content p,.product-summary,.contact-note p{font-size:15px}
 }
+
+.original-home-carousel>img.is-dining-slide{object-position:center top}
+@media(max-width:780px){.original-home-carousel>img.is-dining-slide{object-position:90% top}}
