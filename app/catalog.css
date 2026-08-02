@@ -1327,3 +1327,156 @@ body,
 .product-filters button:hover,
 .product-filters button.is-active{color:#f3a435}
 ::selection{color:#202738;background:#f3a435}
+
+/* Pure white minimal system: hierarchy through space, not cards */
+body,
+.catalog-site,
+.catalog-main,
+.original-structure-home,
+.original-category-section,
+.original-product-section,
+.original-product-section:nth-of-type(even),
+.original-social-section,
+.original-updates-section,
+.home-service-section,
+.original-story-section,
+.original-story-copy,
+.original-logo-strip{
+  background:#fff!important;
+}
+.catalog-header,
+.catalog-header.is-scrolled,
+.catalog-nav-row,
+.catalog-nav-row.is-scrolled{
+  background:#fff;
+  backdrop-filter:none;
+}
+.catalog-header.is-scrolled,
+.catalog-nav-row,
+.catalog-nav-row.is-scrolled{box-shadow:none}
+.catalog-inline-search,
+.selection-link{background:#fff}
+.shop-entry-bar{
+  color:#333;
+  background:#fff;
+}
+.shop-entry-bar span{color:#f3a435}
+.shop-entry-bar a{color:#333;border-color:#33333338}
+.shop-entry-bar a:first-child{
+  color:#202738;
+  background:#f3a435;
+  border-color:#f3a435;
+}
+.shop-entry-bar a:hover,
+.shop-entry-bar a:first-child:hover{
+  color:#fff;
+  background:#202738;
+  border-color:#202738;
+}
+.original-logo-strip>div{
+  border:0;
+  opacity:.56;
+}
+.original-category-grid>a,
+.legacy-product-card,
+.product-card,
+.original-update-grid>a,
+.original-social-grid>a{
+  background:#fff;
+  box-shadow:none;
+}
+.legacy-product-card:hover,
+.product-card:hover,
+.news-card:hover{transform:none}
+.legacy-product-image,
+.product-card-image{background:#fafafa}
+.home-product-progress{background:#33333312}
+.home-service-section .original-service-strip{
+  gap:clamp(28px,4vw,72px);
+  background:#fff;
+}
+.home-service-section .original-service-strip article,
+.home-service-section .original-service-strip article:hover{
+  min-height:150px;
+  padding:8px 0 0;
+  color:#333;
+  background:#fff;
+  box-shadow:none;
+  transform:none;
+}
+.home-service-section .original-service-strip article>img{
+  margin-bottom:34px;
+}
+.home-service-section .original-service-strip article:before{
+  top:7px;
+  right:0;
+  color:#f3a435;
+}
+.home-contact-cta{
+  color:#333;
+  background:#fff;
+}
+.home-contact-cta>div>span{color:#f3a435}
+.home-contact-cta>div>p{color:#33333383}
+.home-contact-cta aside>a:nth-child(-n+2){
+  color:#333;
+  border-color:#33333338;
+}
+.home-contact-cta aside>a:first-child{
+  color:#202738;
+  background:#f3a435;
+  border-color:#f3a435;
+}
+.home-contact-cta aside>small{color:#3333336b}
+.home-contact-cta aside>a:nth-last-child(-n+2){color:#333}
+.home-contact-cta aside>a:hover{color:#f3a435}
+.about-split-layout,
+.about-split-layout>.text-only-about-inner,
+.about-split-layout>.about-reasons,
+.about-split-layout .about-reason-card,
+.about-split-layout .about-reason-card:hover,
+.about-split-layout .about-reason-card:focus-visible{
+  background:#fff;
+  box-shadow:none;
+}
+.about-split-layout{
+  gap:88px;
+  padding-top:98px;
+}
+.about-split-layout>.text-only-about-inner,
+.about-split-layout>.about-reasons{
+  padding:0 clamp(22px,4vw,62px);
+}
+.about-split-layout .about-reasons-grid{
+  gap:44px clamp(22px,3vw,54px);
+}
+.about-split-layout .about-reason-card{
+  min-height:230px;
+  padding:0;
+}
+.about-split-layout .about-reason-card:hover,
+.about-split-layout .about-reason-card:focus-visible{transform:none}
+.about-split-layout .about-reason-photo,
+.about-split-layout .about-reason-card:hover .about-reason-photo,
+.about-split-layout .about-reason-card:focus-visible .about-reason-photo{
+  background:#fafafa;
+  transform:none;
+}
+.about-split-layout .about-reason-card h3{font-weight:400}
+.about-split-layout>.text-only-about-inner:before,
+.about-split-layout>.about-reasons:before{color:#33333340}
+.original-page-title,
+.empty-results,
+.contact-note{background:#fff}
+.product-card-image>span,
+.legacy-product-image>span{box-shadow:none}
+@media(max-width:780px){
+  .shop-entry-bar{padding-top:24px;padding-bottom:24px}
+  .home-service-section .original-service-strip{gap:42px 18px}
+  .home-service-section .original-service-strip article{min-height:130px}
+  .about-split-layout{gap:64px;padding-top:64px}
+  .about-split-layout>.text-only-about-inner,
+  .about-split-layout>.about-reasons{padding:0 12px}
+  .about-split-layout .about-reasons-grid{gap:36px 14px}
+  .about-split-layout .about-reason-card{min-height:205px}
+}
