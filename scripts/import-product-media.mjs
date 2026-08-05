@@ -38,11 +38,15 @@ async function publishImage(source, collection) {
   const digest = crypto.createHash("sha1").update(absolute).digest("hex").slice(0, 8);
   const filename = `${cleanName(collection)}-${cleanName(path.parse(source).name)}-${digest}.webp`;
   const destination = path.join(publicRoot, filename);
-  await sharp(source)
-    .rotate()
-    .resize({ width: 2200, height: 2200, fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 84, effort: 5, smartSubsample: true })
-    .toFile(destination);
+  const sourceStat = await fs.stat(source);
+  const destinationStat = await fs.stat(destination).catch(() => null);
+  if (!destinationStat || sourceStat.mtimeMs > destinationStat.mtimeMs) {
+    await sharp(source)
+      .rotate()
+      .resize({ width: 2200, height: 2200, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 84, effort: 5, smartSubsample: true })
+      .toFile(destination);
+  }
   const url = `/product-media/2026-08/${filename}`;
   processed.set(absolute, url);
   return url;
@@ -103,7 +107,7 @@ for (const model of sortNatural(travertineModels)) {
     category: "POLISHED TILE",
     summary: "Travertine-effect porcelain tile with fine-grain carving, brushed polish and three coordinated faces.",
     description: "Surface: fine-grain carved and brushed polish\nDesign: three coordinated travertine faces\nApplications: living room, bathroom, hospitality and feature wall",
-    images: await publishMany([...overview, ...travertineScenes, ...singles], `travertine-${model}`)
+    images: await publishMany([...travertineScenes, ...overview, ...singles], `travertine-${model}`)
   }));
 }
 
@@ -123,7 +127,7 @@ for (const [index, model] of sortNatural(sandstoneModels).entries()) {
     category: "RUSTIC TILE",
     summary: "Natural sandstone-effect porcelain tile with a soft matt texture and three coordinated faces.",
     description: "Surface: natural sandstone matt texture\nDesign: three coordinated faces\nApplications: living room, open-plan interior, commercial space and floor",
-    images: await publishMany([...overview, ...scene, ...singles], `sandstone-${model}`)
+    images: await publishMany([...scene, ...overview, ...singles], `sandstone-${model}`)
   }));
 }
 
@@ -156,7 +160,7 @@ for (const [index, model] of sortNatural(pandaModels).entries()) {
     category: "POLISHED TILE",
     summary: "High-contrast Panda White marble-effect porcelain tile with fine-grain brushed polish.",
     description: "Surface: fine-grain brushed polish\nDesign: coordinated high-contrast marble faces\nApplications: statement wall, living room, dining room and luxury commercial interior",
-    images: await publishMany([...faces, ...assignedEffects], `panda-white-${model}`)
+    images: await publishMany([...assignedEffects, ...faces], `panda-white-${model}`)
   }));
 }
 
@@ -168,7 +172,7 @@ for (const model of sortNatural(woodModels)) {
   const modelFiles = woodFiles
     .filter((file) => path.basename(file).startsWith(model) && !new RegExp(`^${model}效果\\.jpg$`, "i").test(path.basename(file)))
     .sort((a, b) => {
-      const rank = (file) => /效果图-1/.test(file) ? 0 : /效果图-2/.test(file) ? 1 : /效果图-3/.test(file) ? 2 : /实拍图/.test(file) ? 3 : /细节/.test(file) ? 4 : /展示/.test(file) ? 5 : 6;
+      const rank = (file) => /效果图-1/.test(file) ? 0 : /效果图-2/.test(file) ? 1 : /效果图-3/.test(file) ? 2 : /效果图\.jpg$/i.test(file) ? 3 : /实拍图/.test(file) ? 4 : /细节/.test(file) ? 5 : /展示/.test(file) ? 6 : 7;
       return rank(a) - rank(b) || natural.compare(a, b);
     });
   imported.push(product({
@@ -198,7 +202,7 @@ for (const folder of sortEntries(await fs.readdir(squareRoot, { withFileTypes: t
       category: "RUSTIC TILE",
       summary: "Versatile 600×600 matt porcelain tile for coordinated indoor and outdoor surfaces.",
       description: "Format: 600×600 mm\nSurface: durable matt finish\nApplications: kitchen, bathroom, terrace, courtyard and commercial floor",
-      images: await publishMany([texture, ...selectedScenes], `square-${model}`)
+      images: await publishMany([...selectedScenes, texture], `square-${model}`)
     }));
   }
 }
