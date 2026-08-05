@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { sitePath } from "../lib/site-path";
@@ -61,7 +61,7 @@ export function HomeProductSection({
           disabled={!canMoveBack}
           aria-label="Previous products"
         >
-          <ArrowLeft size={24} />
+          <ChevronLeft size={31} strokeWidth={1.7} />
         </button>
         <div
           className="legacy-product-grid home-product-rail"
@@ -84,7 +84,7 @@ export function HomeProductSection({
           disabled={!canMoveForward}
           aria-label="Next products"
         >
-          <ArrowRight size={24} />
+          <ChevronRight size={31} strokeWidth={1.7} />
         </button>
       </div>
       <div className="home-product-progress" aria-hidden="true">
