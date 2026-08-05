@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Product } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 
 type InquiryItem = {
   slug: string;
@@ -62,7 +63,7 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
             {
               slug: product.slug,
               name: product.name,
-              image: product.images[0] || "/images/bathroom.jpg",
+              image: product.images[0] || sitePath("/images/bathroom.jpg"),
               category: product.category,
               quantity: 1
             }

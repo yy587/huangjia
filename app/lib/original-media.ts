@@ -1,13 +1,15 @@
+import { sitePath } from "./site-path";
+
 const upload = "https://www.huangjia-tiles.com/upload/photo";
 
 export const originalMedia = {
   logo: `${upload}/172137324403473800110.png`,
   productBanner: `${upload}/172301541689848900100.jpg`,
   heroes: [
-    "/images/hero-bathroom-editorial.png",
-    "/images/hero-living-editorial-v2.png",
-    "/images/hero-dining-editorial.png",
-    "/images/hero-kitchen-editorial-v2.png"
+    sitePath("/images/hero-bathroom-editorial.png"),
+    sitePath("/images/hero-living-editorial-v2.png"),
+    sitePath("/images/hero-dining-editorial.png"),
+    sitePath("/images/hero-kitchen-editorial-v2.png")
   ],
   categories: [
     `${upload}/172345141743994900100.jpg`,

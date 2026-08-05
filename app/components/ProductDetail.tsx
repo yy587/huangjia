@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Minus, Plus, Share2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { catalog, primaryModel, productTitle } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
 import { ProductCard } from "./ProductCard";
 import { SiteShell } from "./SiteShell";
@@ -36,9 +37,9 @@ export function ProductDetail({ product }: { product: Product }) {
     <SiteShell>
       <main className="catalog-main">
         <div className="detail-breadcrumbs">
-          <a href="/products"><ArrowLeft size={14} /> Products</a>
+          <a href={sitePath("/products")}><ArrowLeft size={14} /> Products</a>
           {product.categories.slice(1).map((category) => (
-            <a key={category} href={`/products?category=${encodeURIComponent(category)}`}>
+            <a key={category} href={sitePath(`/products?category=${encodeURIComponent(category)}`)}>
               / {category.replace("BASIR", "BASIN")}
             </a>
           ))}
@@ -47,7 +48,7 @@ export function ProductDetail({ product }: { product: Product }) {
           <div className="product-gallery">
             <div className="gallery-main">
               <img
-                src={product.images[activeImage] || "/images/bathroom.jpg"}
+                src={product.images[activeImage] || sitePath("/images/bathroom.jpg")}
                 alt={`${primaryModel(product.name)} view ${activeImage + 1}`}
               />
               <span>{String(activeImage + 1).padStart(2, "0")} / {String(product.images.length || 1).padStart(2, "0")}</span>
@@ -114,7 +115,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 <span className="micro-label">Continue exploring</span>
                 <h2>Related products</h2>
               </div>
-              <a href={`/products?category=${encodeURIComponent(product.category)}`}>
+          <a href={sitePath(`/products?category=${encodeURIComponent(product.category)}`)}>
                 View collection <ArrowRight size={16} />
               </a>
             </div>

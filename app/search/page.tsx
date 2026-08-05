@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { SiteShell } from "../components/SiteShell";
 import { catalog, filterProducts } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -60,7 +61,7 @@ export default function SearchPage() {
               </div>
             )}
             {articles.map((article) => (
-              <a className="search-article" key={article.slug} href={`/news/${article.slug}`}>
+          <a className="search-article" key={article.slug} href={sitePath(`/news/${article.slug}`)}>
                 <span>News</span>
                 <h3>{article.title}</h3>
                 <ArrowRight size={18} />
@@ -71,7 +72,7 @@ export default function SearchPage() {
                 <span>Nothing found</span>
                 <h3>Try a product family or model number.</h3>
                 <p>Popular searches include sanitary, shower head, rustic tile and HJ-JH.</p>
-                <a href="/products">Browse the complete catalogue</a>
+        <a href={sitePath("/products")}>Browse the complete catalogue</a>
               </div>
             )}
           </section>

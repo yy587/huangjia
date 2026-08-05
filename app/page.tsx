@@ -4,6 +4,7 @@ import { HomeProductSection } from "./components/HomeProductSection";
 import { SiteShell } from "./components/SiteShell";
 import { catalog } from "./lib/catalog";
 import { originalMedia } from "./lib/original-media";
+import { sitePath } from "./lib/site-path";
 
 const homeCategories = [
   { name: "CERAMIC TILE", image: originalMedia.categories[0] },
@@ -38,8 +39,8 @@ export default function HomePage() {
             <strong>Browse products, add materials to your cart, then request a confirmed quotation.</strong>
           </div>
           <nav>
-            <a href="/products">Browse materials <ArrowRight size={16} /></a>
-            <a href="/cart">View cart <ArrowRight size={16} /></a>
+          <a href={sitePath("/products")}>Browse materials <ArrowRight size={16} /></a>
+          <a href={sitePath("/cart")}>View cart <ArrowRight size={16} /></a>
           </nav>
         </section>
 
@@ -52,7 +53,7 @@ export default function HomePage() {
             {homeCategories.map((category) => (
               <a
                 key={category.name}
-                href={`/products?category=${encodeURIComponent(category.name)}`}
+              href={sitePath(`/products?category=${encodeURIComponent(category.name)}`)}
               >
                 <img src={category.image} alt={category.name} />
                 <span />
@@ -102,7 +103,7 @@ export default function HomePage() {
               immediately enter the official HUANGJIA online boutique and enjoy luxury
               shopping.
             </p>
-            <a href="/about">read more <ArrowRight size={15} /></a>
+          <a href={sitePath("/about")}>read more <ArrowRight size={15} /></a>
           </div>
         </section>
 
@@ -149,7 +150,7 @@ export default function HomePage() {
           </div>
           <div className="original-social-grid">
             {originalMedia.social.map((image, index) => (
-              <a href="/products" key={image} aria-label={`Huangjia gallery ${index + 1}`}>
+          <a href={sitePath("/products")} key={image} aria-label={`Huangjia gallery ${index + 1}`}>
                 <img src={image} alt="" />
               </a>
             ))}
@@ -163,7 +164,7 @@ export default function HomePage() {
           </div>
           <div className="original-update-grid">
             {catalog.news.map((article, index) => (
-              <a href={`/news/${article.slug}`} key={article.slug}>
+          <a href={sitePath(`/news/${article.slug}`)} key={article.slug}>
                 <img
                   src={originalMedia.news[index]}
                   alt={article.title}
@@ -184,8 +185,8 @@ export default function HomePage() {
             <p>Browse products, add materials to your cart, then request a confirmed quotation.</p>
           </div>
           <aside>
-            <a href="/contact">Contact Us <ArrowRight size={17} /></a>
-            <a href="/cart">View cart <ArrowRight size={17} /></a>
+          <a href={sitePath("/contact")}>Contact Us <ArrowRight size={17} /></a>
+          <a href={sitePath("/cart")}>View cart <ArrowRight size={17} /></a>
             <small>Direct contact</small>
             <a href={`tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`}>{catalog.contact.phone}</a>
             <a href={`mailto:${catalog.contact.email}`}>{catalog.contact.email}</a>

@@ -3,6 +3,7 @@
 import { ArrowRight, Plus } from "lucide-react";
 import type { Product } from "../lib/catalog";
 import { primaryModel, productTitle } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -11,9 +12,9 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="product-card">
-      <a className="product-card-image" href={`/product/${product.slug}`}>
+      <a className="product-card-image" href={sitePath(`/product/${product.slug}`)}>
         <img
-          src={product.images[0] || "/images/bathroom.jpg"}
+          src={product.images[0] || sitePath("/images/bathroom.jpg")}
           alt={primaryModel(product.name)}
           loading="lazy"
         />
@@ -22,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="product-card-body">
         <div>
           <small>{product.category.replace("BASIR", "BASIN")}</small>
-          <a href={`/product/${product.slug}`}>
+          <a href={sitePath(`/product/${product.slug}`)}>
             <h3>{primaryModel(product.name)}</h3>
           </a>
           <p title={productTitle(product.name)}>

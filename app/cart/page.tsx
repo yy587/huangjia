@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SiteShell } from "../components/SiteShell";
 import { useInquiry } from "../components/InquiryProvider";
 import { catalog, primaryModel } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 
 export default function CartPage() {
   const { items, removeItem, setQuantity, clear, count } = useInquiry();
@@ -52,12 +53,12 @@ export default function CartPage() {
               {items.map((item, index) => (
                 <article key={item.slug} className="selection-item">
                   <span className="selection-index">{String(index + 1).padStart(2, "0")}</span>
-                  <a href={`/product/${item.slug}`} className="selection-image">
+              <a href={sitePath(`/product/${item.slug}`)} className="selection-image">
                     <img src={item.image} alt={primaryModel(item.name)} />
                   </a>
                   <div>
                     <small>{item.category.replace("BASIR", "BASIN")}</small>
-                    <h2><a href={`/product/${item.slug}`}>{primaryModel(item.name)}</a></h2>
+                <h2><a href={sitePath(`/product/${item.slug}`)}>{primaryModel(item.name)}</a></h2>
                     <span>{item.slug.replace("display-", "Product group ")}</span>
                   </div>
                   <div className="quantity-control">
@@ -96,7 +97,7 @@ export default function CartPage() {
             <span>0</span>
             <h2>Your selection is empty.</h2>
             <p>Browse the full catalogue and add any products you would like us to quote.</p>
-            <a href="/products">Explore products <ArrowRight size={17} /></a>
+            <a href={sitePath("/products")}>Explore products <ArrowRight size={17} /></a>
           </section>
         )}
       </main>

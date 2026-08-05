@@ -12,6 +12,7 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
+import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
 import { LanguageToggle } from "./LanguageProvider";
 
@@ -39,7 +40,7 @@ export function SiteShell({
   const contactLinks = [
     { label: "WhatsApp", icon: originalMedia.footerIcons[0], href: `https://wa.me/${phoneDigits}`, className: "rail-whatsapp" },
     { label: "Skype", icon: originalMedia.footerIcons[1], href: "skype:myskype?chat", className: "rail-skype" },
-    { label: "WeChat", icon: originalMedia.footerIcons[2], href: "/contact", className: "rail-wechat" },
+    { label: "WeChat", icon: originalMedia.footerIcons[2], href: sitePath("/contact"), className: "rail-wechat" },
     { label: "Telephone", icon: originalMedia.footerIcons[3], href: `tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`, className: "rail-phone" },
     { label: "YouTube", icon: originalMedia.footerIcons[4], href: "https://www.youtube.com/", className: "rail-youtube" },
     { label: "Instagram", icon: originalMedia.footerIcons[5], href: "https://www.instagram.com/", className: "rail-instagram" },
@@ -135,7 +136,7 @@ export function SiteShell({
                 <small>{headerResults.length} shown</small>
               </div>
               {headerResults.length ? headerResults.map((product) => (
-                <a href={`/product/${product.slug}`} key={product.slug}>
+                <a href={sitePath(`/product/${product.slug}`)} key={product.slug}>
                   <img src={product.images[0]} alt="" />
                   <span>
                     <small>{product.category}</small>
@@ -149,11 +150,11 @@ export function SiteShell({
             </div>
           )}
         </div>
-        <a href="/" className="catalog-brand" aria-label="SHIE home">
+        <a href={sitePath("/")} className="catalog-brand" aria-label="SHIE home">
           <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
         </a>
         <div className="catalog-actions">
-          <a href="/cart" className="selection-link" aria-label={`Cart, ${count} items`}>
+          <a href={sitePath("/cart")} className="selection-link" aria-label={`Cart, ${count} items`}>
             <ShoppingBag size={20} />
             <span>Cart</span>
             <b>{count}</b>
@@ -168,14 +169,14 @@ export function SiteShell({
         </div>
       </header>
       <nav className={`catalog-nav catalog-nav-row ${scrolled ? "is-scrolled" : ""}`} aria-label="Primary navigation">
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
+          <a href={sitePath("/")}>Home</a>
+          <a href={sitePath("/about")}>About Us</a>
           <div
             className="mega-trigger"
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
           >
-            <a href="/products">
+            <a href={sitePath("/products")}>
               Products <ChevronDown size={14} />
             </a>
             <div className={`mega-menu ${productsOpen ? "is-open" : ""}`}>
@@ -183,7 +184,7 @@ export function SiteShell({
                 <span className="micro-label">Complete catalogue</span>
                 <h3>Materials for the whole space.</h3>
                 <p>Explore 7 product families and the full Huangjia collection.</p>
-                <a className="line-link" href="/products">
+                <a className="line-link" href={sitePath("/products")}>
                   View all products <ArrowRight size={15} />
                 </a>
               </div>
@@ -192,14 +193,14 @@ export function SiteShell({
                   <div key={group.name}>
                     <a
                       className="mega-title"
-                      href={`/products?category=${encodeURIComponent(group.name)}`}
+                      href={sitePath(`/products?category=${encodeURIComponent(group.name)}`)}
                     >
                       {group.name}
                     </a>
                     {group.children.slice(0, 6).map((child) => (
                       <a
                         key={child}
-                        href={`/products?category=${encodeURIComponent(child)}`}
+                        href={sitePath(`/products?category=${encodeURIComponent(child)}`)}
                       >
                         {child}
                       </a>
@@ -209,8 +210,8 @@ export function SiteShell({
               </div>
             </div>
           </div>
-          <a href="/news">News <ChevronDown size={14} /></a>
-          <a href="/contact">Contact Us</a>
+          <a href={sitePath("/news")}>News <ChevronDown size={14} /></a>
+          <a href={sitePath("/contact")}>Contact Us</a>
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
@@ -239,12 +240,12 @@ export function SiteShell({
         </button>
         <span className="micro-label">Explore Huangjia</span>
         {[
-          ["Home", "/"],
-          ["About", "/about"],
-          ["Products", "/products"],
-          ["News", "/news"],
-          ["Contact", "/contact"],
-          [`Cart (${count})`, "/cart"]
+          ["Home", sitePath("/")],
+          ["About", sitePath("/about")],
+          ["Products", sitePath("/products")],
+          ["News", sitePath("/news")],
+          ["Contact", sitePath("/contact")],
+          [`Cart (${count})`, sitePath("/cart")]
         ].map(([label, href], index) => (
           <a key={label} href={href}>
             <small>0{index + 1}</small>
@@ -255,21 +256,21 @@ export function SiteShell({
 
       {children}
 
-      <a className="floating-enquiry" href="/contact">
+      <a className="floating-enquiry" href={sitePath("/contact")}>
         <Mail size={17} /> <span>Get a quote</span><ArrowRight size={16} />
       </a>
 
       <footer className="catalog-footer original-footer">
         <div className="original-footer-main">
-          <a href="/" className="catalog-brand footer-brand">
+          <a href={sitePath("/")} className="catalog-brand footer-brand">
             <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
           </a>
           <nav>
-            <a href="/">Home</a>
-            <a href="/about">About Us</a>
-            <a href="/products">Products</a>
-            <a href="/news">News</a>
-            <a href="/contact">Contact Us</a>
+            <a href={sitePath("/")}>Home</a>
+            <a href={sitePath("/about")}>About Us</a>
+            <a href={sitePath("/products")}>Products</a>
+            <a href={sitePath("/news")}>News</a>
+            <a href={sitePath("/contact")}>Contact Us</a>
           </nav>
           <div>
             <a href={`mailto:${catalog.contact.email}`}>

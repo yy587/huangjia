@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SiteShell } from "../../components/SiteShell";
 import { catalog } from "../../lib/catalog";
+import { sitePath } from "../../lib/site-path";
 
 export default async function ArticlePage({
   params
@@ -17,7 +18,7 @@ export default async function ArticlePage({
     <SiteShell>
       <main className="catalog-main">
         <article className="article-page">
-          <a href="/news" className="back-link"><ArrowLeft size={15} /> Back to news</a>
+          <a href={sitePath("/news")} className="back-link"><ArrowLeft size={15} /> Back to news</a>
           <span className="micro-label">{article.date}</span>
           <h1>{article.title}</h1>
           <div className="article-image">

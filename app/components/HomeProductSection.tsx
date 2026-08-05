@@ -3,6 +3,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 import { LegacyProductCard } from "./LegacyProductCard";
 
 export function HomeProductSection({
@@ -14,7 +15,7 @@ export function HomeProductSection({
   title: string;
   subtitle: string;
   products: Product[];
-  images: string[];
+  images: readonly string[];
 }) {
   const railRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(0);
@@ -50,7 +51,7 @@ export function HomeProductSection({
           <p>{subtitle}</p>
         </div>
         <div className="home-product-actions">
-          <a href="/products">View all <ArrowRight size={15} /></a>
+        <a href={sitePath("/products")}>View all <ArrowRight size={15} /></a>
           <button onClick={() => move(-1)} disabled={!canMoveBack} aria-label="Previous products">
             <ArrowLeft size={18} />
           </button>
