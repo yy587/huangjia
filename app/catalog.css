@@ -1656,3 +1656,22 @@ body,
   font-weight:500;
   line-height:1.45;
 }
+
+/* Keep every About introduction paragraph typographically consistent */
+.about-split-layout .text-only-about-copy p,
+.about-split-layout .text-only-about-copy p:first-child{
+  margin-bottom:28px;
+  color:#555;
+  font-family:"Noto Sans SC","Microsoft YaHei",Arial,sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:1.85;
+  letter-spacing:0;
+}
+@media(max-width:780px){
+  .about-split-layout .text-only-about-copy p,
+  .about-split-layout .text-only-about-copy p:first-child{
+    font-size:15px;
+    line-height:1.8;
+  }
+}
