@@ -38,17 +38,6 @@ export default function HomePage() {
       <main className="catalog-main original-structure-home">
         <HomeCarousel />
 
-        <section className="shop-entry-bar" aria-label="How to buy Huangjia materials">
-          <div>
-            <span>Official material store</span>
-            <strong>Browse products, add materials to your cart, then request a confirmed quotation.</strong>
-          </div>
-          <nav>
-          <a href={sitePath("/products")}>Browse materials <ArrowRight size={16} /></a>
-          <a href={sitePath("/cart")}>View cart <ArrowRight size={16} /></a>
-          </nav>
-        </section>
-
         <section className="original-category-section">
           <div className="original-section-heading">
             <h2>PRODUCT CATEGORIES</h2>
@@ -67,6 +56,17 @@ export default function HomePage() {
               </a>
             ))}
           </div>
+        </section>
+
+        <section className="shop-entry-bar" aria-label="How to buy Huangjia materials">
+          <div>
+            <span>Official material store</span>
+            <strong>Browse products, add materials to your cart, then request a confirmed quotation.</strong>
+          </div>
+          <nav>
+            <a href={sitePath("/products")}>Browse materials <ArrowRight size={16} /></a>
+            <a href={sitePath("/cart")}>View cart <ArrowRight size={16} /></a>
+          </nav>
         </section>
 
         <ProductSection title="TRENDING PRODUCTS" subtitle="Our Bestsellers" />
