@@ -51,29 +51,41 @@ export function HomeProductSection({
           <p>{subtitle}</p>
         </div>
         <div className="home-product-actions">
-        <a href={sitePath("/products")}>View all <ArrowRight size={15} /></a>
-          <button onClick={() => move(-1)} disabled={!canMoveBack} aria-label="Previous products">
-            <ArrowLeft size={18} />
-          </button>
-          <button onClick={() => move(1)} disabled={!canMoveForward} aria-label="Next products">
-            <ArrowRight size={18} />
-          </button>
+          <a href={sitePath("/products")}>View all <ArrowRight size={15} /></a>
         </div>
       </div>
-      <div
-        className="legacy-product-grid home-product-rail"
-        ref={railRef}
-        onScroll={updatePosition}
-        tabIndex={0}
-        aria-label={`${title} product gallery`}
-      >
-        {products.map((product, index) => (
-          <LegacyProductCard
-            key={`${title}-${product.slug}`}
-            product={product}
-            image={images[index]}
-          />
-        ))}
+      <div className="home-product-rail-wrap">
+        <button
+          className="product-rail-arrow is-previous"
+          onClick={() => move(-1)}
+          disabled={!canMoveBack}
+          aria-label="Previous products"
+        >
+          <ArrowLeft size={24} />
+        </button>
+        <div
+          className="legacy-product-grid home-product-rail"
+          ref={railRef}
+          onScroll={updatePosition}
+          tabIndex={0}
+          aria-label={`${title} product gallery`}
+        >
+          {products.map((product, index) => (
+            <LegacyProductCard
+              key={`${title}-${product.slug}`}
+              product={product}
+              image={images[index]}
+            />
+          ))}
+        </div>
+        <button
+          className="product-rail-arrow is-next"
+          onClick={() => move(1)}
+          disabled={!canMoveForward}
+          aria-label="Next products"
+        >
+          <ArrowRight size={24} />
+        </button>
       </div>
       <div className="home-product-progress" aria-hidden="true">
         <span style={{ transform: `scaleX(${Math.max(position, 0.08)})` }} />
