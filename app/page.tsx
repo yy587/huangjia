@@ -58,17 +58,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="shop-entry-bar" aria-label="How to buy Huangjia materials">
-          <div>
-            <span>Official material store</span>
-            <strong>Browse products, add materials to your cart, then request a confirmed quotation.</strong>
-          </div>
-          <nav>
-            <a href={sitePath("/products")}>Browse materials <ArrowRight size={16} /></a>
-            <a href={sitePath("/cart")}>View cart <ArrowRight size={16} /></a>
-          </nav>
-        </section>
-
         <ProductSection title="TRENDING PRODUCTS" subtitle="Our Bestsellers" />
         <ProductSection
           title="FEATURED PRODUCTS"
