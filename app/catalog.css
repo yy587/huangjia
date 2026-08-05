@@ -1614,3 +1614,14 @@ body,
   background:#fff;
   box-shadow:none;
 }
+
+/* Stronger, more legible desktop navigation */
+.catalog-nav-row.catalog-nav{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.06em;
+}
+.catalog-nav-row>a,
+.catalog-nav-row>.mega-trigger>a{
+  font-weight:700;
+}
