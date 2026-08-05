@@ -63,7 +63,7 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
             {
               slug: product.slug,
               name: product.name,
-              image: product.images[0] || sitePath("/images/bathroom.jpg"),
+              image: sitePath(product.images[0] || "/images/bathroom.jpg"),
               category: product.category,
               quantity: 1
             }

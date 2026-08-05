@@ -14,7 +14,7 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="product-card">
       <a className="product-card-image" href={sitePath(`/product/${product.slug}`)}>
         <img
-          src={product.images[0] || sitePath("/images/bathroom.jpg")}
+          src={sitePath(product.images[0] || "/images/bathroom.jpg")}
           alt={primaryModel(product.name)}
           loading="lazy"
         />

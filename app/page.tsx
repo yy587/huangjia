@@ -14,7 +14,12 @@ const homeCategories = [
   { name: "WALL PANEL", image: originalMedia.categories[4] }
 ];
 
-const originalProducts = [...catalog.products].reverse().slice(0, 8);
+const importedProducts = catalog.products.filter((product) =>
+  product.slug.startsWith("catalog-2026-08-")
+);
+const originalProducts = (
+  importedProducts.length ? importedProducts : [...catalog.products].reverse()
+).slice(0, 8);
 
 function ProductSection({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -22,7 +27,7 @@ function ProductSection({ title, subtitle }: { title: string; subtitle: string }
       title={title}
       subtitle={subtitle}
       products={originalProducts}
-      images={originalMedia.homeProducts}
+      images={[]}
     />
   );
 }

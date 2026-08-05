@@ -13,7 +13,10 @@ export function LegacyProductCard({ product, image }: { product: Product; image?
   return (
     <article className="legacy-product-card">
       <a href={sitePath(`/product/${product.slug}`)} className="legacy-product-image">
-        <img src={image || product.images[0]} alt={primaryModel(product.name)} />
+        <img
+          src={sitePath(image || product.images[0] || "/images/bathroom.jpg")}
+          alt={primaryModel(product.name)}
+        />
         <span>Quick View</span>
       </a>
       <small>{product.category.replace("BASIR", "BASIN")}</small>

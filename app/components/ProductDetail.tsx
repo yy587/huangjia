@@ -48,20 +48,20 @@ export function ProductDetail({ product }: { product: Product }) {
           <div className="product-gallery">
             <div className="gallery-main">
               <img
-                src={product.images[activeImage] || sitePath("/images/bathroom.jpg")}
+                src={sitePath(product.images[activeImage] || "/images/bathroom.jpg")}
                 alt={`${primaryModel(product.name)} view ${activeImage + 1}`}
               />
               <span>{String(activeImage + 1).padStart(2, "0")} / {String(product.images.length || 1).padStart(2, "0")}</span>
             </div>
             {product.images.length > 1 && (
               <div className="gallery-thumbs">
-                {product.images.slice(0, 8).map((image, index) => (
+                {product.images.slice(0, 12).map((image, index) => (
                   <button
                     key={image}
                     className={activeImage === index ? "is-active" : ""}
                     onClick={() => setActiveImage(index)}
                   >
-                    <img src={image} alt="" />
+                    <img src={sitePath(image)} alt="" />
                   </button>
                 ))}
               </div>
