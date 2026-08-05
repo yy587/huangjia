@@ -1625,3 +1625,34 @@ body,
 .catalog-nav-row>.mega-trigger>a{
   font-weight:700;
 }
+
+/* Larger, clearer typography inside the product mega menu */
+.mega-intro .micro-label{
+  font-size:13px;
+  font-weight:700;
+}
+.mega-intro h3{
+  font-size:clamp(40px,3.2vw,58px);
+}
+.mega-intro p{
+  max-width:390px;
+  font-size:15px;
+  line-height:1.7;
+}
+.mega-intro .line-link{
+  font-size:13px;
+  font-weight:700;
+}
+.mega-categories>div{
+  gap:10px;
+}
+.mega-categories .mega-title{
+  margin-bottom:7px;
+  font-size:15px;
+  font-weight:700;
+}
+.mega-categories a:not(.mega-title){
+  font-size:14px;
+  font-weight:500;
+  line-height:1.45;
+}
