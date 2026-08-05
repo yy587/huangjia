@@ -1676,44 +1676,45 @@ body,
   }
 }
 
-/* WIFi Ceramics reference: dark navigation, immediate visual catalogue, quiet white canvas */
+/* WIFi Ceramics reference: unified white navigation, immediate visual catalogue, quiet canvas */
 .catalog-utility{
-  color:#ffffffb8;
-  background:#090909;
+  color:#333333a6;
+  background:#fff;
+  border-bottom:1px solid #33333312;
 }
 .catalog-header,
 .catalog-header.is-scrolled{
-  color:#fff;
-  background:#090909;
-  border-color:#ffffff1c;
+  color:#333;
+  background:#fff;
+  border-color:#33333314;
   box-shadow:none;
   backdrop-filter:none;
 }
 .catalog-header .catalog-brand img,
 .catalog-header.is-scrolled .catalog-brand img{
-  filter:invert(1);
+  filter:none;
 }
 .catalog-inline-search,
 .catalog-inline-search.is-focused,
 .selection-link,
 .selection-link:hover{
-  color:#fff;
+  color:#333;
   background:transparent;
-  border-color:#ffffff52;
+  border-color:#33333352;
   box-shadow:none;
 }
-.catalog-inline-search input{color:#fff}
-.catalog-inline-search input::placeholder{color:#ffffff80}
+.catalog-inline-search input{color:#333}
+.catalog-inline-search input::placeholder{color:#33333380}
 .catalog-inline-results{
   color:#333;
   background:#fff;
 }
 .catalog-nav-row,
 .catalog-nav-row.is-scrolled{
-  color:#fff;
-  background:#090909;
-  border-top:1px solid #ffffff14;
-  border-bottom:0;
+  color:#333;
+  background:#fff;
+  border-top:1px solid #33333312;
+  border-bottom:1px solid #33333312;
   box-shadow:none;
   backdrop-filter:none;
 }
@@ -1762,11 +1763,11 @@ body,
 @media(max-width:780px){
   .catalog-header,
   .catalog-header.is-scrolled{
-    background:#090909;
+    background:#fff;
   }
   .catalog-header .catalog-brand img,
   .catalog-header.is-scrolled .catalog-brand img{
-    filter:invert(1);
+    filter:none;
   }
   .catalog-inline-search.is-mobile-open{
     color:#333;
