@@ -96,7 +96,27 @@ export function ProductDetail({ product }: { product: Product }) {
               </div>
               <span>{String(activeImage + 1).padStart(2, "0")} / {String(product.images.length || 1).padStart(2, "0")}</span>
             </div>
-            {product.images.length > 1 && <small className="gallery-drag-hint">Drag to explore</small>}
+            {product.images.length > 1 && (
+              <>
+                <div className="gallery-thumbs gallery-preview-strip" aria-label="Product image previews">
+                  {product.images.slice(0, 12).map((image, index) => (
+                    <button
+                      key={`${image}-${index}`}
+                      className={activeImage === index ? "is-active" : ""}
+                      onClick={() => {
+                        const track = galleryRef.current;
+                        if (!track) return;
+                        track.scrollTo({ left: track.clientWidth * index, behavior: "smooth" });
+                      }}
+                      aria-label={`View image ${index + 1}`}
+                    >
+                      <img src={sitePath(image)} alt="" />
+                    </button>
+                  ))}
+                </div>
+                <small className="gallery-drag-hint">Drag the main image or select a preview</small>
+              </>
+            )}
           </div>
           <div className="product-detail-info">
             <span className="micro-label">{product.category.replace("BASIR", "BASIN")}</span>
