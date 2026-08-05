@@ -97,17 +97,19 @@ const travertineRoot = path.join(sourceRoot, "travertine");
 const travertineFiles = await walk(travertineRoot);
 const travertineScenes = sortNatural(travertineFiles.filter((file) => /微信图片/.test(file)));
 const travertineModels = [...new Set(travertineFiles.map((file) => path.basename(file).match(/^(BNF\d+)/i)?.[1]).filter(Boolean))];
-for (const model of sortNatural(travertineModels)) {
+for (const [index, model] of sortNatural(travertineModels).entries()) {
   const faces = sortNatural(travertineFiles.filter((file) => path.basename(file).startsWith(model) && !/微信图片/.test(file)));
   const overview = faces.filter((file) => /3面1\.jpg$/i.test(file));
   const singles = faces.filter((file) => !/3面1\.jpg$/i.test(file));
+  const coverScene = index > 0 ? travertineScenes[index - 1] : null;
+  const otherScenes = travertineScenes.filter((scene) => scene !== coverScene);
   imported.push(product({
     slug: model.toLowerCase(),
     name: `${model}, FINE-CARVED TRAVERTINE TILE`,
     category: "POLISHED TILE",
     summary: "Travertine-effect porcelain tile with fine-grain carving, brushed polish and three coordinated faces.",
     description: "Surface: fine-grain carved and brushed polish\nDesign: three coordinated travertine faces\nApplications: living room, bathroom, hospitality and feature wall",
-    images: await publishMany([...travertineScenes, ...overview, ...singles], `travertine-${model}`)
+    images: await publishMany([...(coverScene ? [coverScene] : []), ...overview, ...singles, ...otherScenes], `travertine-${model}`)
   }));
 }
 
@@ -120,14 +122,15 @@ for (const [index, model] of sortNatural(sandstoneModels).entries()) {
   const faces = sortNatural(sandstoneFiles.filter((file) => path.basename(file).startsWith(model)));
   const overview = faces.filter((file) => /-三面\.jpg$/i.test(file));
   const singles = faces.filter((file) => !/-三面\.jpg$/i.test(file));
-  const scene = sandstoneScenes.length ? [sandstoneScenes[Math.min(index, sandstoneScenes.length - 1)]] : [];
+  const coverScene = sandstoneScenes[index] || null;
+  const otherScenes = sandstoneScenes.filter((scene) => scene !== coverScene);
   imported.push(product({
     slug: `${model.toLowerCase()}-sandstone`,
     name: `${model}, SANDSTONE PORCELAIN TILE`,
     category: "RUSTIC TILE",
     summary: "Natural sandstone-effect porcelain tile with a soft matt texture and three coordinated faces.",
     description: "Surface: natural sandstone matt texture\nDesign: three coordinated faces\nApplications: living room, open-plan interior, commercial space and floor",
-    images: await publishMany([...scene, ...overview, ...singles], `sandstone-${model}`)
+    images: await publishMany([...(coverScene ? [coverScene] : []), ...overview, ...singles, ...otherScenes], `sandstone-${model}`)
   }));
 }
 
@@ -192,17 +195,20 @@ for (const folder of sortEntries(await fs.readdir(squareRoot, { withFileTypes: t
   const groupFiles = await walk(path.join(squareRoot, folder.name));
   const textures = sortNatural(groupFiles.filter((file) => /\.jpg$/i.test(file)));
   const scenes = sortNatural(groupFiles.filter((file) => /\.png$/i.test(file)));
+  const usedSceneCovers = new Set();
   for (const texture of textures) {
     const model = path.parse(texture).name.toUpperCase();
     const matchingScenes = scenes.filter((scene) => path.parse(scene).name.toUpperCase().includes(model));
-    const selectedScenes = matchingScenes.length ? matchingScenes : scenes.slice(0, 1);
+    const coverScene = matchingScenes.find((scene) => !usedSceneCovers.has(scene)) || null;
+    if (coverScene) usedSceneCovers.add(coverScene);
+    const otherScenes = scenes.filter((scene) => scene !== coverScene);
     imported.push(product({
       slug: `${model.toLowerCase()}-600x600`,
       name: `${model}, 600×600 MATT TILE`,
       category: "RUSTIC TILE",
       summary: "Versatile 600×600 matt porcelain tile for coordinated indoor and outdoor surfaces.",
       description: "Format: 600×600 mm\nSurface: durable matt finish\nApplications: kitchen, bathroom, terrace, courtyard and commercial floor",
-      images: await publishMany([...selectedScenes, texture], `square-${model}`)
+      images: await publishMany([...(coverScene ? [coverScene] : []), texture, ...otherScenes], `square-${model}`)
     }));
   }
 }
