@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Minus, Plus, Share2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { catalog, primaryModel, productTitle } from "../lib/catalog";
 import { sitePath } from "../lib/site-path";
@@ -11,6 +11,9 @@ import { SiteShell } from "./SiteShell";
 
 export function ProductDetail({ product }: { product: Product }) {
   const [activeImage, setActiveImage] = useState(0);
+  const [galleryDragging, setGalleryDragging] = useState(false);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const galleryDrag = useRef<{ pointerId: number; x: number; scrollLeft: number } | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { addItem } = useInquiry();
@@ -46,26 +49,54 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
         <section className="product-detail">
           <div className="product-gallery">
-            <div className="gallery-main">
-              <img
-                src={sitePath(product.images[activeImage] || "/images/bathroom.jpg")}
-                alt={`${primaryModel(product.name)} view ${activeImage + 1}`}
-              />
-              <span>{String(activeImage + 1).padStart(2, "0")} / {String(product.images.length || 1).padStart(2, "0")}</span>
-            </div>
-            {product.images.length > 1 && (
-              <div className="gallery-thumbs">
-                {product.images.slice(0, 12).map((image, index) => (
-                  <button
-                    key={image}
-                    className={activeImage === index ? "is-active" : ""}
-                    onClick={() => setActiveImage(index)}
-                  >
-                    <img src={sitePath(image)} alt="" />
-                  </button>
+            <div className={`gallery-main${galleryDragging ? " is-dragging" : ""}`}>
+              <div
+                className="gallery-drag-track"
+                ref={galleryRef}
+                onScroll={(event) => {
+                  const track = event.currentTarget;
+                  if (!track.clientWidth) return;
+                  setActiveImage(Math.min(product.images.length - 1, Math.max(0, Math.round(track.scrollLeft / track.clientWidth))));
+                }}
+                onPointerDown={(event) => {
+                  if (event.button !== 0) return;
+                  galleryDrag.current = {
+                    pointerId: event.pointerId,
+                    x: event.clientX,
+                    scrollLeft: event.currentTarget.scrollLeft
+                  };
+                  event.currentTarget.setPointerCapture(event.pointerId);
+                  setGalleryDragging(true);
+                }}
+                onPointerMove={(event) => {
+                  const drag = galleryDrag.current;
+                  if (!drag || drag.pointerId !== event.pointerId) return;
+                  event.currentTarget.scrollLeft = drag.scrollLeft - (event.clientX - drag.x);
+                }}
+                onPointerUp={(event) => {
+                  if (!galleryDrag.current || galleryDrag.current.pointerId !== event.pointerId) return;
+                  galleryDrag.current = null;
+                  setGalleryDragging(false);
+                  event.currentTarget.releasePointerCapture(event.pointerId);
+                }}
+                onPointerCancel={() => {
+                  galleryDrag.current = null;
+                  setGalleryDragging(false);
+                }}
+              >
+                {(product.images.length ? product.images : ["/images/bathroom.jpg"]).map((image, index) => (
+                  <div className="gallery-drag-slide" key={`${image}-${index}`}>
+                    <img
+                      src={sitePath(image)}
+                      alt={`${primaryModel(product.name)} view ${index + 1}`}
+                      draggable={false}
+                    />
+                  </div>
                 ))}
               </div>
-            )}
+              <span>{String(activeImage + 1).padStart(2, "0")} / {String(product.images.length || 1).padStart(2, "0")}</span>
+            </div>
+            {product.images.length > 1 && <small className="gallery-drag-hint">Drag to explore</small>}
           </div>
           <div className="product-detail-info">
             <span className="micro-label">{product.category.replace("BASIR", "BASIN")}</span>

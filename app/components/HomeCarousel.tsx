@@ -1,7 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { originalMedia } from "../lib/original-media";
 
 const slides = [
@@ -25,15 +24,17 @@ const slides = [
 
 export function HomeCarousel() {
   const [active, setActive] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const dragStart = useRef<{ pointerId: number; x: number } | null>(null);
 
   useEffect(() => {
+    if (dragging) return;
     const timer = window.setInterval(
       () => setActive((current) => (current + 1) % slides.length),
       5500
     );
     return () => window.clearInterval(timer);
-  }, []);
+  }, [dragging]);
 
   const move = (direction: number) => {
     setActive((current) => (current + direction + slides.length) % slides.length);
@@ -42,14 +43,25 @@ export function HomeCarousel() {
   const slide = slides[active];
   return (
     <section
-      className={`original-home-carousel${active === 0 ? " is-bathroom-active" : active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : " is-kitchen-active"}`}
+      className={`original-home-carousel${dragging ? " is-dragging" : ""}${active === 0 ? " is-bathroom-active" : active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : " is-kitchen-active"}`}
       aria-label="Huangjia product collections"
-      onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-      onTouchEnd={(event) => {
-        if (touchStart === null) return;
-        const distance = event.changedTouches[0].clientX - touchStart;
+      onPointerDown={(event) => {
+        if (event.button !== 0) return;
+        dragStart.current = { pointerId: event.pointerId, x: event.clientX };
+        event.currentTarget.setPointerCapture(event.pointerId);
+        setDragging(true);
+      }}
+      onPointerUp={(event) => {
+        if (!dragStart.current || dragStart.current.pointerId !== event.pointerId) return;
+        const distance = event.clientX - dragStart.current.x;
         if (Math.abs(distance) > 45) move(distance > 0 ? -1 : 1);
-        setTouchStart(null);
+        dragStart.current = null;
+        setDragging(false);
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }}
+      onPointerCancel={() => {
+        dragStart.current = null;
+        setDragging(false);
       }}
     >
       <img
@@ -57,23 +69,9 @@ export function HomeCarousel() {
         className={active === 0 ? "is-bathroom-slide" : active === 1 ? "is-living-slide" : active === 2 ? "is-dining-slide" : "is-kitchen-slide"}
         src={slide.image}
         alt={slide.title}
+        draggable={false}
       />
-      <button className="carousel-arrow is-left" onClick={() => move(-1)} aria-label="Previous slide">
-        <ChevronLeft size={31} />
-      </button>
-      <button className="carousel-arrow is-right" onClick={() => move(1)} aria-label="Next slide">
-        <ChevronRight size={31} />
-      </button>
-      <div className="carousel-dots">
-        {slides.map((item, index) => (
-          <button
-            key={item.title}
-            className={index === active ? "is-active" : ""}
-            onClick={() => setActive(index)}
-            aria-label={`Show slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      <small className="carousel-drag-hint">Drag to switch</small>
       <div className="carousel-status" aria-hidden="true">
         <b>{String(active + 1).padStart(2, "0")}</b>
         <span />

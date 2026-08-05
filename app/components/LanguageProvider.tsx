@@ -24,6 +24,8 @@ const zh: Record<string, string> = {
   "Previous products": "上一组产品",
   "Next products": "下一组产品",
   "Drag or use arrows to explore": "拖动浏览，或使用箭头切换",
+  "Drag to explore": "拖动浏览",
+  "Drag to switch": "拖动切换",
   "Shop by material": "按材料选购",
   "Browse product categories": "浏览产品分类",
   "WHY CHOOSE HUANGJIA": "为什么选择皇家建材",

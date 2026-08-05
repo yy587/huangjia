@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { sitePath } from "../lib/site-path";
@@ -18,17 +18,16 @@ export function HomeProductSection({
   images: readonly string[];
 }) {
   const railRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef<{ pointerId: number; x: number; scrollLeft: number; moved: boolean } | null>(null);
+  const suppressClick = useRef(false);
   const [position, setPosition] = useState(0);
-  const [canMoveBack, setCanMoveBack] = useState(false);
-  const [canMoveForward, setCanMoveForward] = useState(true);
+  const [dragging, setDragging] = useState(false);
 
   const updatePosition = useCallback(() => {
     const rail = railRef.current;
     if (!rail) return;
     const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0);
     setPosition(maxScroll ? Math.min(rail.scrollLeft / maxScroll, 1) : 0);
-    setCanMoveBack(rail.scrollLeft > 24);
-    setCanMoveForward(rail.scrollLeft < maxScroll - 4);
   }, []);
 
   useEffect(() => {
@@ -36,12 +35,6 @@ export function HomeProductSection({
     window.addEventListener("resize", updatePosition);
     return () => window.removeEventListener("resize", updatePosition);
   }, [updatePosition]);
-
-  const move = (direction: number) => {
-    const rail = railRef.current;
-    if (!rail) return;
-    rail.scrollBy({ left: direction * rail.clientWidth * 0.82, behavior: "smooth" });
-  };
 
   return (
     <section className="original-product-section home-product-showcase">
@@ -55,18 +48,47 @@ export function HomeProductSection({
         </div>
       </div>
       <div className="home-product-rail-wrap">
-        <button
-          className="product-rail-arrow is-previous"
-          onClick={() => move(-1)}
-          disabled={!canMoveBack}
-          aria-label="Previous products"
-        >
-          <ChevronLeft size={31} strokeWidth={1.7} />
-        </button>
         <div
-          className="legacy-product-grid home-product-rail"
+          className={`legacy-product-grid home-product-rail${dragging ? " is-dragging" : ""}`}
           ref={railRef}
           onScroll={updatePosition}
+          onPointerDown={(event) => {
+            if (event.button !== 0 || (event.target as HTMLElement).closest("button,input,select,textarea")) return;
+            dragState.current = {
+              pointerId: event.pointerId,
+              x: event.clientX,
+              scrollLeft: event.currentTarget.scrollLeft,
+              moved: false
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+            setDragging(true);
+          }}
+          onPointerMove={(event) => {
+            const drag = dragState.current;
+            if (!drag || drag.pointerId !== event.pointerId) return;
+            const distance = event.clientX - drag.x;
+            if (Math.abs(distance) > 4) {
+              drag.moved = true;
+              suppressClick.current = true;
+            }
+            event.currentTarget.scrollLeft = drag.scrollLeft - distance;
+          }}
+          onPointerUp={(event) => {
+            if (!dragState.current || dragState.current.pointerId !== event.pointerId) return;
+            dragState.current = null;
+            setDragging(false);
+            event.currentTarget.releasePointerCapture(event.pointerId);
+            window.setTimeout(() => { suppressClick.current = false; }, 0);
+          }}
+          onPointerCancel={() => {
+            dragState.current = null;
+            setDragging(false);
+          }}
+          onClickCapture={(event) => {
+            if (!suppressClick.current) return;
+            event.preventDefault();
+            event.stopPropagation();
+          }}
           tabIndex={0}
           aria-label={`${title} product gallery`}
         >
@@ -78,19 +100,11 @@ export function HomeProductSection({
             />
           ))}
         </div>
-        <button
-          className="product-rail-arrow is-next"
-          onClick={() => move(1)}
-          disabled={!canMoveForward}
-          aria-label="Next products"
-        >
-          <ChevronRight size={31} strokeWidth={1.7} />
-        </button>
       </div>
       <div className="home-product-progress" aria-hidden="true">
         <span style={{ transform: `scaleX(${Math.max(position, 0.08)})` }} />
       </div>
-      <small className="home-product-hint">Drag or use arrows to explore</small>
+      <small className="home-product-hint">Drag to explore</small>
     </section>
   );
 }
