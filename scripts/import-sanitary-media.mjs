@@ -94,7 +94,7 @@ const products = [
     name: "FUTURE EGG, INTELLIGENT TOILET",
     summary: "Sculptural intelligent toilet with a rounded shell, interactive lighting and smart voice control.",
     description: "Series: Future Egg intelligent toilet\nDesign: compact rounded body with circular light interface\nFunctions: smart voice control, pressure-independent flushing, UV care, heated seat and multi-mode washing",
-    images: await publishSelection("future-egg-intelligent-toilet", ["FUTURE-EGG-27", "FUTURE-EGG-01", "FUTURE-EGG-26", "FUTURE-EGG-06", "FUTURE-EGG-08", "FUTURE-EGG-20"]),
+    images: await publishSelection("future-egg-intelligent-toilet", ["FUTURE-EGG-01", "FUTURE-EGG-27", "FUTURE-EGG-26", "FUTURE-EGG-06", "FUTURE-EGG-08", "FUTURE-EGG-20"]),
   }),
   product({
     slug: "801-intelligent-toilet",
