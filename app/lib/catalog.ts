@@ -58,6 +58,7 @@ export const categoryGroups = [
     name: "Sanitary",
     children: [
       "Toilet Bowl",
+      "Smart Toilet Seat",
       "Pedestal Basins",
       "Urinal",
       "Cabinet Basin",

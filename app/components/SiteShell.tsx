@@ -137,7 +137,7 @@ export function SiteShell({
               </div>
               {headerResults.length ? headerResults.map((product) => (
                 <a href={sitePath(`/product/${product.slug}`)} key={product.slug}>
-                  <img src={product.images[0]} alt="" />
+                  <img src={sitePath(product.images[0] || "/images/bathroom.jpg")} alt="" />
                   <span>
                     <small>{product.category}</small>
                     <strong>{primaryModel(product.name)}</strong>

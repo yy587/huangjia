@@ -104,6 +104,7 @@ const zh: Record<string, string> = {
   "Water Ripple": "水波纹系列",
   "Sanitary": "卫浴洁具",
   "Toilet Bowl": "坐便器",
+  "Smart Toilet Seat": "智能马桶盖板",
   "Pedestal Basins": "立柱盆",
   "Urinal": "小便器",
   "Cabinet Basin": "浴室柜盆",
