@@ -2284,3 +2284,75 @@ body,
     flex-basis:68px;
   }
 }
+
+/* Final category reset: prevent legacy black card backgrounds from resurfacing. */
+.original-structure-home>.original-category-section .original-category-grid{
+  grid-auto-rows:auto !important;
+  align-items:start;
+  gap:20px;
+  background:#fff;
+}
+.original-structure-home>.original-category-section .original-category-grid>a,
+.original-structure-home>.original-category-section .original-category-grid>a:first-child,
+.original-structure-home>.original-category-section .original-category-grid>a:nth-child(4),
+.original-structure-home>.original-category-section .original-category-grid>a:nth-child(5){
+  width:auto;
+  height:auto !important;
+  min-height:0;
+  aspect-ratio:auto !important;
+  grid-column:auto;
+  grid-row:auto;
+  display:flex;
+  align-items:stretch;
+  flex-direction:column;
+  overflow:visible;
+  color:#292824;
+  background:#fff !important;
+}
+.original-structure-home>.original-category-section .original-category-grid>a>img{
+  width:100%;
+  height:auto !important;
+  aspect-ratio:4/5;
+  display:block;
+  flex:none;
+  object-fit:cover;
+}
+.original-structure-home>.original-category-section .original-category-grid>a>span,
+.original-structure-home>.original-category-section .original-category-grid>a>i{
+  display:none !important;
+}
+.original-structure-home>.original-category-section .original-category-grid h3{
+  min-height:0;
+  margin:14px 0 0;
+  padding:0;
+  position:static;
+  color:#292824;
+  background:#fff;
+  font:500 13px/1.35 "DM Sans","Noto Sans SC",sans-serif;
+  letter-spacing:0;
+  text-align:left;
+  text-shadow:none;
+}
+@media(max-width:780px){
+  .original-structure-home>.original-category-section .original-category-grid{
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    overflow:visible;
+    gap:28px 12px;
+  }
+  .original-structure-home>.original-category-section .original-category-grid>a,
+  .original-structure-home>.original-category-section .original-category-grid>a:first-child,
+  .original-structure-home>.original-category-section .original-category-grid>a:nth-child(4),
+  .original-structure-home>.original-category-section .original-category-grid>a:nth-child(5){
+    width:auto;
+    flex:none;
+  }
+  .original-structure-home>.original-category-section .original-category-grid h3{
+    margin-top:10px;
+    font-size:11px;
+  }
+}
