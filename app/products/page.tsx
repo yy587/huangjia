@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { SiteShell } from "../components/SiteShell";
@@ -12,12 +12,14 @@ import {
   normalizeCategory
 } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
+import { sitePath } from "../lib/site-path";
 
 export default function ProductsPage() {
   const [category, setCategory] = useState("");
   const [query, setQuery] = useState("");
   const [mobileFilters, setMobileFilters] = useState(false);
   const [visible, setVisible] = useState(18);
+  const [sort, setSort] = useState("catalogue");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,13 +29,19 @@ export default function ProductsPage() {
 
   useEffect(() => setVisible(18), [category, query]);
 
-  const results = useMemo(() => filterProducts(query, category), [query, category]);
+  const results = useMemo(() => {
+    const products = [...filterProducts(query, category)];
+    if (sort === "model-asc") products.sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === "model-desc") products.sort((a, b) => b.name.localeCompare(a.name));
+    if (sort === "category") products.sort((a, b) => a.category.localeCompare(b.category));
+    return products;
+  }, [query, category, sort]);
   const heading = category || "All products";
 
   const chooseCategory = (value: string) => {
     setCategory(value);
     setMobileFilters(false);
-    const url = value ? `/products?category=${encodeURIComponent(value)}` : "/products";
+    const url = value ? `${sitePath("/products")}?category=${encodeURIComponent(value)}` : sitePath("/products");
     window.history.replaceState({}, "", url);
   };
 
@@ -114,11 +122,24 @@ export default function ProductsPage() {
                 <button className="mobile-filter-button" onClick={() => setMobileFilters(true)}>
                   <SlidersHorizontal size={17} /> Filters
                 </button>
-                <button className="sort-button">
-                  Catalogue order <ChevronDown size={15} />
-                </button>
+                <label className="sort-select" aria-label="Sort products">
+                  <select value={sort} onChange={(event) => setSort(event.target.value)}>
+                    <option value="catalogue">Catalogue order</option>
+                    <option value="model-asc">Model A–Z</option>
+                    <option value="model-desc">Model Z–A</option>
+                    <option value="category">Product category</option>
+                  </select>
+                </label>
               </div>
             </div>
+            {(category || query) && (
+              <div className="active-product-filters">
+                <span>Active filters</span>
+                {category && <button onClick={() => chooseCategory("")}>{category}<X size={13} /></button>}
+                {query && <button onClick={() => setQuery("")}>“{query}”<X size={13} /></button>}
+                <button className="clear-product-filters" onClick={() => { chooseCategory(""); setQuery(""); }}>Clear all</button>
+              </div>
+            )}
             {results.length ? (
               <>
                 <div className="product-grid">

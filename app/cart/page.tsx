@@ -10,8 +10,15 @@ import { sitePath } from "../lib/site-path";
 export default function CartPage() {
   const { items, removeItem, setQuantity, clear, count } = useInquiry();
   const [notes, setNotes] = useState("");
+  const [customer, setCustomer] = useState({ name: "", company: "", email: "", country: "", delivery: "" });
+  const [formError, setFormError] = useState("");
 
   const sendEnquiry = () => {
+    if (!customer.name.trim() || !customer.email.trim() || !customer.country.trim()) {
+      setFormError("Please enter your name, email and destination country.");
+      return;
+    }
+    setFormError("");
     const lines = items.map(
       (item, index) =>
         `${index + 1}. ${primaryModel(item.name)} (${item.category}) — Qty: ${item.quantity}`
@@ -24,10 +31,13 @@ export default function CartPage() {
         "Please quote the following selection:",
         ...lines,
         "",
-        notes ? `Project notes:\n${notes}` : "Project notes:",
+        `Name: ${customer.name}`,
+        `Company: ${customer.company || "—"}`,
+        `Email: ${customer.email}`,
+        `Destination country: ${customer.country}`,
+        `Required delivery date: ${customer.delivery || "To be confirmed"}`,
         "",
-        "Destination country:",
-        "Required delivery date:",
+        notes ? `Project notes:\n${notes}` : "Project notes:",
         "",
         "Thank you."
       ].join("\n")
@@ -77,6 +87,13 @@ export default function CartPage() {
               <h2>Ready to enquire?</h2>
               <div><span>Product groups</span><b>{items.length}</b></div>
               <div><span>Total quantity</span><b>{count}</b></div>
+              <div className="checkout-fields">
+                <label>Your name *<input value={customer.name} onChange={(event) => setCustomer({ ...customer, name: event.target.value })} placeholder="Contact person" /></label>
+                <label>Company<input value={customer.company} onChange={(event) => setCustomer({ ...customer, company: event.target.value })} placeholder="Company name" /></label>
+                <label>Email *<input type="email" value={customer.email} onChange={(event) => setCustomer({ ...customer, email: event.target.value })} placeholder="name@company.com" /></label>
+                <label>Destination country *<input value={customer.country} onChange={(event) => setCustomer({ ...customer, country: event.target.value })} placeholder="Country / market" /></label>
+                <label>Required delivery date<input type="date" value={customer.delivery} onChange={(event) => setCustomer({ ...customer, delivery: event.target.value })} /></label>
+              </div>
               <label>
                 Project notes
                 <textarea
@@ -86,10 +103,12 @@ export default function CartPage() {
                   placeholder="Sizes, destination, timeline or other requirements…"
                 />
               </label>
+              {formError && <p className="checkout-error" role="alert">{formError}</p>}
               <button onClick={sendEnquiry}>
                 <Mail size={17} /> Email this selection <ArrowRight size={17} />
               </button>
               <p>No payment is taken online. Our team will confirm availability, specifications, shipping and pricing directly.</p>
+              <a className="continue-shopping" href={sitePath("/products")}>Continue browsing products <ArrowRight size={14} /></a>
             </aside>
           </section>
         ) : (

@@ -1960,6 +1960,95 @@ body,
   height:100%;
   object-fit:cover;
 }
+
+/* Procurement storefront flow */
+.sort-select{
+  height:40px;
+  padding:0 11px;
+  display:flex;
+  align-items:center;
+  border:1px solid var(--line);
+}
+.sort-select select{
+  min-width:145px;
+  border:0;
+  outline:0;
+  color:var(--ink);
+  background:transparent;
+  font-size:10px;
+  cursor:pointer;
+}
+.active-product-filters{
+  margin:-18px 0 30px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  color:#17181680;
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.active-product-filters button{
+  min-height:30px;
+  padding:0 10px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.active-product-filters .clear-product-filters{border:0;text-decoration:underline}
+.product-card-body>button.is-selected{
+  color:#fff;
+  border-color:var(--ink);
+  background:var(--ink);
+}
+.checkout-fields{
+  padding:24px 0 5px!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr;
+  gap:0 16px;
+  border-top:1px solid var(--line);
+}
+.checkout-fields label{
+  margin:0 0 16px;
+  min-width:0;
+}
+.checkout-fields label:nth-child(5){grid-column:1/-1}
+.checkout-fields input{
+  width:100%;
+  padding:10px 0;
+  color:var(--ink);
+  border:0;
+  border-bottom:1px solid #17181645;
+  outline:0;
+  background:transparent;
+  font-size:12px;
+}
+.checkout-error{
+  margin:-7px 0 15px!important;
+  color:#a43e2e!important;
+  font-size:10px!important;
+}
+.continue-shopping{
+  width:fit-content;
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-bottom:1px solid;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+@media(max-width:780px){
+  .sort-select{margin-left:auto}
+  .checkout-fields{grid-template-columns:1fr}
+  .checkout-fields label:nth-child(5){grid-column:auto}
+}
 @media(max-width:780px){
   .carousel-drag-hint{
     left:20px;

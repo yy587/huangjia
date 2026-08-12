@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Check, Plus } from "lucide-react";
 import type { Product } from "../lib/catalog";
 import { primaryModel, productTitle } from "../lib/catalog";
 import { sitePath } from "../lib/site-path";
@@ -31,8 +31,8 @@ export function ProductCard({ product }: { product: Product }) {
           </p>
           <span className="product-card-price">Price on request</span>
         </div>
-        <button onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)}`}>
-          <Plus size={16} />
+        <button className={selected ? "is-selected" : ""} onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)}`}>
+          {selected ? <Check size={16} /> : <Plus size={16} />}
           {selected ? "Added to Cart" : "Add to Cart"}
         </button>
       </div>
