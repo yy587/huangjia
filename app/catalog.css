@@ -2471,7 +2471,7 @@ html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories a:not(.mega-t
   padding:9px 13px;
   display:inline-flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   gap:5px;
   flex:0 0 auto;
   color:#333;
@@ -2479,9 +2479,19 @@ html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories a:not(.mega-t
   border:1px solid #dedbd4;
   font:500 11px/1.25 "DM Sans","Noto Sans SC",sans-serif;
   letter-spacing:0;
-  text-align:center;
+  text-align:left;
   text-transform:uppercase;
   white-space:normal;
+}
+
+/* Keep filter tags and their labels aligned to the catalogue's left edge. */
+.product-filters .filter-children{
+  justify-content:flex-start;
+  text-align:left;
+}
+.product-filters .filter-children>button span{
+  width:100%;
+  text-align:left;
 }
 .product-filters .filter-children>button b{
   display:none;
