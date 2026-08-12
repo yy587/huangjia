@@ -139,6 +139,83 @@ html[lang="zh-CN"] .selection-link { min-width: 112px; }
  .footer-lead{padding:65px 22px;grid-template-columns:1fr;gap:28px}.footer-lead>a{width:fit-content}.footer-grid{padding:60px 22px;grid-template-columns:1fr 1fr;gap:45px 25px}.footer-grid>div:first-child{grid-column:1/-1}.catalog-footer .footer-bottom{padding:22px;align-items:flex-start;flex-direction:column;gap:8px}
 }
 
+/* Final mega-menu reset: text catalogue, never boxed chips. */
+.catalog-nav-row .mega-menu{
+  min-height:390px;
+  padding:46px max(4vw,calc((100vw - 1600px)/2));
+  grid-template-columns:minmax(280px,.72fr) minmax(0,2.28fr);
+  gap:clamp(50px,7vw,110px);
+  color:#292824;
+  background:#fff;
+  border:0;
+  border-top:1px solid #eeeae3;
+  box-shadow:0 24px 50px #29282412;
+}
+.catalog-nav-row .mega-categories{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-content:start;
+  gap:38px clamp(28px,3vw,58px);
+}
+.catalog-nav-row .mega-categories>div{
+  min-width:0;
+  display:flex;
+  align-items:flex-start;
+  flex-direction:column;
+  gap:0;
+  background:transparent;
+  border:0;
+}
+.catalog-nav-row .mega-categories a,
+.catalog-nav-row .mega-categories a:not(.mega-title){
+  width:auto;
+  min-width:0;
+  min-height:0;
+  margin:0;
+  padding:6px 0;
+  display:block;
+  color:#77736d;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  font:400 12px/1.45 "DM Sans","Noto Sans SC",sans-serif;
+  letter-spacing:0;
+  text-align:left;
+  text-transform:none;
+  white-space:normal;
+  transform:none;
+}
+.catalog-nav-row .mega-categories .mega-title{
+  width:100%;
+  margin:0 0 10px;
+  padding:0 0 12px;
+  color:#292824;
+  border-bottom:1px solid #dedbd4 !important;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.catalog-nav-row .mega-categories a:hover,
+.catalog-nav-row .mega-categories a:not(.mega-title):hover{
+  color:#db8617;
+  background:transparent !important;
+  transform:none;
+}
+html[lang="zh-CN"] .catalog-nav-row .mega-categories .mega-title{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:14px;
+  letter-spacing:.04em;
+}
+html[lang="zh-CN"] .catalog-nav-row .mega-categories a:not(.mega-title){
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:13px;
+}
+@media(max-width:1120px) and (min-width:781px){
+  .catalog-nav-row .mega-menu{grid-template-columns:220px minmax(0,1fr);gap:42px}
+  .catalog-nav-row .mega-categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+}
+
 /* Final interaction overrides */
 .catalog-site{--accent:#f3a435;--accent-strong:#db8617;background:#fff}
 .catalog-site .catalog-utility{height:28px;min-height:28px;padding-block:5px;justify-content:space-between;background:#f7f6f3;color:#625f59}
@@ -2356,3 +2433,14 @@ body,
     font-size:11px;
   }
 }
+
+/* Catalogue menu — final cascade override */
+.catalog-site .catalog-nav-row .mega-menu{min-height:390px;padding:46px max(4vw,calc((100vw - 1600px)/2));grid-template-columns:minmax(280px,.72fr) minmax(0,2.28fr);gap:clamp(50px,7vw,110px);color:#292824;background:#fff;border:0;border-top:1px solid #eeeae3;box-shadow:0 24px 50px #29282412}
+.catalog-site .catalog-nav-row .mega-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:38px clamp(28px,3vw,58px)}
+.catalog-site .catalog-nav-row .mega-categories>div{min-width:0;display:flex;align-items:flex-start;flex-direction:column;gap:0;background:transparent;border:0}
+.catalog-site .catalog-nav-row .mega-categories a,.catalog-site .catalog-nav-row .mega-categories a:not(.mega-title){width:auto;min-width:0;min-height:0;margin:0;padding:6px 0;display:block;color:#77736d;background:transparent!important;border:0!important;box-shadow:none!important;font:400 12px/1.45 "DM Sans","Noto Sans SC",sans-serif;letter-spacing:0;text-align:left;text-transform:none;white-space:normal;transform:none}
+.catalog-site .catalog-nav-row .mega-categories .mega-title{width:100%;margin:0 0 10px;padding:0 0 12px;color:#292824;border-bottom:1px solid #dedbd4!important;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.catalog-site .catalog-nav-row .mega-categories a:hover,.catalog-site .catalog-nav-row .mega-categories a:not(.mega-title):hover{color:#db8617;background:transparent!important;transform:none}
+html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories .mega-title{font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;font-size:14px;letter-spacing:.04em}
+html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories a:not(.mega-title){font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;font-size:13px}
+@media(max-width:1120px) and (min-width:781px){.catalog-site .catalog-nav-row .mega-menu{grid-template-columns:220px minmax(0,1fr);gap:42px}.catalog-site .catalog-nav-row .mega-categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}}
