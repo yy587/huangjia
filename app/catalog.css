@@ -2493,6 +2493,50 @@ html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories a:not(.mega-t
   width:100%;
   text-align:left;
 }
+
+/* Subcategory tags use the exact same scale and rhythm as Popular tags. */
+.product-filters .filter-children,
+.product-filters .filter-children.is-open{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.product-filters .filter-children::before{
+  content:none !important;
+  display:none !important;
+}
+.product-filters .filter-children>button,
+.product-filters .filter-group .filter-children>button.is-child{
+  width:auto;
+  min-width:0;
+  min-height:0;
+  margin:0;
+  padding:7px 9px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  color:#333;
+  background:#fff;
+  border:1px solid var(--line);
+  font:400 9px/1.35 "DM Sans","Noto Sans SC",sans-serif;
+  letter-spacing:0;
+  text-align:left;
+  text-transform:uppercase;
+  white-space:normal;
+}
+.product-filters .filter-children>button span{
+  width:auto;
+  text-align:left;
+}
+html[lang="zh-CN"] .product-filters .filter-children>button,
+html[lang="zh-CN"] .product-filters .filter-group .filter-children>button.is-child{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:9px;
+  font-weight:400;
+}
 .product-filters .filter-children>button b{
   display:none;
 }
