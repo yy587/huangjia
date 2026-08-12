@@ -126,6 +126,12 @@ export function ProductDetail({ product }: { product: Product }) {
             <p className="product-summary">
               {product.summary || "Huangjia coordinated building material collection."}
             </p>
+            <div className="procurement-facts" aria-label="Commercial information">
+              <div><span>Price</span><b>Formal quotation</b></div>
+              <div><span>MOQ</span><b>Confirm by model</b></div>
+              <div><span>Lead time</span><b>Confirm availability</b></div>
+              <div><span>Delivery</span><b>Incoterm & destination required</b></div>
+            </div>
             <div className="selection-controls">
               <div>
                 <button onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
@@ -145,6 +151,12 @@ export function ProductDetail({ product }: { product: Product }) {
               </button>
             </div>
           </div>
+        </section>
+
+        <section className="product-trade-note">
+          <div><span className="micro-label">Before ordering</span><h2>Commercial details are confirmed in writing.</h2></div>
+          <p>Product dimensions, finish, colour variation, packing, MOQ, production schedule, certificates, price and delivery terms can vary by model and destination. Add the product to your quote list and include the required quantity and market so the sales team can verify the correct terms.</p>
+          <a href={sitePath("/trade")}>Read the procurement guide <ArrowRight size={16} /></a>
         </section>
 
         <section className="specification-section">

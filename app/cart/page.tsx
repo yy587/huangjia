@@ -87,6 +87,7 @@ export default function CartPage() {
               <h2>Ready to enquire?</h2>
               <div><span>Product groups</span><b>{items.length}</b></div>
               <div><span>Total quantity</span><b>{count}</b></div>
+              <div><span>Quotation status</span><b>Pending sales confirmation</b></div>
               <div className="checkout-fields">
                 <label>Your name *<input value={customer.name} onChange={(event) => setCustomer({ ...customer, name: event.target.value })} placeholder="Contact person" /></label>
                 <label>Company<input value={customer.company} onChange={(event) => setCustomer({ ...customer, company: event.target.value })} placeholder="Company name" /></label>
@@ -108,6 +109,7 @@ export default function CartPage() {
                 <Mail size={17} /> Email this selection <ArrowRight size={17} />
               </button>
               <p>No payment is taken online. Our team will confirm availability, specifications, shipping and pricing directly.</p>
+              <p>By sending an enquiry, you acknowledge the <a href={sitePath("/privacy")}>privacy notice</a>. No order is binding until a formal quotation and commercial terms are accepted.</p>
               <a className="continue-shopping" href={sitePath("/products")}>Continue browsing products <ArrowRight size={14} /></a>
             </aside>
           </section>

@@ -112,6 +112,23 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,te
   .cart-feedback,.selection-link b,.quantity-control button,.selection-controls>div button{transition:none}
 }
 
+/* International procurement and compliance content */
+.trade-page,.policy-page{background:#fff}
+.trade-intro{padding:90px 6.5vw;display:grid;grid-template-columns:1fr 1fr;gap:9vw;align-items:end}
+.trade-intro h2,.trade-terms-heading h2{max-width:750px;margin:16px 0 0;font:400 clamp(42px,5vw,72px)/1 "Manrope","Noto Sans SC",sans-serif;letter-spacing:-.055em}
+.trade-intro>p{max-width:620px;margin:0;color:#333333a3;font-size:14px;line-height:1.8}
+.trade-steps{display:grid;grid-template-columns:repeat(5,1fr);background:#202738;color:#fff}
+.trade-steps article{min-height:250px;padding:32px 26px;border-right:1px solid #ffffff24}
+.trade-steps small{color:#f3a435;font-size:9px;letter-spacing:.12em}.trade-steps h3{margin:72px 0 12px;font:500 20px/1.15 "Manrope",sans-serif}.trade-steps p{margin:0;color:#ffffff9c;font-size:11px;line-height:1.7}
+.trade-terms{padding:110px 6.5vw;background:#f5f5f1}.trade-terms-heading{max-width:900px;margin-bottom:65px}.trade-term-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#33333324}.trade-term-grid article{min-height:320px;padding:38px 30px;background:#fff}.trade-term-grid svg{color:#f3a435}.trade-term-grid h3{margin:80px 0 13px;font:500 22px "Manrope",sans-serif}.trade-term-grid p{margin:0;color:#3333339c;font-size:12px;line-height:1.75}
+.trade-disclosure{padding:55px 6.5vw;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:25px;background:#f3a435}.trade-disclosure h3{margin:0 0 6px;font:600 17px "Manrope",sans-serif}.trade-disclosure p{max-width:900px;margin:0;font-size:11px;line-height:1.65}.trade-disclosure a{height:46px;padding:0 17px;display:flex;align-items:center;gap:13px;color:#fff;background:#202738;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.policy-page>article{max-width:920px;margin:0 auto;padding:90px 24px 130px}.policy-page article h2{margin:48px 0 14px;font:500 28px "Manrope",sans-serif}.policy-page article h2:first-child{margin-top:0}.policy-page article p{margin:0;color:#333333ad;font-size:15px;line-height:1.85}.policy-page article a{text-decoration:underline}.policy-page article>small{margin-top:55px;display:block;color:#33333370}
+.procurement-facts{margin:28px 0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}.procurement-facts>div{min-height:70px;padding:13px 15px;display:flex;flex-direction:column;justify-content:center;gap:5px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.procurement-facts span{color:#33333370;font-size:8px;letter-spacing:.1em;text-transform:uppercase}.procurement-facts b{font-size:11px;font-weight:500}
+.product-trade-note{padding:70px 6.5vw;display:grid;grid-template-columns:1fr 1fr;gap:5vw;background:#f5f5f1}.product-trade-note h2{max-width:620px;margin:13px 0 0;font:400 clamp(32px,4vw,54px)/1.03 "Manrope",sans-serif;letter-spacing:-.045em}.product-trade-note>p{margin:0;color:#333333a3;font-size:13px;line-height:1.8}.product-trade-note>a{width:fit-content;grid-column:2;display:flex;align-items:center;gap:9px;border-bottom:1px solid;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.form-privacy{margin:-5px 0 22px;color:#33333380;font-size:9px;line-height:1.6}.form-privacy a,.selection-summary>p a{text-decoration:underline}
+.footer-bottom>span a{color:#ffffff9c;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1000px){.trade-steps{grid-template-columns:repeat(2,1fr)}.trade-steps article:last-child{grid-column:1/-1}.trade-term-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.trade-intro{padding:70px 22px;grid-template-columns:1fr;gap:35px}.trade-steps{grid-template-columns:1fr}.trade-steps article,.trade-steps article:last-child{min-height:190px;grid-column:auto}.trade-steps h3{margin-top:45px}.trade-terms{padding:75px 22px}.trade-term-grid{grid-template-columns:1fr}.trade-term-grid article{min-height:250px}.trade-term-grid h3{margin-top:50px}.trade-disclosure{padding:40px 22px;grid-template-columns:auto 1fr}.trade-disclosure a{grid-column:1/-1;width:fit-content}.product-trade-note{padding:60px 22px;grid-template-columns:1fr;gap:30px}.product-trade-note>a{grid-column:auto}.procurement-facts{grid-template-columns:1fr}}
+
 /* The Huangjia gallery is a non-interactive photo wall. */
 .original-social-grid>div{
   aspect-ratio:3/4;

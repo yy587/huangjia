@@ -245,6 +245,7 @@ export function SiteShell({
             </div>
           </div>
           <a href={sitePath("/news")}>News <ChevronDown size={14} /></a>
+          <a href={sitePath("/trade")}>Trade Guide</a>
           <a href={sitePath("/contact")}>Contact Us</a>
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
@@ -297,6 +298,7 @@ export function SiteShell({
           ))}
         </div>
         {[
+          ["Trade Guide", sitePath("/trade")],
           ["News", sitePath("/news")],
           ["Contact", sitePath("/contact")],
           [`Cart (${count})`, sitePath("/cart")]
@@ -325,6 +327,7 @@ export function SiteShell({
             <a href={sitePath("/")}>Home</a>
             <a href={sitePath("/about")}>About Us</a>
             <a href={sitePath("/products")}>Products</a>
+            <a href={sitePath("/trade")}>Trade Guide</a>
             <a href={sitePath("/news")}>News</a>
             <a href={sitePath("/contact")}>Contact Us</a>
           </nav>
@@ -338,7 +341,7 @@ export function SiteShell({
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved. · <a href={sitePath("/privacy")}>Privacy</a> · <a href={sitePath("/trade")}>Trade terms guide</a></span>
           <div className="original-footer-icons" aria-label="Huangjia contact and social channels">
             {contactLinks.map((item) => {
               const external = item.href.startsWith("http");

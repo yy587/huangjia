@@ -4,6 +4,7 @@ import { ArrowRight, Check, Mail, MapPin, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { SiteShell } from "../components/SiteShell";
 import { catalog } from "../lib/catalog";
+import { sitePath } from "../lib/site-path";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -73,6 +74,7 @@ export default function ContactPage() {
             </div>
             <label>Country / market<input name="market" placeholder="Where is your project?" /></label>
             <label>Project details *<textarea name="message" required rows={6} placeholder="Tell us about the products, quantities and timeline you need…" /></label>
+            <p className="form-privacy">By sending this enquiry, you acknowledge our <a href={sitePath("/privacy")}>privacy notice</a>. Product and trade terms remain subject to formal confirmation.</p>
             <button type="submit">
               {sent ? "Opening your email…" : "Send project enquiry"} <ArrowRight size={17} />
             </button>
