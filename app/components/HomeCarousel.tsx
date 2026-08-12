@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { originalMedia } from "../lib/original-media";
+import { sitePath } from "../lib/site-path";
 
 const slides = [
   {
@@ -37,7 +38,7 @@ export function HomeCarousel() {
     if (dragging || paused || !pageVisible) return;
     const timer = window.setInterval(
       () => setActive((current) => (current + 1) % slides.length),
-      5500
+      7500
     );
     return () => window.clearInterval(timer);
   }, [dragging, paused, pageVisible]);
@@ -57,9 +58,17 @@ export function HomeCarousel() {
     <section
       className={`original-home-carousel${dragging ? " is-dragging" : ""}${active === 0 ? " is-bathroom-active" : active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : " is-kitchen-active"}`}
       aria-label="Huangjia product collections"
+      tabIndex={0}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft") move(-1);
+        if (event.key === "ArrowRight") move(1);
+      }}
       onPointerDown={(event) => {
+        if ((event.target as HTMLElement).closest("a,button")) return;
         if (event.button !== 0) return;
         dragStart.current = { pointerId: event.pointerId, x: event.clientX };
         event.currentTarget.setPointerCapture(event.pointerId);
@@ -88,8 +97,19 @@ export function HomeCarousel() {
       <div className="carousel-image-copy">
         <h1>{slide.title}</h1>
         <p>{slide.subtitle}</p>
+        <a href={sitePath("/products")}>Browse products</a>
       </div>
-      <small className="carousel-drag-hint">Drag to switch</small>
+      <small className="carousel-drag-hint">Swipe or use the tabs</small>
+      <div className="carousel-pagination" aria-label="Select a scene">
+        {slides.map((item, index) => <button
+          key={item.title}
+          type="button"
+          className={active === index ? "is-active" : ""}
+          aria-label={`Show ${item.title}`}
+          aria-current={active === index ? "true" : undefined}
+          onClick={() => setActive(index)}
+        />)}
+      </div>
       <div className="carousel-status" aria-hidden="true">
         <b>{String(active + 1).padStart(2, "0")}</b>
         <span />

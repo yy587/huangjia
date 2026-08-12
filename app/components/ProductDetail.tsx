@@ -139,7 +139,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 <button onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
               </div>
               <button className={added ? "add-selection is-added" : "add-selection"} onClick={add}>
-                {added ? "Added to Cart" : "Add to Cart"}
+                {added ? "In Quote · Add More" : "Add to Quote"}
                 <ArrowRight size={17} />
               </button>
             </div>

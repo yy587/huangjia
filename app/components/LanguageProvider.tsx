@@ -14,6 +14,23 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 const textOriginals = new WeakMap<Text, string>();
 
 const zh: Record<string, string> = {
+  "International building material supply · Foshan, China": "国际建材供应 · 中国佛山",
+  "Quote List": "询价清单",
+  "Browse products": "浏览产品",
+  "Swipe or use the tabs": "拖动或点击分页切换",
+  "Ask our team": "咨询我们的团队",
+  "Quick quote": "快速询价",
+  "Add to Quote": "加入询价清单",
+  "In Quote · Add More": "已加入 · 再加一件",
+  "Added to quote list": "已加入询价清单",
+  "Undo": "撤销",
+  "View list": "查看清单",
+  "Confirm products": "确认产品",
+  "Contact details": "联系信息",
+  "Send request": "发送询价",
+  "Clear quote list": "清空询价清单",
+  "Submit quote request": "提交询价需求",
+  "Your quote list is empty.": "您的询价清单为空。",
   "Foshan · China": "中国 · 佛山",
   "Tile & building material solutions for global projects": "面向全球项目的瓷砖与建材解决方案",
   "Official material store · Browse, select and request a quote": "官方建材商城 · 浏览、选购并获取报价",

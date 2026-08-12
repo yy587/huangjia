@@ -33,27 +33,17 @@ export function SiteShell({
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const headerSearchRef = useRef<HTMLInputElement>(null);
   const megaTriggerRef = useRef<HTMLDivElement>(null);
+  const contactDockRef = useRef<HTMLDivElement>(null);
   const { count } = useInquiry();
-  const headerResults = useMemo(
-    () => headerQuery.trim() ? filterProducts(headerQuery).slice(0, 6) : [],
+  const matchingHeaderResults = useMemo(
+    () => headerQuery.trim() ? filterProducts(headerQuery) : [],
     [headerQuery]
   );
+  const headerResults = matchingHeaderResults.slice(0, 6);
   const phoneDigits = catalog.contact.phone.replace(/[^\d]/g, "");
-  const contactLinks = [
-    { label: "WhatsApp", icon: originalMedia.footerIcons[0], href: `https://wa.me/${phoneDigits}`, className: "rail-whatsapp" },
-    { label: "Skype", icon: originalMedia.footerIcons[1], href: "skype:myskype?chat", className: "rail-skype" },
-    { label: "WeChat", icon: originalMedia.footerIcons[2], href: sitePath("/contact"), className: "rail-wechat" },
-    { label: "Telephone", icon: originalMedia.footerIcons[3], href: `tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`, className: "rail-phone" },
-    { label: "YouTube", icon: originalMedia.footerIcons[4], href: "https://www.youtube.com/", className: "rail-youtube" },
-    { label: "Instagram", icon: originalMedia.footerIcons[5], href: "https://www.instagram.com/", className: "rail-instagram" },
-    { label: "Pinterest", icon: originalMedia.footerIcons[6], href: "https://www.pinterest.com/", className: "rail-pinterest" },
-    { label: "LinkedIn", icon: originalMedia.footerIcons[7], href: "https://www.linkedin.com/", className: "rail-linkedin" },
-    { label: "Facebook", icon: originalMedia.footerIcons[8], href: "https://www.facebook.com/", className: "rail-facebook" },
-    { label: "X", icon: originalMedia.footerIcons[9], href: "https://www.twitter.com/", className: "rail-x" },
-    { label: "Email", icon: originalMedia.footerIcons[10], href: `mailto:${catalog.contact.email}`, className: "rail-email" }
-  ];
 
   useEffect(() => {
     setMobileOpen(false);
@@ -84,10 +74,14 @@ export function SiteShell({
 
   useEffect(() => {
     const closeProductsWithKeyboard = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setProductsOpen(false);
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setContactOpen(false);
+      }
     };
     const closeProductsOutside = (event: PointerEvent) => {
       if (!megaTriggerRef.current?.contains(event.target as Node)) setProductsOpen(false);
+      if (!contactDockRef.current?.contains(event.target as Node)) setContactOpen(false);
     };
     window.addEventListener("keydown", closeProductsWithKeyboard);
     window.addEventListener("pointerdown", closeProductsOutside);
@@ -100,8 +94,7 @@ export function SiteShell({
   return (
     <div className={`catalog-site shell-${theme}`}>
       <div className="catalog-utility">
-        <span>Foshan · China</span>
-        <span>Official material store · Browse, select and request a quote</span>
+        <span>International building material supply · Foshan, China</span>
         <LanguageToggle compact />
       </div>
       <header className={`catalog-header ${scrolled ? "is-scrolled" : ""}`}>
@@ -152,7 +145,7 @@ export function SiteShell({
             <div className="catalog-inline-results" aria-live="polite">
               <div className="catalog-inline-results-head">
                 <span>Search results</span>
-                <small>{headerResults.length} shown</small>
+                <small>{matchingHeaderResults.length} found</small>
               </div>
               {headerResults.length ? headerResults.map((product) => (
                 <a href={sitePath(`/product/${product.slug}`)} key={product.slug}>
@@ -163,9 +156,14 @@ export function SiteShell({
                   </span>
                   <ArrowRight size={15} />
                 </a>
-              )) : (
+              )) : <div className="catalog-search-empty">
                 <p>No matching products</p>
-              )}
+                <a href={sitePath("/products")}>Browse all products</a>
+                <button type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => setQuoteOpen(true)}>Ask our team</button>
+              </div>}
+              {headerResults.length > 0 && <a className="catalog-search-all" href={sitePath(`/products?q=${encodeURIComponent(headerQuery.trim())}`)}>
+                View all {matchingHeaderResults.length} results <ArrowRight size={15} />
+              </a>}
             </div>
           )}
         </div>
@@ -173,9 +171,9 @@ export function SiteShell({
           <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
         </a>
         <div className="catalog-actions">
-          <a href={sitePath("/cart")} className="selection-link" aria-label={`Cart, ${count} items`}>
+          <a href={sitePath("/cart")} className="selection-link" aria-label={`Quote list, ${count} items`}>
             <ShoppingBag size={20} />
-            <span>Cart</span>
+            <span>Quote List</span>
             <b>{count}</b>
           </a>
           <button
@@ -189,7 +187,6 @@ export function SiteShell({
       </header>
       <nav className={`catalog-nav catalog-nav-row ${scrolled ? "is-scrolled" : ""}`} aria-label="Primary navigation">
           <a href={sitePath("/")}>Home</a>
-          <a href={sitePath("/about")}>About Us</a>
           <div
             ref={megaTriggerRef}
             className="mega-trigger"
@@ -244,42 +241,30 @@ export function SiteShell({
               </div>
             </div>
           </div>
-          <a href={sitePath("/news")}>News <ChevronDown size={14} /></a>
           <a href={sitePath("/trade")}>Trade Guide</a>
+          <a href={sitePath("/about")}>About Us</a>
           <a href={sitePath("/contact")}>Contact Us</a>
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
-      <aside className="social-contact-rail" aria-label="Contact and social links">
-        {contactLinks.map((item) => {
-          const external = item.href.startsWith("http");
-          return (
-            <a
-              key={item.label}
-              className={item.className}
-              href={item.href}
-              target={external ? "_blank" : undefined}
-              rel={external ? "noreferrer" : undefined}
-              aria-label={item.label}
-            >
-              <img src={item.icon} alt="" />
-              <span>{item.label}</span>
-            </a>
-          );
-        })}
-      </aside>
+      <div ref={contactDockRef} className={`contact-dock${contactOpen ? " is-open" : ""}`}>
+        <div className="contact-dock-menu" aria-hidden={!contactOpen}>
+          <a href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href={`mailto:${catalog.contact.email}`}>Email</a>
+          <button type="button" onClick={() => { setContactOpen(false); setQuoteOpen(true); }}>Quick quote</button>
+        </div>
+        <button className="contact-dock-trigger" type="button" aria-expanded={contactOpen} onClick={() => setContactOpen((value) => !value)}>
+          <Mail size={17} /><span>Contact</span>
+        </button>
+      </div>
 
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
           <X size={26} />
         </button>
         <span className="micro-label">Explore Huangjia</span>
-        {[
-          ["Home", sitePath("/")],
-          ["About", sitePath("/about")]
-        ].map(([label, href], index) => (
+        {[["Home", sitePath("/")]].map(([label, href]) => (
           <a key={label} href={href}>
-            <small>0{index + 1}</small>
             {label}
           </a>
         ))}
@@ -289,7 +274,7 @@ export function SiteShell({
           aria-expanded={mobileProductsOpen}
           onClick={() => setMobileProductsOpen((value) => !value)}
         >
-          <small>03</small><span>Products</span><ChevronDown size={18} />
+          <span>Products</span><ChevronDown size={18} />
         </button>
         <div className={`mobile-product-groups${mobileProductsOpen ? " is-open" : ""}`}>
           <a href={sitePath("/products")}>View all products</a>
@@ -299,22 +284,17 @@ export function SiteShell({
         </div>
         {[
           ["Trade Guide", sitePath("/trade")],
-          ["News", sitePath("/news")],
+          ["About", sitePath("/about")],
           ["Contact", sitePath("/contact")],
-          [`Cart (${count})`, sitePath("/cart")]
-        ].map(([label, href], index) => (
+          [`Quote List (${count})`, sitePath("/cart")]
+        ].map(([label, href]) => (
           <a key={label} href={href}>
-            <small>0{index + 4}</small>
             {label}
           </a>
         ))}
       </aside>
 
       {children}
-
-      <button className="floating-enquiry" type="button" onClick={() => setQuoteOpen(true)}>
-        <Mail size={17} /> <span>Get a quote</span><ArrowRight size={16} />
-      </button>
 
       <QuickQuotePanel open={quoteOpen} onClose={() => setQuoteOpen(false)} />
 
@@ -342,22 +322,7 @@ export function SiteShell({
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Foshan Huangjia Building Material Co., Ltd. All rights reserved. · <a href={sitePath("/privacy")}>Privacy</a> · <a href={sitePath("/trade")}>Trade terms guide</a></span>
-          <div className="original-footer-icons" aria-label="Huangjia contact and social channels">
-            {contactLinks.map((item) => {
-              const external = item.href.startsWith("http");
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noreferrer" : undefined}
-                  aria-label={item.label}
-                >
-                  <img src={item.icon} alt="" />
-                </a>
-              );
-            })}
-          </div>
+          <a href={sitePath("/cart")}>Quote List ({count})</a>
         </div>
       </footer>
     </div>

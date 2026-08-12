@@ -29,11 +29,11 @@ export function ProductCard({ product }: { product: Product }) {
           <p title={productTitle(product.name)}>
             {product.summary || "Huangjia building material collection"}
           </p>
-          <span className="product-card-price">Price on request</span>
+          <span className="product-card-price">Request quotation</span>
         </div>
-        <button className={selected ? "is-selected" : ""} onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)}`}>
+        <button className={selected ? "is-selected" : ""} onClick={() => addItem(product)} aria-label={`Add ${primaryModel(product.name)} to quote list`}>
           {selected ? <Check size={16} /> : <Plus size={16} />}
-          {selected ? "Added to Cart" : "Add to Cart"}
+          {selected ? "In Quote · Add More" : "Add to Quote"}
         </button>
       </div>
     </article>

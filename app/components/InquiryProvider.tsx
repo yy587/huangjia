@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ShoppingBag, X } from "lucide-react";
+import { Check, ShoppingBag, Undo2, X } from "lucide-react";
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
 import { primaryModel } from "../lib/catalog";
@@ -29,7 +29,7 @@ const STORAGE_KEY = "shie-inquiry-selection";
 export function InquiryProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<InquiryItem[]>([]);
   const [ready, setReady] = useState(false);
-  const [feedback, setFeedback] = useState<{ name: string; quantity: number } | null>(null);
+  const [feedback, setFeedback] = useState<{ slug: string; name: string; added: number; previous: number; total: number } | null>(null);
   const feedbackTimer = useRef<number | null>(null);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
     if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
   }, []);
 
-  const showFeedback = (product: Product, quantity: number) => {
-    setFeedback({ name: primaryModel(product.name), quantity });
+  const showFeedback = (product: Product, quantity: number, previous: number) => {
+    setFeedback({ slug: product.slug, name: primaryModel(product.name), added: quantity, previous, total: previous + quantity });
     if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
     feedbackTimer.current = window.setTimeout(() => setFeedback(null), 4200);
   };
@@ -66,7 +66,8 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
       items,
       addItem: (product, quantity = 1) => {
         const safeQuantity = Math.max(1, quantity);
-        showFeedback(product, safeQuantity);
+        const previous = items.find((item) => item.slug === product.slug)?.quantity || 0;
+        showFeedback(product, safeQuantity, previous);
         setItems((current) => {
           const existing = current.find((item) => item.slug === product.slug);
           if (existing) {
@@ -105,10 +106,17 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
       <div className={`cart-feedback${feedback ? " is-visible" : ""}`} role="status" aria-live="polite">
         <span className="cart-feedback-icon"><Check size={17} /></span>
         <div>
-          <strong>Added to your quote</strong>
-          <small>{feedback ? `${feedback.quantity} × ${feedback.name}` : ""}</small>
+          <strong>Added to quote list</strong>
+          <small>{feedback ? `${feedback.name} · Current quantity ${feedback.total}` : ""}</small>
         </div>
-        <a href={sitePath("/cart")}><ShoppingBag size={15} /> View quote</a>
+        <button className="cart-feedback-undo" type="button" onClick={() => {
+          if (!feedback) return;
+          setItems((current) => feedback.previous === 0
+            ? current.filter((item) => item.slug !== feedback.slug)
+            : current.map((item) => item.slug === feedback.slug ? { ...item, quantity: feedback.previous } : item));
+          setFeedback(null);
+        }}><Undo2 size={14} /> Undo</button>
+        <a href={sitePath("/cart")}><ShoppingBag size={15} /> View list</a>
         <button type="button" onClick={() => setFeedback(null)} aria-label="Dismiss notification"><X size={16} /></button>
       </div>
     </InquiryContext.Provider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { SiteShell } from "../components/SiteShell";
@@ -20,6 +20,7 @@ export default function ProductsPage() {
   const [mobileFilters, setMobileFilters] = useState(false);
   const [visible, setVisible] = useState(18);
   const [sort, setSort] = useState("catalogue");
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([categoryGroups[0]?.name || ""]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -52,9 +53,16 @@ export default function ProductsPage() {
   }, [query, category, sort]);
   const heading = category || "All products";
 
+  useEffect(() => {
+    const parent = categoryGroups.find((group) =>
+      normalizeCategory(group.name) === normalizeCategory(category) ||
+      group.children.some((child) => normalizeCategory(child) === normalizeCategory(category))
+    );
+    if (parent) setExpandedGroups((current) => current.includes(parent.name) ? current : [...current, parent.name]);
+  }, [category]);
+
   const chooseCategory = (value: string) => {
     setCategory(value);
-    setMobileFilters(false);
     const url = value ? `${sitePath("/products")}?category=${encodeURIComponent(value)}` : sitePath("/products");
     window.history.replaceState({}, "", url);
   };
@@ -88,18 +96,20 @@ export default function ProductsPage() {
             </button>
             {categoryGroups.map((group) => (
               <div className="filter-group" key={group.name}>
-                <button
-                  className={
+                <div className="filter-group-heading">
+                  <button className={
                     normalizeCategory(category) === normalizeCategory(group.name)
                       ? "is-active"
                       : ""
-                  }
-                  onClick={() => chooseCategory(group.name)}
-                >
-                  <span>{group.name}</span>
-                  <b>{categoryCount(group.name)}</b>
-                </button>
-                {group.children.map((child) => (
+                  } onClick={() => chooseCategory(group.name)}>
+                    <span>{group.name}</span><b>{categoryCount(group.name)}</b>
+                  </button>
+                  <button className="filter-expand" type="button" aria-label={`Toggle ${group.name}`} aria-expanded={expandedGroups.includes(group.name)} onClick={() => setExpandedGroups((current) => current.includes(group.name) ? current.filter((name) => name !== group.name) : [...current, group.name])}>
+                    <ChevronDown size={16} />
+                  </button>
+                </div>
+                <div className={`filter-children${expandedGroups.includes(group.name) ? " is-open" : ""}`}>
+                  {group.children.map((child) => (
                   <button
                     key={child}
                     className={
@@ -112,9 +122,11 @@ export default function ProductsPage() {
                     <span>{child}</span>
                     <b>{categoryCount(child)}</b>
                   </button>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
+            <button className="mobile-filter-results" type="button" onClick={() => setMobileFilters(false)}>View {results.length} products</button>
           </aside>
 
           <div className="product-results">

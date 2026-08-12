@@ -49,16 +49,21 @@ export default function CartPage() {
     <SiteShell>
       <main className="catalog-main">
         <section className="original-page-title">
-          <span>Home / Cart</span>
-          <h1>Shopping Cart</h1>
+          <span>Home / Quote List</span>
+          <h1>Quote List</h1>
           <p>{count} Items</p>
         </section>
+        <div className="quote-progress" aria-label="Quote request steps">
+          <span className="is-active"><b>01</b> Confirm products</span>
+          <span><b>02</b> Contact details</span>
+          <span><b>03</b> Send request</span>
+        </div>
         {items.length ? (
           <section className="selection-layout">
             <div className="selection-items">
               <div className="selection-table-heading">
                 <span>{items.length} product group{items.length === 1 ? "" : "s"}</span>
-                <button onClick={clear}>Clear selection</button>
+                <button onClick={clear}>Clear quote list</button>
               </div>
               {items.map((item, index) => (
                 <article key={item.slug} className="selection-item">
@@ -106,7 +111,7 @@ export default function CartPage() {
               </label>
               {formError && <p className="checkout-error" role="alert">{formError}</p>}
               <button onClick={sendEnquiry}>
-                <Mail size={17} /> Email this selection <ArrowRight size={17} />
+                <Mail size={17} /> Submit quote request <ArrowRight size={17} />
               </button>
               <p>No payment is taken online. Our team will confirm availability, specifications, shipping and pricing directly.</p>
               <p>By sending an enquiry, you acknowledge the <a href={sitePath("/privacy")}>privacy notice</a>. No order is binding until a formal quotation and commercial terms are accepted.</p>
@@ -116,7 +121,7 @@ export default function CartPage() {
         ) : (
           <section className="empty-selection">
             <span>0</span>
-            <h2>Your selection is empty.</h2>
+            <h2>Your quote list is empty.</h2>
             <p>Browse the full catalogue and add any products you would like us to quote.</p>
             <a href={sitePath("/products")}>Explore products <ArrowRight size={17} /></a>
           </section>

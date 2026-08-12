@@ -25,7 +25,7 @@ export function LegacyProductCard({ product, image }: { product: Product; image?
         <strong>Price on request</strong>
       </div>
       <button onClick={() => addItem(product)}>
-        <ShoppingBag size={15} /> {added ? "Added to Cart" : "Add to Cart"}
+        <ShoppingBag size={15} /> {added ? "In Quote · Add More" : "Add to Quote"}
       </button>
     </article>
   );
