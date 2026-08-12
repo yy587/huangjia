@@ -451,12 +451,43 @@
   height:clamp(480px,45vw,650px);
   min-height:480px;
 }
+.carousel-image-copy{
+  position:absolute;
+  top:34px;
+  left:max(4vw,44px);
+  z-index:2;
+  max-width:min(520px,58vw);
+  padding:18px 22px;
+  color:#fff;
+  background:linear-gradient(90deg,#11120f99,#11120f2b 76%,transparent);
+  text-shadow:0 2px 12px #0009;
+  pointer-events:none;
+}
+.carousel-image-copy h1{
+  margin:0;
+  font:600 clamp(26px,3vw,46px)/1.05 "Manrope","Noto Sans SC",sans-serif;
+  letter-spacing:.14em;
+}
+.carousel-image-copy p{
+  margin:11px 0 0;
+  font-size:clamp(12px,1.15vw,17px);
+  font-weight:500;
+  letter-spacing:.07em;
+}
 @media(max-width:780px){
   .original-home-carousel,
   .original-home-carousel.is-dining-active{
     height:300px;
     min-height:300px;
   }
+  .carousel-image-copy{
+    top:20px;
+    left:18px;
+    max-width:calc(100% - 76px);
+    padding:12px 14px;
+  }
+  .carousel-image-copy h1{font-size:21px}
+  .carousel-image-copy p{margin-top:7px;font-size:10px;line-height:1.4}
 }
 
 /* Yinjispace-inspired quiet editorial refinement */

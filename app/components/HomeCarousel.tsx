@@ -6,19 +6,23 @@ import { originalMedia } from "../lib/original-media";
 const slides = [
   {
     image: originalMedia.heroes[0],
-    title: "BATHROOM"
+    title: "BATHROOM",
+    subtitle: "Spatial Aesthetics · Textured Living"
   },
   {
     image: originalMedia.heroes[1],
-    title: "LIVING ROOM"
+    title: "LIVING ROOM SERIES",
+    subtitle: "Space aesthetics · Textured lifestyle"
   },
   {
     image: originalMedia.heroes[2],
-    title: "LIVING SPACE"
+    title: "DINING ROOM",
+    subtitle: "Space aesthetics · Textured lifestyle"
   },
   {
     image: originalMedia.heroes[3],
-    title: "OPEN PLAN"
+    title: "KITCHEN ROOM SERIES",
+    subtitle: "Slow down · Feel your space"
   }
 ];
 
@@ -81,6 +85,10 @@ export function HomeCarousel() {
         alt={slide.title}
         draggable={false}
       />
+      <div className="carousel-image-copy">
+        <h1>{slide.title}</h1>
+        <p>{slide.subtitle}</p>
+      </div>
       <small className="carousel-drag-hint">Drag to switch</small>
       <div className="carousel-status" aria-hidden="true">
         <b>{String(active + 1).padStart(2, "0")}</b>
