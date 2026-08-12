@@ -1,7 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { Check, ShoppingBag, X } from "lucide-react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "../lib/catalog";
+import { primaryModel } from "../lib/catalog";
 import { sitePath } from "../lib/site-path";
 
 type InquiryItem = {
@@ -14,7 +16,7 @@ type InquiryItem = {
 
 type InquiryContextValue = {
   items: InquiryItem[];
-  addItem: (product: Product) => void;
+  addItem: (product: Product, quantity?: number) => void;
   removeItem: (slug: string) => void;
   setQuantity: (slug: string, quantity: number) => void;
   clear: () => void;
@@ -27,6 +29,8 @@ const STORAGE_KEY = "shie-inquiry-selection";
 export function InquiryProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<InquiryItem[]>([]);
   const [ready, setReady] = useState(false);
+  const [feedback, setFeedback] = useState<{ name: string; quantity: number } | null>(null);
+  const feedbackTimer = useRef<number | null>(null);
 
   useEffect(() => {
     try {
@@ -47,15 +51,27 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items, ready]);
 
+  useEffect(() => () => {
+    if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
+  }, []);
+
+  const showFeedback = (product: Product, quantity: number) => {
+    setFeedback({ name: primaryModel(product.name), quantity });
+    if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
+    feedbackTimer.current = window.setTimeout(() => setFeedback(null), 4200);
+  };
+
   const value = useMemo<InquiryContextValue>(
     () => ({
       items,
-      addItem: (product) =>
+      addItem: (product, quantity = 1) => {
+        const safeQuantity = Math.max(1, quantity);
+        showFeedback(product, safeQuantity);
         setItems((current) => {
           const existing = current.find((item) => item.slug === product.slug);
           if (existing) {
             return current.map((item) =>
-              item.slug === product.slug ? { ...item, quantity: item.quantity + 1 } : item
+              item.slug === product.slug ? { ...item, quantity: item.quantity + safeQuantity } : item
             );
           }
           return [
@@ -65,10 +81,11 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
               name: product.name,
               image: sitePath(product.images[0] || "/images/bathroom.jpg"),
               category: product.category,
-              quantity: 1
+              quantity: safeQuantity
             }
           ];
-        }),
+        });
+      },
       removeItem: (slug) => setItems((current) => current.filter((item) => item.slug !== slug)),
       setQuantity: (slug, quantity) =>
         setItems((current) =>
@@ -82,7 +99,20 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
     [items]
   );
 
-  return <InquiryContext.Provider value={value}>{children}</InquiryContext.Provider>;
+  return (
+    <InquiryContext.Provider value={value}>
+      {children}
+      <div className={`cart-feedback${feedback ? " is-visible" : ""}`} role="status" aria-live="polite">
+        <span className="cart-feedback-icon"><Check size={17} /></span>
+        <div>
+          <strong>Added to your quote</strong>
+          <small>{feedback ? `${feedback.quantity} × ${feedback.name}` : ""}</small>
+        </div>
+        <a href={sitePath("/cart")}><ShoppingBag size={15} /> View quote</a>
+        <button type="button" onClick={() => setFeedback(null)} aria-label="Dismiss notification"><X size={16} /></button>
+      </div>
+    </InquiryContext.Provider>
+  );
 }
 
 export function useInquiry() {

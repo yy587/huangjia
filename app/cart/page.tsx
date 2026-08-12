@@ -72,9 +72,9 @@ export default function CartPage() {
                     <span>{item.slug.replace("display-", "Product group ")}</span>
                   </div>
                   <div className="quantity-control">
-                    <button onClick={() => setQuantity(item.slug, item.quantity - 1)}><Minus size={14} /></button>
+                    <button aria-label={`Decrease ${primaryModel(item.name)} quantity`} onClick={() => setQuantity(item.slug, item.quantity - 1)}><Minus size={14} /></button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => setQuantity(item.slug, item.quantity + 1)}><Plus size={14} /></button>
+                    <button aria-label={`Increase ${primaryModel(item.name)} quantity`} onClick={() => setQuantity(item.slug, item.quantity + 1)}><Plus size={14} /></button>
                   </div>
                   <button className="remove-selection" onClick={() => removeItem(item.slug)} aria-label="Remove item">
                     <Trash2 size={17} />

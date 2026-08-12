@@ -27,7 +27,7 @@ export function ProductDetail({ product }: { product: Product }) {
   );
 
   const add = () => {
-    for (let index = 0; index < quantity; index += 1) addItem(product);
+    addItem(product, quantity);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1800);
   };

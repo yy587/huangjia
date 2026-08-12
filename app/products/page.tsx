@@ -29,6 +29,20 @@ export default function ProductsPage() {
 
   useEffect(() => setVisible(18), [category, query]);
 
+  useEffect(() => {
+    if (!mobileFilters) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileFilters(false);
+    };
+    window.addEventListener("keydown", close);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", close);
+    };
+  }, [mobileFilters]);
+
   const results = useMemo(() => {
     const products = [...filterProducts(query, category)];
     if (sort === "model-asc") products.sort((a, b) => a.name.localeCompare(b.name));
