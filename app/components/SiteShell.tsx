@@ -15,6 +15,7 @@ import { originalMedia } from "../lib/original-media";
 import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
 import { LanguageToggle } from "./LanguageProvider";
+import { QuickQuotePanel } from "./QuickQuotePanel";
 
 export function SiteShell({
   children,
@@ -30,7 +31,10 @@ export function SiteShell({
   const [headerQuery, setHeaderQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
   const headerSearchRef = useRef<HTMLInputElement>(null);
+  const megaTriggerRef = useRef<HTMLDivElement>(null);
   const { count } = useInquiry();
   const headerResults = useMemo(
     () => headerQuery.trim() ? filterProducts(headerQuery).slice(0, 6) : [],
@@ -75,6 +79,21 @@ export function SiteShell({
     return () => {
       window.removeEventListener("scroll", updateScroll);
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const closeProductsWithKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setProductsOpen(false);
+    };
+    const closeProductsOutside = (event: PointerEvent) => {
+      if (!megaTriggerRef.current?.contains(event.target as Node)) setProductsOpen(false);
+    };
+    window.addEventListener("keydown", closeProductsWithKeyboard);
+    window.addEventListener("pointerdown", closeProductsOutside);
+    return () => {
+      window.removeEventListener("keydown", closeProductsWithKeyboard);
+      window.removeEventListener("pointerdown", closeProductsOutside);
     };
   }, []);
 
@@ -172,11 +191,26 @@ export function SiteShell({
           <a href={sitePath("/")}>Home</a>
           <a href={sitePath("/about")}>About Us</a>
           <div
+            ref={megaTriggerRef}
             className="mega-trigger"
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
+            onFocusCapture={() => setProductsOpen(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) setProductsOpen(false);
+            }}
           >
-            <a href={sitePath("/products")}>
+            <a
+              href={sitePath("/products")}
+              aria-expanded={productsOpen}
+              aria-haspopup="true"
+              onClick={(event) => {
+                if (!productsOpen) {
+                  event.preventDefault();
+                  setProductsOpen(true);
+                }
+              }}
+            >
               Products <ChevronDown size={14} />
             </a>
             <div className={`mega-menu ${productsOpen ? "is-open" : ""}`}>
@@ -241,14 +275,34 @@ export function SiteShell({
         <span className="micro-label">Explore Huangjia</span>
         {[
           ["Home", sitePath("/")],
-          ["About", sitePath("/about")],
-          ["Products", sitePath("/products")],
+          ["About", sitePath("/about")]
+        ].map(([label, href], index) => (
+          <a key={label} href={href}>
+            <small>0{index + 1}</small>
+            {label}
+          </a>
+        ))}
+        <button
+          className="mobile-products-toggle"
+          type="button"
+          aria-expanded={mobileProductsOpen}
+          onClick={() => setMobileProductsOpen((value) => !value)}
+        >
+          <small>03</small><span>Products</span><ChevronDown size={18} />
+        </button>
+        <div className={`mobile-product-groups${mobileProductsOpen ? " is-open" : ""}`}>
+          <a href={sitePath("/products")}>View all products</a>
+          {categoryGroups.map((group) => (
+            <a key={group.name} href={sitePath(`/products?category=${encodeURIComponent(group.name)}`)}>{group.name}</a>
+          ))}
+        </div>
+        {[
           ["News", sitePath("/news")],
           ["Contact", sitePath("/contact")],
           [`Cart (${count})`, sitePath("/cart")]
         ].map(([label, href], index) => (
           <a key={label} href={href}>
-            <small>0{index + 1}</small>
+            <small>0{index + 4}</small>
             {label}
           </a>
         ))}
@@ -256,9 +310,11 @@ export function SiteShell({
 
       {children}
 
-      <a className="floating-enquiry" href={sitePath("/contact")}>
+      <button className="floating-enquiry" type="button" onClick={() => setQuoteOpen(true)}>
         <Mail size={17} /> <span>Get a quote</span><ArrowRight size={16} />
-      </a>
+      </button>
+
+      <QuickQuotePanel open={quoteOpen} onClose={() => setQuoteOpen(false)} />
 
       <footer className="catalog-footer original-footer">
         <div className="original-footer-main">

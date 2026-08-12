@@ -25,16 +25,24 @@ const slides = [
 export function HomeCarousel() {
   const [active, setActive] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
   const dragStart = useRef<{ pointerId: number; x: number } | null>(null);
 
   useEffect(() => {
-    if (dragging) return;
+    if (dragging || paused || !pageVisible) return;
     const timer = window.setInterval(
       () => setActive((current) => (current + 1) % slides.length),
       5500
     );
     return () => window.clearInterval(timer);
-  }, [dragging]);
+  }, [dragging, paused, pageVisible]);
+
+  useEffect(() => {
+    const updateVisibility = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
 
   const move = (direction: number) => {
     setActive((current) => (current + direction + slides.length) % slides.length);
@@ -45,6 +53,8 @@ export function HomeCarousel() {
     <section
       className={`original-home-carousel${dragging ? " is-dragging" : ""}${active === 0 ? " is-bathroom-active" : active === 1 ? " is-living-active" : active === 2 ? " is-dining-active" : " is-kitchen-active"}`}
       aria-label="Huangjia product collections"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
       onPointerDown={(event) => {
         if (event.button !== 0) return;
         dragStart.current = { pointerId: event.pointerId, x: event.clientX };
