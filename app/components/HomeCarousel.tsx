@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { originalMedia } from "../lib/original-media";
-import { sitePath } from "../lib/site-path";
 
 const slides = [
   {
@@ -97,7 +96,6 @@ export function HomeCarousel() {
       <div className="carousel-image-copy">
         <h1>{slide.title}</h1>
         <p>{slide.subtitle}</p>
-        <a href={sitePath("/products")}>Browse products</a>
       </div>
       <small className="carousel-drag-hint">Swipe or use the tabs</small>
       <div className="carousel-pagination" aria-label="Select a scene">
