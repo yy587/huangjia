@@ -2553,30 +2553,44 @@ html[lang="zh-CN"] .product-filters .filter-group .filter-children>button.is-chi
   text-transform:none;
 }
 
-/* Strict filter alignment: equal columns and no legacy placeholder offset. */
+/* Final filter layout: identical to Popular, contained and wrapping. */
 .product-filters .filter-children,
 .product-filters .filter-children.is-open{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  align-items:stretch;
-  justify-content:stretch;
-  gap:9px;
+  width:100%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:7px;
 }
 .product-filters .filter-children::before{
   content:none !important;
   display:none !important;
 }
+.popular-filter-set button,
 .product-filters .filter-children>button,
 .product-filters .filter-group .filter-children>button.is-child{
-  width:100%;
+  width:auto;
+  max-width:100%;
   min-width:0;
-  min-height:48px;
-  padding:9px 11px;
-  align-self:stretch;
-  justify-content:flex-start;
-  text-align:left;
+  min-height:0;
+  margin:0;
+  padding:7px 9px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 1 auto;
+  color:#333;
+  background:#fff;
+  border:1px solid var(--line);
+  font:400 9px/1.35 "DM Sans","Noto Sans SC",sans-serif;
+  letter-spacing:0;
+  text-align:center;
+  text-transform:uppercase;
+  white-space:normal;
+  overflow-wrap:anywhere;
 }
 .product-filters .filter-children>button span{
-  width:100%;
-  text-align:left;
+  width:auto;
+  text-align:center;
 }
