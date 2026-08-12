@@ -2444,3 +2444,57 @@ body,
 html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories .mega-title{font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;font-size:14px;letter-spacing:.04em}
 html[lang="zh-CN"] .catalog-site .catalog-nav-row .mega-categories a:not(.mega-title){font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;font-size:13px}
 @media(max-width:1120px) and (min-width:781px){.catalog-site .catalog-nav-row .mega-menu{grid-template-columns:220px minmax(0,1fr);gap:42px}.catalog-site .catalog-nav-row .mega-categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}}
+
+/* Product filter tags — match the compact Popular treatment. */
+.product-filters .filter-children{
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:9px;
+  max-height:0;
+  padding:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .28s ease,padding .28s ease,opacity .2s ease;
+}
+.product-filters .filter-children.is-open{
+  max-height:520px;
+  padding:12px 0 16px;
+  opacity:1;
+}
+.product-filters .filter-children>button,
+.product-filters .filter-group .filter-children>button.is-child{
+  width:auto;
+  min-width:0;
+  min-height:40px;
+  margin:0;
+  padding:9px 13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  flex:0 0 auto;
+  color:#333;
+  background:#fff;
+  border:1px solid #dedbd4;
+  font:500 11px/1.25 "DM Sans","Noto Sans SC",sans-serif;
+  letter-spacing:0;
+  text-align:center;
+  text-transform:uppercase;
+  white-space:normal;
+}
+.product-filters .filter-children>button b{
+  display:none;
+}
+.product-filters .filter-children>button:hover,
+.product-filters .filter-children>button.is-active{
+  color:#9b5d0b;
+  background:#fff8ee;
+  border-color:#f3a435;
+}
+html[lang="zh-CN"] .product-filters .filter-children>button,
+html[lang="zh-CN"] .product-filters .filter-group .filter-children>button.is-child{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:12px;
+  text-transform:none;
+}
