@@ -14,11 +14,11 @@ const slides = [
   },
   {
     image: originalMedia.heroes[2],
-    title: "DINING ROOM"
+    title: "LIVING SPACE"
   },
   {
     image: originalMedia.heroes[3],
-    title: "KITCHEN"
+    title: "OPEN PLAN"
   }
 ];
 

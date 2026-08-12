@@ -6,10 +6,10 @@ export const originalMedia = {
   logo: `${upload}/172137324403473800110.png`,
   productBanner: `${upload}/172301541689848900100.jpg`,
   heroes: [
-    sitePath("/images/hero-bathroom-editorial.png"),
-    sitePath("/images/hero-living-editorial-v2.png"),
-    sitePath("/images/hero-dining-editorial.png"),
-    sitePath("/images/hero-kitchen-editorial-v2.png")
+    sitePath("/product-media/2026-08/jihua-jh48a04-image-a31c4b83.webp"),
+    sitePath("/product-media/2026-08/jihua-jh48a020-02-0adc98d5.webp"),
+    sitePath("/product-media/2026-08/jihua-jh48a01-01-40ef469b.webp"),
+    sitePath("/product-media/2026-08/jihua-jh48a05-image-9b1d59a0.webp")
   ],
   categories: [
     `${upload}/172345141743994900100.jpg`,
