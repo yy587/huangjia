@@ -144,9 +144,9 @@ export default function HomePage() {
           </div>
           <div className="original-social-grid">
             {originalMedia.social.map((image, index) => (
-          <a href={sitePath("/products")} key={image} aria-label={`Huangjia gallery ${index + 1}`}>
-                <img src={image} alt="" />
-              </a>
+              <div key={image} aria-label={`Huangjia gallery ${index + 1}`}>
+                <img src={image} alt={`Huangjia gallery ${index + 1}`} />
+              </div>
             ))}
           </div>
         </section>
