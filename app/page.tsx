@@ -59,20 +59,6 @@ export default function HomePage() {
         </section>
 
         <ProductSection title="TRENDING PRODUCTS" subtitle="Our Bestsellers" />
-        <ProductSection
-          title="FEATURED PRODUCTS"
-          subtitle="Featured ceramic tile and building materials"
-        />
-        <ProductSection
-          title="NEW ARRIVAL PRODUCTS"
-          subtitle="Explore the latest Huangjia collections"
-        />
-
-        <section className="original-logo-strip" aria-label="Huangjia collections">
-          {originalMedia.collectionStrip.map((image, index) => (
-            <div key={image}><img src={image} alt={`Huangjia collection ${index + 1}`} /></div>
-          ))}
-        </section>
 
         <section className="original-story-section">
           <div className="original-story-image">
@@ -115,7 +101,7 @@ export default function HomePage() {
               },
               {
                 icon: originalMedia.services[1],
-                title: "Add to cart",
+                title: "Add to quote",
                 text: "Save the models and quantities you need"
               },
               {
@@ -151,36 +137,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="original-updates-section">
-          <div className="original-section-heading">
-            <h2>RECENT UPDATES</h2>
-            <p>If it&apos;s worth knowing about, you&apos;ll find it here.</p>
-          </div>
-          <div className="original-update-grid">
-            {catalog.news.map((article, index) => (
-          <a href={sitePath(`/news/${article.slug}`)} key={article.slug}>
-                <img
-                  src={originalMedia.news[index]}
-                  alt={article.title}
-                />
-                <small>{article.date}</small>
-                <h3>{article.title}</h3>
-                <p>{article.title}</p>
-                <b>read more <ArrowRight size={14} /></b>
-              </a>
-            ))}
-          </div>
-        </section>
-
         <section className="home-contact-cta">
           <div>
             <span>Start a project</span>
             <h2>Browse, select and request a quote.</h2>
-            <p>Browse products, add materials to your cart, then request a confirmed quotation.</p>
+            <p>Browse products, build one quote list, then send it to our sales team.</p>
           </div>
           <aside>
           <a href={sitePath("/contact")}>Contact Us <ArrowRight size={17} /></a>
-          <a href={sitePath("/cart")}>View cart <ArrowRight size={17} /></a>
+          <a href={sitePath("/cart")}>View quote list <ArrowRight size={17} /></a>
             <small>Direct contact</small>
             <a href={`tel:${catalog.contact.phone.replace(/[^\d+]/g, "")}`}>{catalog.contact.phone}</a>
             <a href={`mailto:${catalog.contact.email}`}>{catalog.contact.email}</a>

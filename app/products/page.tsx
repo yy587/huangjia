@@ -94,6 +94,10 @@ export default function ProductsPage() {
               <span>All products</span>
               <b>{catalog.products.length}</b>
             </button>
+            <div className="popular-filter-set">
+              <span>Popular</span>
+              {["CERAMIC TILE", "SANITARY", "WALL PANEL"].map((item) => <button key={item} onClick={() => chooseCategory(item)}>{item}</button>)}
+            </div>
             {categoryGroups.map((group) => (
               <div className="filter-group" key={group.name}>
                 <div className="filter-group-heading">

@@ -251,7 +251,7 @@ export function SiteShell({
         <div className="contact-dock-menu" aria-hidden={!contactOpen}>
           <a href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer">WhatsApp</a>
           <a href={`mailto:${catalog.contact.email}`}>Email</a>
-          <button type="button" onClick={() => { setContactOpen(false); setQuoteOpen(true); }}>Quick quote</button>
+          <a href={sitePath("/contact")}>General enquiry</a>
         </div>
         <button className="contact-dock-trigger" type="button" aria-expanded={contactOpen} onClick={() => setContactOpen((value) => !value)}>
           <Mail size={17} /><span>Contact</span>
@@ -299,6 +299,11 @@ export function SiteShell({
       <QuickQuotePanel open={quoteOpen} onClose={() => setQuoteOpen(false)} />
 
       <footer className="catalog-footer original-footer">
+        <div className="footer-quote-cta">
+          <span>Project sourcing</span>
+          <h2>Build one material list.<br />Request one clear quotation.</h2>
+          <a href={sitePath("/cart")}>Start a quotation <ArrowRight size={18} /></a>
+        </div>
         <div className="original-footer-main">
           <a href={sitePath("/")} className="catalog-brand footer-brand">
             <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />

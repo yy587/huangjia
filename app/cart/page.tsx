@@ -12,6 +12,7 @@ export default function CartPage() {
   const [notes, setNotes] = useState("");
   const [customer, setCustomer] = useState({ name: "", company: "", email: "", country: "", delivery: "" });
   const [formError, setFormError] = useState("");
+  const [quoteStep, setQuoteStep] = useState<1 | 2>(1);
 
   const sendEnquiry = () => {
     if (!customer.name.trim() || !customer.email.trim() || !customer.country.trim()) {
@@ -53,13 +54,13 @@ export default function CartPage() {
           <h1>Quote List</h1>
           <p>{count} Items</p>
         </section>
-        <div className="quote-progress" aria-label="Quote request steps">
-          <span className="is-active"><b>01</b> Confirm products</span>
-          <span><b>02</b> Contact details</span>
+        <div className={`quote-progress quote-progress-step-${quoteStep}`} aria-label="Quote request steps">
+          <button className={quoteStep === 1 ? "is-active" : "is-complete"} onClick={() => setQuoteStep(1)}><b>01</b> Confirm products</button>
+          <button className={quoteStep === 2 ? "is-active" : ""} onClick={() => setQuoteStep(2)}><b>02</b> Contact details</button>
           <span><b>03</b> Send request</span>
         </div>
         {items.length ? (
-          <section className="selection-layout">
+          <section className={`selection-layout quote-step-${quoteStep}`}>
             <div className="selection-items">
               <div className="selection-table-heading">
                 <span>{items.length} product group{items.length === 1 ? "" : "s"}</span>
@@ -86,8 +87,12 @@ export default function CartPage() {
                   </button>
                 </article>
               ))}
+              <button className="quote-mobile-next" type="button" onClick={() => { setQuoteStep(2); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+                Continue to contact details <ArrowRight size={16} />
+              </button>
             </div>
             <aside className="selection-summary">
+              <button className="quote-mobile-back" type="button" onClick={() => setQuoteStep(1)}>Back to products</button>
               <span className="micro-label">Request a quote</span>
               <h2>Ready to enquire?</h2>
               <div><span>Product groups</span><b>{items.length}</b></div>
