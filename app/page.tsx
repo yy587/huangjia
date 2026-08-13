@@ -60,6 +60,14 @@ export default function HomePage() {
 
         <ProductSection title="TRENDING PRODUCTS" subtitle="Our Bestsellers" />
 
+        <section className="original-logo-strip" aria-label="Huangjia certifications">
+          {originalMedia.collectionStrip.map((image, index) => (
+            <div key={image}>
+              <img src={image} alt={`Huangjia certification ${index + 1}`} />
+            </div>
+          ))}
+        </section>
+
         <section className="original-story-section">
           <div className="original-story-image">
             <img src={originalMedia.story} alt="OUR STORY" />

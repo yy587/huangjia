@@ -3075,3 +3075,44 @@ html[lang="zh-CN"] .carousel-image-copy h1{
   .carousel-image-copy h1{font-size:clamp(25px,8vw,36px) !important}
   .carousel-image-copy p{margin-top:8px !important;font-size:10px !important}
 }
+
+/* Restore the original certification strip as one quiet, full-width row. */
+.original-logo-strip{
+  min-height:150px;
+  padding:30px max(4vw,32px) !important;
+  display:grid;
+  grid-template-columns:repeat(8,minmax(0,1fr));
+  align-items:center;
+  gap:clamp(18px,3vw,56px) !important;
+  overflow:hidden;
+  background:#fff !important;
+  border:0 !important;
+}
+.original-logo-strip>div{
+  width:100%;
+  aspect-ratio:1.5/1;
+  padding:0 !important;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+  border:0 !important;
+  filter:none !important;
+  opacity:1 !important;
+}
+.original-logo-strip img{
+  width:100%;
+  height:100%;
+  object-fit:contain !important;
+}
+@media(max-width:780px){
+  .original-logo-strip{
+    min-height:118px;
+    padding:24px 20px !important;
+    grid-template-columns:repeat(8,105px) !important;
+    gap:24px !important;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .original-logo-strip::-webkit-scrollbar{display:none}
+  .original-logo-strip>div,.original-logo-strip>div:nth-child(n){display:grid}
+}
