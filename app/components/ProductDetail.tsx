@@ -156,7 +156,7 @@ export function ProductDetail({ product }: { product: Product }) {
         <section className="product-trade-note">
           <div><span className="micro-label">Before ordering</span><h2>Commercial details are confirmed in writing.</h2></div>
           <p>Product dimensions, finish, colour variation, packing, MOQ, production schedule, certificates, price and delivery terms can vary by model and destination. Add the product to your quote list and include the required quantity and market so the sales team can verify the correct terms.</p>
-          <a href={sitePath("/trade")}>Read the procurement guide <ArrowRight size={16} /></a>
+          <a href={sitePath("/cart")}>Build a quote list <ArrowRight size={16} /></a>
         </section>
 
         <section className="specification-section">
