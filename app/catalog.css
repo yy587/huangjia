@@ -3015,3 +3015,63 @@ html[lang="zh-CN"] .catalog-footer .footer-quote-cta,
 html[lang="zh-CN"] .catalog-footer .footer-quote-cta *{
   font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
 }
+
+/* Home scenes: typography belongs to the image, without a separate text panel. */
+.original-home-carousel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(13,14,13,.34) 0%,rgba(13,14,13,.13) 30%,transparent 56%),
+    linear-gradient(0deg,rgba(13,14,13,.2) 0%,transparent 35%);
+}
+.carousel-image-copy{
+  top:auto !important;
+  left:max(4vw,48px) !important;
+  bottom:clamp(58px,6vw,86px) !important;
+  max-width:min(620px,62vw) !important;
+  padding:0 !important;
+  background:none !important;
+  color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,.42) !important;
+}
+.carousel-image-copy h1{
+  margin:0 !important;
+  font-family:"DM Sans","Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+  font-size:clamp(34px,4vw,58px) !important;
+  font-weight:400 !important;
+  line-height:1.02 !important;
+  letter-spacing:.015em !important;
+  text-transform:uppercase;
+}
+.carousel-image-copy p{
+  margin:12px 0 0 !important;
+  font-family:"DM Sans","Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+  font-size:clamp(12px,1.05vw,15px) !important;
+  font-weight:400 !important;
+  line-height:1.5 !important;
+  letter-spacing:.04em !important;
+}
+html[lang="zh-CN"] .carousel-image-copy h1,
+html[lang="zh-CN"] .carousel-image-copy p{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+}
+html[lang="zh-CN"] .carousel-image-copy h1{
+  font-size:clamp(32px,3.7vw,52px) !important;
+  font-weight:400 !important;
+  letter-spacing:.02em !important;
+}
+@media(max-width:780px){
+  .original-home-carousel::after{
+    background:linear-gradient(90deg,rgba(13,14,13,.4),rgba(13,14,13,.08) 72%,transparent);
+  }
+  .carousel-image-copy{
+    left:20px !important;
+    bottom:48px !important;
+    max-width:calc(100% - 72px) !important;
+  }
+  .carousel-image-copy h1{font-size:clamp(25px,8vw,36px) !important}
+  .carousel-image-copy p{margin-top:8px !important;font-size:10px !important}
+}
