@@ -95,6 +95,8 @@ const zh: Record<string, string> = {
   "Your quote list is empty.": "您的询价清单为空。",
   "Add to quote": "加入询价清单",
   "Build one material list. Request one clear quotation.": "建立一份材料清单，获取一份清晰报价。",
+  "Build one material list.": "建立一份材料清单。",
+  "Request one clear quotation.": "获取一份清晰报价。",
   "Project sourcing": "工程采购",
   "Start a quotation": "开始询价",
   "Popular": "热门分类",
