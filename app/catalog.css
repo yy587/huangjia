@@ -139,6 +139,139 @@ html[lang="zh-CN"] .selection-link { min-width: 112px; }
  .footer-lead{padding:65px 22px;grid-template-columns:1fr;gap:28px}.footer-lead>a{width:fit-content}.footer-grid{padding:60px 22px;grid-template-columns:1fr 1fr;gap:45px 25px}.footer-grid>div:first-child{grid-column:1/-1}.catalog-footer .footer-bottom{padding:22px;align-items:flex-start;flex-direction:column;gap:8px}
 }
 
+/* Trade Guide — compact, orderly and deliberately minimal. */
+.trade-page{
+  --trade-guide-width:min(1200px,calc(100% - 80px));
+  background:#fff;
+}
+.trade-guide-hero,
+.trade-guide-purpose,
+.trade-guide-process,
+.trade-guide-final{
+  width:var(--trade-guide-width);
+  margin:0 auto;
+}
+.trade-guide-hero{
+  min-height:0;
+  padding:92px 0 82px;
+  border-bottom:1px solid #e6e2db;
+}
+.trade-guide-eyebrow,
+.trade-guide-section-label{
+  color:#a26008;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+}
+.trade-guide-hero h1{
+  max-width:850px;
+  margin:18px 0 20px;
+  font-size:clamp(48px,5.4vw,78px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+}
+.trade-guide-hero>p{
+  max-width:680px;
+  font-size:14px;
+  line-height:1.75;
+}
+.trade-guide-actions{
+  margin-top:30px;
+  gap:10px;
+}
+.trade-guide-actions a,
+.trade-guide-final>a{
+  min-height:44px;
+  padding:0 15px;
+  font-size:10px;
+  box-shadow:none;
+}
+.trade-guide-purpose{
+  padding:78px 0;
+  grid-template-columns:180px minmax(0,1fr);
+  gap:70px;
+  border-top:0;
+  border-bottom:1px solid #e6e2db;
+}
+.trade-guide-purpose>div{max-width:760px}
+.trade-guide-purpose h2,
+.trade-guide-process h2,
+.trade-guide-prepare h2,
+.trade-guide-final h2{
+  margin:10px 0 18px;
+  font-size:clamp(34px,3.6vw,52px);
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+.trade-guide-purpose p,
+.trade-guide-prepare header>p,
+.trade-guide-final p{
+  font-size:14px;
+  line-height:1.75;
+}
+.trade-guide-process{
+  padding:78px 0 88px;
+}
+.trade-guide-process>header,
+.trade-guide-prepare>header{
+  max-width:760px;
+  margin-bottom:38px;
+}
+.trade-guide-step-list article{
+  min-height:0;
+  padding:25px 0;
+  grid-template-columns:54px minmax(190px,.55fr) minmax(0,1fr);
+  gap:26px;
+}
+.trade-guide-step-list h3,
+.trade-guide-checklist h3{
+  font-size:16px;
+  line-height:1.4;
+}
+.trade-guide-step-list p,
+.trade-guide-checklist p{
+  font-size:12px;
+  line-height:1.65;
+}
+.trade-guide-prepare{
+  width:100%;
+  padding:82px max(40px,calc((100vw - 1200px)/2));
+  background:#faf9f7;
+  border-top:1px solid #e6e2db;
+  border-bottom:1px solid #e6e2db;
+}
+.trade-guide-checklist article{
+  min-height:120px;
+  padding:25px 26px 25px 0;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:16px;
+}
+.trade-guide-checklist article:nth-child(even){padding-left:26px}
+.trade-guide-checklist h3{margin-bottom:8px}
+.trade-guide-final{
+  padding:82px 0 92px;
+  grid-template-columns:minmax(0,760px) auto;
+  gap:60px;
+}
+.trade-guide-final svg{margin-bottom:15px}
+html[lang="zh-CN"] .trade-guide-hero h1{font-size:clamp(44px,5vw,68px)}
+@media(max-width:900px){
+  .trade-page{--trade-guide-width:calc(100% - 48px)}
+  .trade-guide-purpose{grid-template-columns:1fr;gap:20px}
+  .trade-guide-final{grid-template-columns:1fr;gap:30px}
+}
+@media(max-width:780px){
+  .trade-page{--trade-guide-width:calc(100% - 40px)}
+  .trade-guide-hero{padding:62px 0 58px}
+  .trade-guide-hero h1{font-size:clamp(40px,12vw,56px)}
+  .trade-guide-purpose,.trade-guide-process{padding:58px 0}
+  .trade-guide-purpose h2,.trade-guide-process h2,.trade-guide-prepare h2,.trade-guide-final h2{font-size:34px}
+  .trade-guide-step-list article{padding:22px 0;grid-template-columns:36px minmax(0,1fr);gap:8px 12px}
+  .trade-guide-prepare{padding:60px 20px}
+  .trade-guide-checklist article,.trade-guide-checklist article:nth-child(even){padding:22px 0}
+  .trade-guide-final{padding:60px 0 70px}
+}
+
 /* Final mega-menu reset: text catalogue, never boxed chips. */
 .catalog-nav-row .mega-menu{
   min-height:390px;
@@ -2796,3 +2929,24 @@ html[lang="zh-CN"] .trade-guide-checklist h3{font-family:"Noto Sans SC","Microso
   .trade-guide-final{padding:74px 0 85px;gap:34px}
   .trade-guide-final>a{width:100%}
 }
+
+/* Trade Guide final compact override */
+.trade-page{--trade-guide-width:min(1200px,calc(100% - 80px));background:#fff}
+.trade-guide-hero,.trade-guide-purpose,.trade-guide-process,.trade-guide-final{width:var(--trade-guide-width);margin:0 auto}
+.trade-guide-hero{min-height:0;padding:92px 0 82px;border-bottom:1px solid #e6e2db}
+.trade-guide-eyebrow,.trade-guide-section-label{color:#a26008;font-size:10px;font-weight:600;letter-spacing:.12em}
+.trade-guide-hero h1{max-width:850px;margin:18px 0 20px;font-size:clamp(48px,5.4vw,78px);line-height:1.02;letter-spacing:-.055em}
+.trade-guide-hero>p{max-width:680px;font-size:14px;line-height:1.75}
+.trade-guide-actions{margin-top:30px;gap:10px}.trade-guide-actions a,.trade-guide-final>a{min-height:44px;padding:0 15px;font-size:10px;box-shadow:none}
+.trade-guide-purpose{padding:78px 0;grid-template-columns:180px minmax(0,1fr);gap:70px;border-top:0;border-bottom:1px solid #e6e2db}.trade-guide-purpose>div{max-width:760px}
+.trade-guide-purpose h2,.trade-guide-process h2,.trade-guide-prepare h2,.trade-guide-final h2{margin:10px 0 18px;font-size:clamp(34px,3.6vw,52px);line-height:1.08;letter-spacing:-.045em}
+.trade-guide-purpose p,.trade-guide-prepare header>p,.trade-guide-final p{font-size:14px;line-height:1.75}
+.trade-guide-process{padding:78px 0 88px}.trade-guide-process>header,.trade-guide-prepare>header{max-width:760px;margin-bottom:38px}
+.trade-guide-step-list article{min-height:0;padding:25px 0;grid-template-columns:54px minmax(190px,.55fr) minmax(0,1fr);gap:26px}
+.trade-guide-step-list h3,.trade-guide-checklist h3{font-size:16px;line-height:1.4}.trade-guide-step-list p,.trade-guide-checklist p{font-size:12px;line-height:1.65}
+.trade-guide-prepare{width:100%;padding:82px max(40px,calc((100vw - 1200px)/2));background:#faf9f7;border-top:1px solid #e6e2db;border-bottom:1px solid #e6e2db}
+.trade-guide-checklist article{min-height:120px;padding:25px 26px 25px 0;grid-template-columns:42px minmax(0,1fr);gap:16px}.trade-guide-checklist article:nth-child(even){padding-left:26px}.trade-guide-checklist h3{margin-bottom:8px}
+.trade-guide-final{padding:82px 0 92px;grid-template-columns:minmax(0,760px) auto;gap:60px}.trade-guide-final svg{margin-bottom:15px}
+html[lang="zh-CN"] .trade-guide-hero h1{font-size:clamp(44px,5vw,68px)}
+@media(max-width:900px){.trade-page{--trade-guide-width:calc(100% - 48px)}.trade-guide-purpose{grid-template-columns:1fr;gap:20px}.trade-guide-final{grid-template-columns:1fr;gap:30px}}
+@media(max-width:780px){.trade-page{--trade-guide-width:calc(100% - 40px)}.trade-guide-hero{padding:62px 0 58px}.trade-guide-hero h1{font-size:clamp(40px,12vw,56px)}.trade-guide-purpose,.trade-guide-process{padding:58px 0}.trade-guide-purpose h2,.trade-guide-process h2,.trade-guide-prepare h2,.trade-guide-final h2{font-size:34px}.trade-guide-step-list article{padding:22px 0;grid-template-columns:36px minmax(0,1fr);gap:8px 12px}.trade-guide-prepare{padding:60px 20px}.trade-guide-checklist article,.trade-guide-checklist article:nth-child(even){padding:22px 0}.trade-guide-final{padding:60px 0 70px}}
