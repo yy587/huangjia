@@ -297,11 +297,6 @@ export function SiteShell({
       <QuickQuotePanel open={quoteOpen} onClose={() => setQuoteOpen(false)} />
 
       <footer className="catalog-footer original-footer">
-        <div className="footer-quote-cta">
-          <span>Project sourcing</span>
-          <h2>Build one material list.<br />Request one clear quotation.</h2>
-          <a href={sitePath("/cart")}>Start a quotation <ArrowRight size={18} /></a>
-        </div>
         <div className="original-footer-main">
           <a href={sitePath("/")} className="catalog-brand footer-brand">
             <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
