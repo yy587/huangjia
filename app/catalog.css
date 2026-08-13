@@ -2991,3 +2991,27 @@ html[lang="zh-CN"] .trade-guide-hero h1{font-size:clamp(44px,5vw,68px)}
 .catalog-footer .footer-quote-cta{
   align-items:start;
 }
+
+/* Trade Guide typography: one family, hierarchy only through size and weight. */
+.trade-page,
+.trade-page *,
+.catalog-footer .footer-quote-cta,
+.catalog-footer .footer-quote-cta *{
+  font-family:"DM Sans","Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+}
+.trade-guide-hero h1,
+.trade-guide-purpose h2,
+.trade-guide-process h2,
+.trade-guide-prepare h2,
+.trade-guide-final h2,
+.trade-guide-step-list h3,
+.trade-guide-checklist h3,
+.catalog-footer .footer-quote-cta h2{
+  font-family:"DM Sans","Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+}
+html[lang="zh-CN"] .trade-page,
+html[lang="zh-CN"] .trade-page *,
+html[lang="zh-CN"] .catalog-footer .footer-quote-cta,
+html[lang="zh-CN"] .catalog-footer .footer-quote-cta *{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif !important;
+}
