@@ -585,6 +585,7 @@ function walkText(root: ParentNode, language: Language) {
     if (
       parent &&
       !parent.closest(".language-toggle") &&
+      !parent.closest("[data-i18n-static]") &&
       !["SCRIPT", "STYLE", "TEXTAREA"].includes(parent.tagName)
     ) {
       const original = textOriginals.get(node) ?? node.nodeValue ?? "";

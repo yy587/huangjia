@@ -93,7 +93,7 @@ export function HomeCarousel() {
         alt={slide.title}
         draggable={false}
       />
-      <div className="carousel-image-copy">
+      <div className="carousel-image-copy" data-i18n-static translate="no">
         <h1>{slide.title}</h1>
         <p>{slide.subtitle}</p>
       </div>
