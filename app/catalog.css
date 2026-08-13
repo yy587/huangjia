@@ -2594,3 +2594,205 @@ html[lang="zh-CN"] .product-filters .filter-group .filter-children>button.is-chi
   width:auto;
   text-align:center;
 }
+
+/* Trade Guide v2 — one purpose, one grid and one left edge. */
+.trade-page{
+  --trade-guide-width:min(1380px,calc(100% - 10vw));
+  color:#292824;
+  background:#fff;
+}
+.trade-guide-hero,
+.trade-guide-purpose,
+.trade-guide-process,
+.trade-guide-prepare,
+.trade-guide-final{
+  width:var(--trade-guide-width);
+  margin:0 auto;
+  text-align:left;
+}
+.trade-guide-hero{
+  min-height:560px;
+  padding:110px 0 100px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  flex-direction:column;
+}
+.trade-guide-eyebrow,
+.trade-guide-section-label{
+  display:block;
+  color:#a26008;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.13em;
+  line-height:1.4;
+  text-transform:uppercase;
+}
+.trade-guide-hero h1{
+  max-width:1050px;
+  margin:24px 0 24px;
+  font:400 clamp(58px,7vw,104px)/.98 "Manrope","Noto Sans SC",sans-serif;
+  letter-spacing:-.065em;
+}
+.trade-guide-hero>p{
+  max-width:720px;
+  margin:0;
+  color:#6f6b65;
+  font-size:16px;
+  line-height:1.75;
+}
+.trade-guide-actions{
+  margin-top:38px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.trade-guide-actions a,
+.trade-guide-final>a{
+  min-height:48px;
+  padding:0 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  color:#292824;
+  border:1px solid #d9d5ce;
+  background:#fff;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.trade-guide-actions a:first-child,
+.trade-guide-final>a{
+  border-color:#f3a435;
+  background:#f3a435;
+}
+.trade-guide-purpose{
+  padding:100px 0;
+  display:grid;
+  grid-template-columns:minmax(180px,.35fr) minmax(0,1fr);
+  gap:clamp(50px,9vw,150px);
+  border-top:1px solid #e5e1da;
+}
+.trade-guide-purpose>div{max-width:880px}
+.trade-guide-purpose h2,
+.trade-guide-process h2,
+.trade-guide-prepare h2,
+.trade-guide-final h2{
+  margin:14px 0 22px;
+  font:400 clamp(38px,4.5vw,66px)/1.05 "Manrope","Noto Sans SC",sans-serif;
+  letter-spacing:-.05em;
+}
+.trade-guide-purpose p,
+.trade-guide-prepare header>p,
+.trade-guide-final p{
+  max-width:760px;
+  margin:0;
+  color:#6f6b65;
+  font-size:15px;
+  line-height:1.8;
+}
+.trade-guide-process{padding:100px 0}
+.trade-guide-process>header,
+.trade-guide-prepare>header{max-width:900px;margin-bottom:55px}
+.trade-guide-step-list{
+  border-top:1px solid #d9d5ce;
+}
+.trade-guide-step-list article{
+  min-height:132px;
+  padding:30px 0;
+  display:grid;
+  grid-template-columns:70px minmax(220px,.7fr) minmax(0,1.3fr);
+  align-items:start;
+  gap:32px;
+  border-bottom:1px solid #e5e1da;
+}
+.trade-guide-step-list small,
+.trade-guide-checklist small{
+  color:#a26008;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.1em;
+}
+.trade-guide-step-list h3,
+.trade-guide-checklist h3{
+  margin:0;
+  font:500 20px/1.35 "Manrope","Noto Sans SC",sans-serif;
+  letter-spacing:-.02em;
+}
+.trade-guide-step-list p,
+.trade-guide-checklist p{
+  max-width:650px;
+  margin:0;
+  color:#77736d;
+  font-size:13px;
+  line-height:1.7;
+}
+.trade-guide-prepare{
+  width:100%;
+  padding:110px max(5vw,calc((100vw - 1380px)/2));
+  background:#f7f6f3;
+}
+.trade-guide-prepare>header,
+.trade-guide-checklist{width:100%;margin-left:auto;margin-right:auto}
+.trade-guide-checklist{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid #d9d5ce;
+}
+.trade-guide-checklist article{
+  min-height:150px;
+  padding:30px 32px 30px 0;
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr);
+  gap:20px;
+  border-bottom:1px solid #d9d5ce;
+}
+.trade-guide-checklist article:nth-child(odd){border-right:1px solid #d9d5ce}
+.trade-guide-checklist article:nth-child(even){padding-left:32px}
+.trade-guide-checklist h3{margin-bottom:12px}
+.trade-guide-final{
+  padding:110px 0 120px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:70px;
+}
+.trade-guide-final>div{max-width:850px}
+.trade-guide-final svg{margin-bottom:22px;color:#a26008}
+html[lang="zh-CN"] .trade-guide-hero h1,
+html[lang="zh-CN"] .trade-guide-purpose h2,
+html[lang="zh-CN"] .trade-guide-process h2,
+html[lang="zh-CN"] .trade-guide-prepare h2,
+html[lang="zh-CN"] .trade-guide-final h2{
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  font-weight:400;
+  letter-spacing:-.04em;
+  line-height:1.14;
+}
+html[lang="zh-CN"] .trade-guide-hero h1{font-size:clamp(50px,6vw,84px)}
+html[lang="zh-CN"] .trade-guide-step-list h3,
+html[lang="zh-CN"] .trade-guide-checklist h3{font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;font-weight:500}
+@media(max-width:900px){
+  .trade-guide-purpose{grid-template-columns:1fr;gap:28px}
+  .trade-guide-step-list article{grid-template-columns:54px minmax(180px,.7fr) minmax(0,1.3fr);gap:20px}
+  .trade-guide-final{grid-template-columns:1fr;align-items:start}
+}
+@media(max-width:780px){
+  .trade-page{--trade-guide-width:calc(100% - 40px)}
+  .trade-guide-hero{min-height:0;padding:74px 0 68px}
+  .trade-guide-hero h1{margin:18px 0;font-size:clamp(45px,14vw,68px)}
+  .trade-guide-hero>p{font-size:14px}
+  .trade-guide-actions{width:100%;align-items:stretch;flex-direction:column}
+  .trade-guide-actions a{width:100%}
+  .trade-guide-purpose,.trade-guide-process{padding:72px 0}
+  .trade-guide-purpose h2,.trade-guide-process h2,.trade-guide-prepare h2,.trade-guide-final h2{font-size:clamp(35px,10vw,48px)}
+  .trade-guide-step-list article{padding:26px 0;grid-template-columns:42px minmax(0,1fr);gap:12px 14px}
+  .trade-guide-step-list p{grid-column:2}
+  .trade-guide-prepare{padding:72px 20px}
+  .trade-guide-checklist{grid-template-columns:1fr}
+  .trade-guide-checklist article,.trade-guide-checklist article:nth-child(even){min-height:0;padding:25px 0;border-right:0}
+  .trade-guide-final{padding:74px 0 85px;gap:34px}
+  .trade-guide-final>a{width:100%}
+}

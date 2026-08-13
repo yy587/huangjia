@@ -1,43 +1,84 @@
-import { ArrowRight, Check, Container, FileText, PackageCheck, Ship } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { SiteShell } from "../components/SiteShell";
 import { sitePath } from "../lib/site-path";
 
 const steps = [
-  ["01", "Select products", "Add models and required quantities to your quote list."],
-  ["02", "Confirm specifications", "Our sales team checks size, finish, packaging, MOQ and production availability."],
-  ["03", "Receive quotation", "The formal quotation confirms price, Incoterm, lead time, validity and payment terms."],
-  ["04", "Approve production", "Samples, colour references and order details are confirmed before production where applicable."],
-  ["05", "Inspection & shipment", "Packing, inspection documents and shipping arrangements are coordinated against the confirmed contract."]
+  ["01", "Choose products", "Browse the catalogue and add the required models and estimated quantities to one quote list."],
+  ["02", "Send project details", "Tell us the destination market, required sizes, finish, quantity and preferred delivery time."],
+  ["03", "Confirm specifications", "Our team checks availability, packing, MOQ, lead time and any technical requirements with you."],
+  ["04", "Receive a formal quotation", "The quotation records confirmed products, pricing, trade terms, production schedule and validity."],
+  ["05", "Approve and coordinate delivery", "After commercial terms are accepted, production, inspection documents and shipment are coordinated."]
+];
+
+const preparation = [
+  ["Products", "Model number, size, finish and estimated quantity"],
+  ["Project", "Application, destination country and required date"],
+  ["Delivery", "Preferred port, address or requested Incoterm, if known"],
+  ["Documents", "Any certification, packing or inspection requirements"]
 ];
 
 export default function TradePage() {
   return (
     <SiteShell>
       <main className="catalog-main trade-page">
-        <section className="original-page-title">
-          <span>Home / International Trade</span>
-          <h1>International Procurement</h1>
-          <p>A clear route from product selection to confirmed export quotation.</p>
-        </section>
-        <section className="trade-intro">
-          <div><span className="micro-label">How it works</span><h2>Built for project and wholesale enquiries.</h2></div>
-          <p>This website is a quotation platform, not an instant-payment store. Product availability, technical specifications, pricing, packing, shipping and payment terms are confirmed in a formal quotation before any order is placed.</p>
-        </section>
-        <section className="trade-steps">
-          {steps.map(([number, title, copy]) => <article key={number}><small>{number}</small><h3>{title}</h3><p>{copy}</p></article>)}
-        </section>
-        <section className="trade-terms">
-          <div className="trade-terms-heading"><span className="micro-label">Quotation checklist</span><h2>Information confirmed for every project.</h2></div>
-          <div className="trade-term-grid">
-            <article><PackageCheck /><h3>Product & packing</h3><p>Model, dimensions, finish, colour variation, quantity per carton or pallet, gross weight and packing method are confirmed by product.</p></article>
-            <article><Container /><h3>MOQ & lead time</h3><p>Minimum order quantity, sample availability, production schedule and estimated readiness date are confirmed by the sales team.</p></article>
-            <article><Ship /><h3>Delivery terms</h3><p>Available Incoterms, named port or destination, freight scope, insurance and customs responsibilities are stated in the quotation.</p></article>
-            <article><FileText /><h3>Commercial documents</h3><p>Quotation validity, payment milestones and applicable packing, inspection and shipping documents are agreed before order confirmation.</p></article>
+        <section className="trade-guide-hero">
+          <span className="trade-guide-eyebrow">International project sourcing</span>
+          <h1>How to purchase from Huangjia</h1>
+          <p>This page explains how overseas distributors, project teams and wholesale buyers move from product selection to a confirmed quotation and delivery arrangement.</p>
+          <div className="trade-guide-actions">
+            <a href={sitePath("/products")}>Browse products <ArrowRight size={16} /></a>
+            <a href={sitePath("/cart")}>Open quote list <ArrowRight size={16} /></a>
           </div>
         </section>
-        <section className="trade-disclosure">
-          <Check size={20} /><div><h3>No unverified promises</h3><p>MOQ, delivery time, certifications and trade terms vary by model and destination. Where these details are not published, the website marks them for sales confirmation rather than presenting assumed information.</p></div>
-          <a href={sitePath("/products")}>Build a quote list <ArrowRight size={16} /></a>
+
+        <section className="trade-guide-purpose">
+          <span className="trade-guide-section-label">Purpose of this page</span>
+          <div>
+            <h2>A clear route from selection to quotation.</h2>
+            <p>Huangjia supplies building materials through project and wholesale enquiries. The website helps you select products and prepare one complete request. It does not take instant online payment. Final specifications, availability, price, packing and shipping terms are confirmed in writing before an order is placed.</p>
+          </div>
+        </section>
+
+        <section className="trade-guide-process">
+          <header>
+            <span className="trade-guide-section-label">Purchasing process</span>
+            <h2>Five steps from enquiry to delivery.</h2>
+          </header>
+          <div className="trade-guide-step-list">
+            {steps.map(([number, title, copy]) => (
+              <article key={number}>
+                <small>{number}</small>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="trade-guide-prepare">
+          <header>
+            <span className="trade-guide-section-label">Before requesting a quote</span>
+            <h2>Prepare these four details.</h2>
+            <p>Complete information helps the sales team check the correct product and respond more efficiently.</p>
+          </header>
+          <div className="trade-guide-checklist">
+            {preparation.map(([title, copy], index) => (
+              <article key={title}>
+                <small>{String(index + 1).padStart(2, "0")}</small>
+                <div><h3>{title}</h3><p>{copy}</p></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="trade-guide-final">
+          <div>
+            <Check size={20} />
+            <span className="trade-guide-section-label">Clear commercial confirmation</span>
+            <h2>Only confirmed information enters the quotation.</h2>
+            <p>MOQ, lead time, certification, packing and delivery terms vary by product and destination. Our team confirms these details for your project instead of presenting assumptions.</p>
+          </div>
+          <a href={sitePath("/products")}>Start with the product catalogue <ArrowRight size={17} /></a>
         </section>
       </main>
     </SiteShell>
