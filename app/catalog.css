@@ -3116,3 +3116,51 @@ html[lang="zh-CN"] .carousel-image-copy h1{
   .original-logo-strip::-webkit-scrollbar{display:none}
   .original-logo-strip>div,.original-logo-strip>div:nth-child(n){display:grid}
 }
+
+/* Compact story block: reference-like proportions with the current quiet styling. */
+.original-story-section{
+  width:min(1500px,calc(100% - 10vw));
+  min-height:0 !important;
+  margin:clamp(70px,7vw,110px) auto;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(380px,.95fr) !important;
+  align-items:stretch;
+  background:#fff !important;
+}
+.original-story-image{
+  min-height:0 !important;
+  height:clamp(430px,38vw,570px);
+  overflow:hidden;
+}
+.original-story-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.original-story-copy{
+  min-height:0;
+  padding:clamp(42px,4.5vw,72px) clamp(40px,4.8vw,76px) !important;
+  justify-content:center;
+}
+.original-story-copy .original-section-heading{margin-bottom:8px}
+.original-story-copy .original-section-heading h2{
+  font-size:clamp(34px,3.2vw,48px) !important;
+  line-height:1.08;
+}
+.original-story-copy>p{
+  max-width:600px;
+  margin-top:16px !important;
+  font-size:13px !important;
+  line-height:1.72 !important;
+}
+.original-story-copy>p+p{margin-top:12px !important}
+.original-story-copy>a{margin-top:24px !important}
+@media(max-width:900px){
+  .original-story-section{
+    width:calc(100% - 40px);
+    grid-template-columns:1fr !important;
+    margin:64px auto;
+  }
+  .original-story-image{height:58vw;min-height:320px !important}
+  .original-story-copy{padding:48px 0 8px !important}
+}
