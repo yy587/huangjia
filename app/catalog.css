@@ -2950,3 +2950,44 @@ html[lang="zh-CN"] .trade-guide-checklist h3{font-family:"Noto Sans SC","Microso
 html[lang="zh-CN"] .trade-guide-hero h1{font-size:clamp(44px,5vw,68px)}
 @media(max-width:900px){.trade-page{--trade-guide-width:calc(100% - 48px)}.trade-guide-purpose{grid-template-columns:1fr;gap:20px}.trade-guide-final{grid-template-columns:1fr;gap:30px}}
 @media(max-width:780px){.trade-page{--trade-guide-width:calc(100% - 40px)}.trade-guide-hero{padding:62px 0 58px}.trade-guide-hero h1{font-size:clamp(40px,12vw,56px)}.trade-guide-purpose,.trade-guide-process{padding:58px 0}.trade-guide-purpose h2,.trade-guide-process h2,.trade-guide-prepare h2,.trade-guide-final h2{font-size:34px}.trade-guide-step-list article{padding:22px 0;grid-template-columns:36px minmax(0,1fr);gap:8px 12px}.trade-guide-prepare{padding:60px 20px}.trade-guide-checklist article,.trade-guide-checklist article:nth-child(even){padding:22px 0}.trade-guide-final{padding:60px 0 70px}}
+
+/* One left edge across Trade Guide and its quotation footer. */
+.trade-page,
+.trade-page section,
+.trade-page header,
+.trade-page article,
+.trade-page h1,
+.trade-page h2,
+.trade-page h3,
+.trade-page p,
+.trade-page small,
+.trade-page span,
+.trade-guide-actions,
+.trade-guide-final>a,
+.catalog-footer .footer-quote-cta,
+.catalog-footer .footer-quote-cta>span,
+.catalog-footer .footer-quote-cta h2,
+.catalog-footer .footer-quote-cta a{
+  text-align:left;
+}
+.trade-guide-hero,
+.trade-guide-purpose,
+.trade-guide-process,
+.trade-guide-prepare>header,
+.trade-guide-checklist,
+.trade-guide-final{
+  align-items:start;
+}
+.trade-guide-actions,
+.trade-guide-step-list article,
+.trade-guide-checklist article{
+  justify-content:start;
+}
+.trade-guide-actions a,
+.trade-guide-final>a,
+.catalog-footer .footer-quote-cta a{
+  justify-content:flex-start;
+}
+.catalog-footer .footer-quote-cta{
+  align-items:start;
+}
