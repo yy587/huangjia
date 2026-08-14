@@ -186,6 +186,7 @@ const zh: Record<string, string> = {
   "Materials for the whole space.": "覆盖完整空间的材料方案。",
   "Explore 7 product families and the full Huangjia collection.": "探索 7 大产品系列与皇家建材完整产品目录。",
   "Browse the product families currently available in the Huangjia catalogue.": "浏览皇家建材目录中当前已发布的产品系列。",
+  "Browse Huangjia's complete product catalogue and planned collections.": "浏览皇家建材完整产品目录及后续规划系列。",
   "View all products": "查看全部产品",
   "Ceramic Tile": "陶瓷砖",
   "Polished Tile": "抛光砖",

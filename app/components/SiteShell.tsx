@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { availableCategoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
+import { categoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
 import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
@@ -213,13 +213,13 @@ export function SiteShell({
               <div className="mega-intro">
                 <span className="micro-label">Complete catalogue</span>
                 <h3>Materials for the whole space.</h3>
-                <p>Browse the product families currently available in the Huangjia catalogue.</p>
+                <p>Browse Huangjia's complete product catalogue and planned collections.</p>
                 <a className="line-link" href={sitePath("/products")}>
                   View all products <ArrowRight size={15} />
                 </a>
               </div>
               <div className="mega-categories">
-                {availableCategoryGroups.map((group) => (
+                {categoryGroups.map((group) => (
                   <div key={group.name}>
                     <a
                       className="mega-title"
@@ -227,7 +227,7 @@ export function SiteShell({
                     >
                       {group.name}
                     </a>
-                    {group.children.slice(0, 6).map((child) => (
+                    {group.children.map((child) => (
                       <a
                         key={child}
                         href={sitePath(`/products?category=${encodeURIComponent(child)}`)}
@@ -265,7 +265,7 @@ export function SiteShell({
         </button>
         <div className={`mobile-product-groups${mobileProductsOpen ? " is-open" : ""}`}>
           <a href={sitePath("/products")}>View all products</a>
-          {availableCategoryGroups.map((group) => (
+          {categoryGroups.map((group) => (
             <a key={group.name} href={sitePath(`/products?category=${encodeURIComponent(group.name)}`)}>{group.name}</a>
           ))}
         </div>

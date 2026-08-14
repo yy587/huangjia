@@ -6,7 +6,7 @@ import { ProductCard } from "../components/ProductCard";
 import { SiteShell } from "../components/SiteShell";
 import { useLanguage } from "../components/LanguageProvider";
 import {
-  availableCategoryGroups,
+  categoryGroups,
   categoryCount,
   catalog,
   filterProducts,
@@ -22,7 +22,7 @@ export default function ProductsPage() {
   const [mobileFilters, setMobileFilters] = useState(false);
   const [visible, setVisible] = useState(18);
   const [sort, setSort] = useState("catalogue");
-  const [expandedGroups, setExpandedGroups] = useState<string[]>([availableCategoryGroups[0]?.name || ""]);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([categoryGroups[0]?.name || ""]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -56,7 +56,7 @@ export default function ProductsPage() {
   const heading = translate(category || "All products");
 
   useEffect(() => {
-    const parent = availableCategoryGroups.find((group) =>
+    const parent = categoryGroups.find((group) =>
       normalizeCategory(group.name) === normalizeCategory(category) ||
       group.children.some((child) => normalizeCategory(child) === normalizeCategory(category))
     );
@@ -98,9 +98,9 @@ export default function ProductsPage() {
             </button>
             <div className="popular-filter-set">
               <span>{translate("Popular")}</span>
-              {availableCategoryGroups.slice(0, 3).map((group) => <button key={group.name} onClick={() => chooseCategory(group.name)}>{translate(group.name)}</button>)}
+              {categoryGroups.slice(0, 3).map((group) => <button key={group.name} onClick={() => chooseCategory(group.name)}>{translate(group.name)}</button>)}
             </div>
-            {availableCategoryGroups.map((group) => (
+            {categoryGroups.map((group) => (
               <div className="filter-group" key={group.name}>
                 <div className="filter-group-heading">
                   <button className={
