@@ -89,6 +89,16 @@ export function HomeProductSection({
             event.preventDefault();
             event.stopPropagation();
           }}
+          onKeyDown={(event) => {
+            if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+            event.preventDefault();
+            const rail = railRef.current;
+            if (!rail) return;
+            rail.scrollBy({
+              left: (event.key === "ArrowRight" ? 1 : -1) * rail.clientWidth * .78,
+              behavior: "smooth"
+            });
+          }}
           tabIndex={0}
           aria-label={`${title} product gallery`}
         >

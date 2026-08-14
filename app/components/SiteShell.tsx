@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   X
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
@@ -24,6 +25,7 @@ export function SiteShell({
   children: React.ReactNode;
   theme?: "light" | "dark";
 }) {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -44,6 +46,7 @@ export function SiteShell({
   );
   const headerResults = matchingHeaderResults.slice(0, 6);
   const phoneDigits = catalog.contact.phone.replace(/[^\d]/g, "");
+  const isCurrentPath = (path: string) => path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -186,7 +189,7 @@ export function SiteShell({
         </div>
       </header>
       <nav className={`catalog-nav catalog-nav-row ${scrolled ? "is-scrolled" : ""}`} aria-label="Primary navigation">
-          <a href={sitePath("/")}>Home</a>
+          <a className={isCurrentPath("/") ? "is-current" : ""} aria-current={isCurrentPath("/") ? "page" : undefined} href={sitePath("/")}>Home</a>
           <div
             ref={megaTriggerRef}
             className="mega-trigger"
@@ -198,6 +201,7 @@ export function SiteShell({
             }}
           >
             <a
+              className={isCurrentPath("/products") || isCurrentPath("/product") ? "is-current" : ""}
               href={sitePath("/products")}
               aria-expanded={productsOpen}
               aria-haspopup="true"
@@ -241,12 +245,12 @@ export function SiteShell({
               </div>
             </div>
           </div>
-          <a href={sitePath("/about")}>About Us</a>
-          <a href={sitePath("/contact")}>Contact Us</a>
+          <a className={isCurrentPath("/about") ? "is-current" : ""} aria-current={isCurrentPath("/about") ? "page" : undefined} href={sitePath("/about")}>About Us</a>
+          <a className={isCurrentPath("/contact") ? "is-current" : ""} aria-current={isCurrentPath("/contact") ? "page" : undefined} href={sitePath("/contact")}>Contact Us</a>
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
-      <div ref={contactDockRef} className={`contact-dock${contactOpen ? " is-open" : ""}`}>
+      {!isCurrentPath("/contact") && <div ref={contactDockRef} className={`contact-dock${contactOpen ? " is-open" : ""}`}>
         <div className="contact-dock-menu" aria-hidden={!contactOpen}>
           <a href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer">WhatsApp</a>
           <a href={`mailto:${catalog.contact.email}`}>Email</a>
@@ -255,7 +259,7 @@ export function SiteShell({
         <button className="contact-dock-trigger" type="button" aria-expanded={contactOpen} onClick={() => setContactOpen((value) => !value)}>
           <Mail size={17} /><span>Contact</span>
         </button>
-      </div>
+      </div>}
 
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
