@@ -31,7 +31,7 @@ export default function ContactPage() {
   return (
     <SiteShell>
       <main className="catalog-main">
-        <section className="original-page-title">
+        <section className="original-page-title contact-page-title">
           <span>Home / Contact Us</span>
           <h1>Contact Us</h1>
         </section>

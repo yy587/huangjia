@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
+import { availableCategoryGroups, catalog, filterProducts, primaryModel } from "../lib/catalog";
 import { originalMedia } from "../lib/original-media";
 import { sitePath } from "../lib/site-path";
 import { useInquiry } from "./InquiryProvider";
@@ -35,17 +35,14 @@ export function SiteShell({
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
   const headerSearchRef = useRef<HTMLInputElement>(null);
   const megaTriggerRef = useRef<HTMLDivElement>(null);
-  const contactDockRef = useRef<HTMLDivElement>(null);
   const { count } = useInquiry();
   const matchingHeaderResults = useMemo(
     () => headerQuery.trim() ? filterProducts(headerQuery) : [],
     [headerQuery]
   );
   const headerResults = matchingHeaderResults.slice(0, 6);
-  const phoneDigits = catalog.contact.phone.replace(/[^\d]/g, "");
   const isCurrentPath = (path: string) => path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
 
   useEffect(() => {
@@ -79,12 +76,10 @@ export function SiteShell({
     const closeProductsWithKeyboard = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setProductsOpen(false);
-        setContactOpen(false);
       }
     };
     const closeProductsOutside = (event: PointerEvent) => {
       if (!megaTriggerRef.current?.contains(event.target as Node)) setProductsOpen(false);
-      if (!contactDockRef.current?.contains(event.target as Node)) setContactOpen(false);
     };
     window.addEventListener("keydown", closeProductsWithKeyboard);
     window.addEventListener("pointerdown", closeProductsOutside);
@@ -170,7 +165,7 @@ export function SiteShell({
             </div>
           )}
         </div>
-        <a href={sitePath("/")} className="catalog-brand" aria-label="SHIE home">
+        <a href={sitePath("/")} className="catalog-brand" aria-label="Huangjia home">
           <img src={originalMedia.logo} alt="Foshan Huangjia Building Material Co., Ltd." />
         </a>
         <div className="catalog-actions">
@@ -218,13 +213,13 @@ export function SiteShell({
               <div className="mega-intro">
                 <span className="micro-label">Complete catalogue</span>
                 <h3>Materials for the whole space.</h3>
-                <p>Explore 7 product families and the full Huangjia collection.</p>
+                <p>Browse the product families currently available in the Huangjia catalogue.</p>
                 <a className="line-link" href={sitePath("/products")}>
                   View all products <ArrowRight size={15} />
                 </a>
               </div>
               <div className="mega-categories">
-                {categoryGroups.map((group) => (
+                {availableCategoryGroups.map((group) => (
                   <div key={group.name}>
                     <a
                       className="mega-title"
@@ -250,17 +245,6 @@ export function SiteShell({
       </nav>
       <span className="catalog-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
-      {!isCurrentPath("/contact") && <div ref={contactDockRef} className={`contact-dock${contactOpen ? " is-open" : ""}`}>
-        <div className="contact-dock-menu" aria-hidden={!contactOpen}>
-          <a href={`https://wa.me/${phoneDigits}`} target="_blank" rel="noreferrer">WhatsApp</a>
-          <a href={`mailto:${catalog.contact.email}`}>Email</a>
-          <a href={sitePath("/contact")}>General enquiry</a>
-        </div>
-        <button className="contact-dock-trigger" type="button" aria-expanded={contactOpen} onClick={() => setContactOpen((value) => !value)}>
-          <Mail size={17} /><span>Contact</span>
-        </button>
-      </div>}
-
       <aside className={`catalog-mobile-menu ${mobileOpen ? "is-open" : ""}`}>
         <button aria-label="Close menu" onClick={() => setMobileOpen(false)}>
           <X size={26} />
@@ -281,7 +265,7 @@ export function SiteShell({
         </button>
         <div className={`mobile-product-groups${mobileProductsOpen ? " is-open" : ""}`}>
           <a href={sitePath("/products")}>View all products</a>
-          {categoryGroups.map((group) => (
+          {availableCategoryGroups.map((group) => (
             <a key={group.name} href={sitePath(`/products?category=${encodeURIComponent(group.name)}`)}>{group.name}</a>
           ))}
         </div>

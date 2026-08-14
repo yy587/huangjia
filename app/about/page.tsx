@@ -37,16 +37,13 @@ export default function AboutPage() {
             <div className="about-reasons-heading">
               <span>Huangjia advantages</span>
               <h2 id="why-choose-us-title">Why Choose Us?</h2>
-              <p>Photo framework — team portraits can be added later.</p>
+              <p>Eight practical strengths for long-term project cooperation.</p>
             </div>
             <div className="about-reasons-grid">
               {whyChooseUs.map((title, index) => (
-                <article className="about-reason-card" key={title} tabIndex={0}>
-                  <div className="about-reason-photo" aria-label={`Photo placeholder ${index + 1}`}>
-                    <span>PHOTO {String(index + 1).padStart(2, "0")}</span>
-                  </div>
+                <article className="about-reason-card" key={title}>
+                  <b>{String(index + 1).padStart(2, "0")}</b>
                   <h3>{title}</h3>
-                  <small>{String(index + 1).padStart(2, "0")} / 08</small>
                 </article>
               ))}
             </div>

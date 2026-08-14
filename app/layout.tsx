@@ -6,13 +6,13 @@ import "./catalog.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yy587.github.io/huangjia/"),
-  title: "SHIE Surfaces | Ceramic Tile & Building Materials",
+  title: "HUANGJIA Surfaces | Ceramic Tile & Building Materials",
   description:
     "Curated ceramic tile, slabs, mosaics, wall panels and bathroom systems for distributors and projects worldwide.",
   openGraph: {
     type: "website",
-    siteName: "SHIE Surfaces",
-    title: "SHIE Surfaces | Ceramic Tile & Building Materials",
+    siteName: "HUANGJIA Surfaces",
+    title: "HUANGJIA Surfaces | Ceramic Tile & Building Materials",
     description: "Building materials for international distributors, project buyers and wholesale enquiries."
   }
 };

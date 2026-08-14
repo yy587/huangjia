@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = catalog.products.find((item) => item.slug === slug);
   if (!product) return {};
-  const title = `${primaryModel(product.name)} | SHIE Surfaces`;
+  const title = `${primaryModel(product.name)} | HUANGJIA Surfaces`;
   const description = product.summary || `Request specifications and an export quotation for ${primaryModel(product.name)}.`;
   const image = product.images[0]?.startsWith("http") ? product.images[0] : `${publicBase}${product.images[0] || "/images/bathroom.jpg"}`;
   return { title, description, alternates: { canonical: `${publicBase}/product/${product.slug}/` }, openGraph: { title, description, images: [image] } };

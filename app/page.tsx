@@ -8,10 +8,10 @@ import { sitePath } from "./lib/site-path";
 
 const homeCategories = [
   { name: "CERAMIC TILE", image: originalMedia.categories[0] },
-  { name: "SLAB", image: originalMedia.categories[1] },
-  { name: "MOSAIC", image: originalMedia.categories[2] },
-  { name: "SANITARY", image: originalMedia.categories[3] },
-  { name: "WALL PANEL", image: originalMedia.categories[4] }
+  { name: "POLISHED TILE", image: originalMedia.categories[1] },
+  { name: "RUSTIC TILE", image: originalMedia.categories[2] },
+  { name: "EXTERIOR WALL BRICK", image: originalMedia.categories[4] },
+  { name: "SANITARY", image: originalMedia.categories[3] }
 ];
 
 const importedProducts = catalog.products.filter((product) =>

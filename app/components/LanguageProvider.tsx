@@ -8,12 +8,14 @@ type LanguageContextValue = {
   language: Language;
   setLanguage: (language: Language) => void;
   toggleLanguage: () => void;
+  translate: (text: string) => string;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 const textOriginals = new WeakMap<Text, string>();
 
 const zh: Record<string, string> = {
+  "HUANGJIA Surfaces | Ceramic Tile & Building Materials": "HUANGJIA 建材｜瓷砖与建筑材料",
   "International building material supply · Foshan, China": "国际建材供应 · 中国佛山",
   "Quote List": "询价清单",
   "Browse products": "浏览产品",
@@ -155,6 +157,7 @@ const zh: Record<string, string> = {
   "Huangjia advantages": "皇家优势",
   "Why Choose Us?": "为什么选择我们？",
   "Photo framework — team portraits can be added later.": "照片框架——后续可补充团队人物照片。",
+  "Eight practical strengths for long-term project cooperation.": "面向长期项目合作的八项核心优势。",
   "Research & Innovation Experience 25 Years": "25 年研发与创新经验",
   "ODM Experience 10+ Years": "10 年以上 ODM 经验",
   "Project Cooperation Experience 15 Years": "15 年项目合作经验",
@@ -182,6 +185,7 @@ const zh: Record<string, string> = {
   "Complete catalogue": "完整产品目录",
   "Materials for the whole space.": "覆盖完整空间的材料方案。",
   "Explore 7 product families and the full Huangjia collection.": "探索 7 大产品系列与皇家建材完整产品目录。",
+  "Browse the product families currently available in the Huangjia catalogue.": "浏览皇家建材目录中当前已发布的产品系列。",
   "View all products": "查看全部产品",
   "Ceramic Tile": "陶瓷砖",
   "Polished Tile": "抛光砖",
@@ -235,8 +239,15 @@ const zh: Record<string, string> = {
   "Search model or product": "搜索型号或产品",
   "Filters": "筛选",
   "Catalogue order": "目录顺序",
+  "Product category": "产品分类",
+  "Active filters": "当前筛选",
+  "Clear all": "清除全部",
   "Load more products": "加载更多产品",
   "This collection is ready for content.": "该系列正在完善产品内容。",
+  "No products match your search.": "没有符合当前搜索条件的产品。",
+  "No published products in this collection.": "该系列暂未发布产品。",
+  "Try another model number or remove the current filters.": "请尝试其他型号，或清除当前筛选条件。",
+  "Contact our team if you need products from this category.": "如需此分类产品，请联系我们的团队。",
   "The category exists on the current Huangjia website, but no individual product records are published in its sitemap yet.": "现有皇家网站已包含此分类，但 sitemap 中暂未发布独立产品资料。",
   "Browse all available products": "浏览全部已发布产品",
   "View details": "查看详情",
@@ -532,6 +543,16 @@ const zh: Record<string, string> = {
 const zhCaseInsensitive = Object.fromEntries(
   Object.entries(zh).map(([key, value]) => [key.toLowerCase(), value])
 );
+const englishByChinese = Object.fromEntries(
+  Object.entries(zh).map(([key, value]) => [value, key])
+);
+
+function canonicalText(value: string): string {
+  const leading = value.match(/^\s*/)?.[0] || "";
+  const trailing = value.match(/\s*$/)?.[0] || "";
+  const core = value.trim();
+  return `${leading}${englishByChinese[core] || core}${trailing}`;
+}
 
 function translatedText(original: string): string {
   const leading = original.match(/^\s*/)?.[0] || "";
@@ -572,7 +593,8 @@ function translatedText(original: string): string {
       .replace(/\bSTAINLESS STEEL SINK\b/g, "不锈钢水槽")
       .replace(/\bFITTINGS\b/g, "管件")
       .replace(/\bFLOOR DRAINER\b/g, "地漏")
-      .replace(/\bSHOWER ROOM\b/g, "淋浴房");
+      .replace(/\bSHOWER ROOM\b/g, "淋浴房")
+      .replace(/\| HUANGJIA Surfaces$/i, "| HUANGJIA 建材");
   }
   return `${leading}${translated}${trailing}`;
 }
@@ -588,7 +610,7 @@ function walkText(root: ParentNode, language: Language) {
       !parent.closest("[data-i18n-static]") &&
       !["SCRIPT", "STYLE", "TEXTAREA"].includes(parent.tagName)
     ) {
-      const original = textOriginals.get(node) ?? node.nodeValue ?? "";
+      const original = textOriginals.get(node) ?? canonicalText(node.nodeValue ?? "");
       if (!textOriginals.has(node)) textOriginals.set(node, original);
       const next = language === "zh" ? translatedText(original) : original;
       if (node.nodeValue !== next) node.nodeValue = next;
@@ -608,13 +630,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("shie-language");
+    const saved = window.localStorage.getItem("huangjia-language") || window.localStorage.getItem("shie-language");
     if (saved === "zh" || saved === "en") setLanguage(saved);
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("shie-language", language);
+    window.localStorage.setItem("huangjia-language", language);
+    window.localStorage.removeItem("shie-language");
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+    const titleSource = document.documentElement.dataset.i18nTitle || document.title;
+    document.documentElement.dataset.i18nTitle = titleSource;
+    document.title = language === "zh" ? translatedText(titleSource).trim() : titleSource;
     let observer: MutationObserver;
     const apply = (root: ParentNode = document.body) => {
       observer?.disconnect();
@@ -628,7 +654,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.type === "characterData" && mutation.target.parentNode) {
-          textOriginals.set(mutation.target as Text, mutation.target.nodeValue || "");
+          const textNode = mutation.target as Text;
+          if (!textOriginals.has(textNode)) textOriginals.set(textNode, canonicalText(textNode.nodeValue || ""));
           apply(mutation.target.parentNode);
           return;
         }
@@ -652,7 +679,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     () => ({
       language,
       setLanguage,
-      toggleLanguage: () => setLanguage((current) => (current === "en" ? "zh" : "en"))
+      toggleLanguage: () => setLanguage((current) => (current === "en" ? "zh" : "en")),
+      translate: (text: string) => language === "zh" ? translatedText(text).trim() : text
     }),
     [language]
   );

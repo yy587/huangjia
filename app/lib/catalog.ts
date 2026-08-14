@@ -100,6 +100,13 @@ export const categoryCount = (category: string) => {
   ).length;
 };
 
+export const availableCategoryGroups = categoryGroups
+  .map((group) => ({
+    ...group,
+    children: group.children.filter((child) => categoryCount(child) > 0)
+  }))
+  .filter((group) => categoryCount(group.name) > 0 || group.children.length > 0);
+
 export const filterProducts = (query: string, category?: string) => {
   const normalizedQuery = query.trim().toLowerCase();
   const normalizedCategory = category ? normalizeCategory(category) : "";
