@@ -3461,3 +3461,47 @@ html[lang="zh-CN"] .catalog-site textarea{
 @media(max-width:780px){
   .catalog-site{--paragraph-gap:14px}
 }
+
+/* 2026-08 consistent spacing between content sections */
+.catalog-site{
+  --section-block-space:88px;
+  --section-heading-gap:36px;
+  --section-group-gap:72px;
+}
+.original-structure-home>.original-category-section,
+.original-structure-home>.original-product-section,
+.original-structure-home>.home-service-section,
+.original-structure-home>.original-social-section,
+.product-browser,
+.about-split-layout,
+.contact-page-grid,
+.news-list,
+.article-page,
+.search-results,
+.search-suggestions,
+.product-trade-note,
+.specification-section,
+.related-products{
+  padding-top:var(--section-block-space);
+  padding-bottom:var(--section-block-space);
+}
+.original-story-copy,
+.home-contact-cta{
+  padding-top:var(--section-block-space);
+  padding-bottom:var(--section-block-space);
+}
+.original-category-section>.original-section-heading,
+.home-service-section>.original-section-heading,
+.original-social-section>.original-section-heading,
+.home-product-heading,
+.section-heading-row{
+  margin-bottom:var(--section-heading-gap);
+}
+.about-split-layout{gap:var(--section-group-gap)}
+@media(max-width:780px){
+  .catalog-site{
+    --section-block-space:64px;
+    --section-heading-gap:28px;
+    --section-group-gap:52px;
+  }
+}
