@@ -3432,3 +3432,32 @@ html[lang="zh-CN"] .catalog-site textarea{
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* 2026-08 consistent long-form paragraph rhythm */
+.catalog-site{
+  --body-copy-leading:1.72;
+  --paragraph-gap:16px;
+}
+.about-split-layout .text-only-about-copy p,
+.about-split-layout .text-only-about-copy p:first-child,
+.original-story-copy>p,
+.article-content>p,
+.specification-copy>p,
+.selection-summary>p,
+.contact-note>p,
+.policy-page article>p{
+  margin-top:0;
+  margin-bottom:0;
+  line-height:var(--body-copy-leading);
+}
+.about-split-layout .text-only-about-copy p+p,
+.original-story-copy>p+p,
+.article-content>p+p,
+.specification-copy>p+p,
+.selection-summary>p+p{
+  margin-top:var(--paragraph-gap);
+}
+.policy-page article>h2:not(:first-child){margin-top:var(--paragraph-gap)}
+@media(max-width:780px){
+  .catalog-site{--paragraph-gap:14px}
+}
